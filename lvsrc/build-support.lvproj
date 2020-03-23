@@ -17,8 +17,8 @@
 		<Item Name="PostBuildSupport" Type="Folder">
 			<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../PostBuildSupport/PostBuildSupport.lvclass"/>
 		</Item>
-		<Item Name="PostBuildSupport (FOR 2013)" Type="Folder">
-			<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../PostBuildSupport (FOR 2013)/PostBuildSupport (2013).lvclass"/>
+		<Item Name="PostBuildSupport (2013)" Type="Folder">
+			<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../PostBuildSupport (2013)/PostBuildSupport (2013).lvclass"/>
 		</Item>
 		<Item Name="PreBuildSupport" Type="Folder">
 			<Item Name="rename to VIPT.vi" Type="VI" URL="../PreBuildSupport/rename to VIPT.vi"/>
