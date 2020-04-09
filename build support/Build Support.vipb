@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2020-04-09 13:11:32" Creator="Patrick Irvin" Comments="" ID="aff297ef6289769128469288e4b10cd9">
+<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2020-04-09 13:18:15" Creator="Patrick Irvin" Comments="" ID="898c759642ff2f95d853e90e3b915ef2">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.0.1.5</Library_Version>
+    <Library_Version>1.0.2.6</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -45,7 +45,7 @@
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>[1.0.2.4]
+      <Release_Notes>[1.0.2.5]
 Change install location</Release_Notes>
     </Description>
     <Destinations>
@@ -269,7 +269,7 @@ Change install location</Release_Notes>
         <Path>..\lvsrc\Templates</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>7533EEED8A42E956D5F046A90993FD2D</GUID>
+      <GUID>4863397F95D93EEE6ABBA1EB3A7AF625</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -318,7 +318,7 @@ Change install location</Release_Notes>
         <Path>..\lvsrc\PostBuildSupport\API\Post Build Script (manual build).vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>AB08258096083551981A21243C50FDDF</GUID>
+      <GUID>691DB5DADC9636EBF3291EEE6AD9E909</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -367,7 +367,7 @@ Change install location</Release_Notes>
         <Path>..\lvsrc\PreBuildSupport\VIPT to rename.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>122EB6B202E9BF43ABB5CEA5C603B1CD</GUID>
+      <GUID>E5B2EAE1E67D62BDF5F787BEFA189C31</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -402,7 +402,7 @@ Change install location</Release_Notes>
         <Path>..\lvsrc\subVIs\Find File By Name.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>8AA7D429F45D8FBC37E7E08BA7F75F58</GUID>
+      <GUID>CCEB37B61168B2E88690C6CE07252DB2</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -465,7 +465,7 @@ Change install location</Release_Notes>
         <Path>..\lvsrc\Templates\Pre-Build Custom Action.vit</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>6628DBCD41C88AA99EDF4231EF48F4B9</GUID>
+      <GUID>E24ECD4CF5744E927CBB37DEA263FD3E</GUID>
     </Functions_Palette_Data>
   </Library_Palette_Definition>
 </VI_Package_Builder_Settings>
