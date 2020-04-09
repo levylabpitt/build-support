@@ -1,10 +1,10 @@
-<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2020-03-23 12:23:24" Creator="Patrick Irvin" Comments="" ID="fe49c08ae24076939f6a77ed4d3022fa">
+<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2020-04-09 13:11:32" Creator="Patrick Irvin" Comments="" ID="aff297ef6289769128469288e4b10cd9">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.0.1.4</Library_Version>
+    <Library_Version>1.0.1.5</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
-    <Library_Output_Folder>..</Library_Output_Folder>
+    <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
     <Company_Name>Levylab</Company_Name>
     <Library_Summary/>
     <Library_License>BSD-3</Library_License>
@@ -41,20 +41,18 @@
     <VI_Package_Configuration_File>Build Support.vipc</VI_Package_Configuration_File>
     <Description>
       <One_Line_Description_Summary/>
-      <Description>Miscellanious VIs help build applications and packages</Description>
+      <Description>Miscellaneous VIs help build applications and packages</Description>
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>[1.0.1.3]
-Adjust APIs to make easier to call the post build script manually:
-- Post Build Script (auto build).vi can be called by Post-Build Custom Action.vi to automatically build an application and installer post vip build
-- Post Build Script (manual build).vi can be called by user after manually building an application and installer using the Build Specifications in Project Explorer</Release_Notes>
+      <Release_Notes>[1.0.2.4]
+Change install location</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
         <LLB>false</LLB>
         <Preserve_Hierarchy>true</Preserve_Hierarchy>
-        <Path>&lt;user.lib&gt;\Levylab</Path>
+        <Path>&lt;user.lib&gt;\Levylab\Build Support</Path>
       </Toolkit_VIs>
       <Examples>
         <LLB>false</LLB>
@@ -271,7 +269,7 @@ Adjust APIs to make easier to call the post build script manually:
         <Path>..\lvsrc\Templates</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>C64CEB61F102DBECE29BAD76852BD67A</GUID>
+      <GUID>7533EEED8A42E956D5F046A90993FD2D</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -320,7 +318,7 @@ Adjust APIs to make easier to call the post build script manually:
         <Path>..\lvsrc\PostBuildSupport\API\Post Build Script (manual build).vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>627626BE3452D3436E031F60B2884208</GUID>
+      <GUID>AB08258096083551981A21243C50FDDF</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -369,7 +367,7 @@ Adjust APIs to make easier to call the post build script manually:
         <Path>..\lvsrc\PreBuildSupport\VIPT to rename.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>E0EB7EC2F7A8B6C9FB05159C69481E86</GUID>
+      <GUID>122EB6B202E9BF43ABB5CEA5C603B1CD</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -404,7 +402,7 @@ Adjust APIs to make easier to call the post build script manually:
         <Path>..\lvsrc\subVIs\Find File By Name.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>5714B09DF8C8F61838AB33F6F343A8AB</GUID>
+      <GUID>8AA7D429F45D8FBC37E7E08BA7F75F58</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -467,7 +465,7 @@ Adjust APIs to make easier to call the post build script manually:
         <Path>..\lvsrc\Templates\Pre-Build Custom Action.vit</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>31DEB47D1BF6F269C6C8896460B1B95A</GUID>
+      <GUID>6628DBCD41C88AA99EDF4231EF48F4B9</GUID>
     </Functions_Palette_Data>
   </Library_Palette_Definition>
 </VI_Package_Builder_Settings>
