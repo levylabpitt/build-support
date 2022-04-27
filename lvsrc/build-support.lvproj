@@ -45,7 +45,10 @@
 		<Item Name="VIPM" Type="Folder">
 			<Item Name="VIPM.lvclass" Type="LVClass" URL="../VIPM/VIPM.lvclass"/>
 		</Item>
+		<Item Name="Find Most Recent File.vi" Type="VI" URL="../VIPM/Find Most Recent File.vi"/>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../Git/Git.lvclass"/>
+		<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
+		<Item Name="Untitled 4.vi" Type="VI" URL="../Untitled 4.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="Build Path - File Names and Paths Arrays - path__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/file/file.llb/Build Path - File Names and Paths Arrays - path__ogtk.vi"/>
@@ -1367,10 +1370,10 @@
 				<Property Name="Destination[1].path" Type="Path">../builds/NI_AB_PROJECTNAME/Patrick Builder/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
 				<Property Name="Exe_iconItemID" Type="Ref">/My Computer/build support/build helper.ico</Property>
-				<Property Name="Source[0].itemID" Type="Str">{65B1512D-DE20-4F63-9345-FA4F843CFAE3}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{5C40C42A-7A07-4152-B1ED-8FFF36E5D1B8}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[1].itemID" Type="Ref">/My Computer/VIPM/VIPM.lvclass/Patrick Builder.vi</Property>
+				<Property Name="Source[1].itemID" Type="Ref">/My Computer/Patrick Builder.vi</Property>
 				<Property Name="Source[1].sourceInclusion" Type="Str">TopLevel</Property>
 				<Property Name="Source[1].type" Type="Str">VI</Property>
 				<Property Name="SourceCount" Type="Int">2</Property>
