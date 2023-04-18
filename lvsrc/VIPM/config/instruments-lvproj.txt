@@ -1,0 +1,10 @@
+C:\Users\patrick\Documents\GitHub\Aerotech-Delay-Line\lvsrc\AerotechDelayLine.lvproj
+C:\Users\patrick\Documents\GitHub\Andeen-Hagerling-2500A\src\AH2500A.lvproj
+C:\Users\patrick\Documents\GitHub\Krohn-Hite-7008\lvsrc\KH_Control.lvproj
+C:\Users\patrick\Documents\GitHub\Leiden-MNK-TC\src\Instrument.TC.lvproj
+C:\Users\patrick\Documents\GitHub\Montana-Instruments-Cryostation\lvsrc\Cryostation_inst.lvproj
+C:\Users\patrick\Documents\GitHub\Multichannel-Lockin\src\Multichannel Lockin.lvproj
+C:\Users\patrick\Documents\GitHub\Oxford-1820\src\Oxford-1820.lvproj
+C:\Users\patrick\Documents\GitHub\Oxford-VRM\src\Oxford-VRM.lvproj
+C:\Users\patrick\Documents\GitHub\PPMS-Monitor-and-Control\lvsrc\PPMS_inst.lvproj
+C:\Users\patrick\Documents\GitHub\Razorbill-RP100\lvsrc\razorbill.lvproj
