@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2022-08-27 13:57:38" Creator="Patrick Irvin" Comments="" ID="eb6600c96e9cb122ced1dff4af15f17d">
+<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2023-04-18 08:25:15" Creator="Patrick Irvin" Comments="" ID="bea34a71fc64e41a4693be2dce8c1f53">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.2.3.3</Library_Version>
+    <Library_Version>1.2.3.5</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -17,10 +17,10 @@
   </Library_General_Settings>
   <Advanced_Settings>
     <Package_Dependencies>
-      <External_Dependencies>hse_lib_git_api &gt;= 2.0.2.1</External_Dependencies>
+      <External_Dependencies>hse_lib_git_api &gt;= 2.1.0.98</External_Dependencies>
       <External_Dependencies>jki_lib_rest_client &gt;= 1.3.3.25</External_Dependencies>
       <External_Dependencies>jki_lib_state_machine &gt;= 2018.0.7.45</External_Dependencies>
-      <External_Dependencies>jki_lib_vipm_api &gt;= 2020.0.2.73</External_Dependencies>
+      <External_Dependencies>jki_lib_vipm_api &gt;= 2020.0.3.80</External_Dependencies>
       <External_Dependencies>jki_statemachineobjects &gt;= 1.4.0.69</External_Dependencies>
       <External_Dependencies>labview_open_source_lib_unicity &gt;= 1.1.0.6</External_Dependencies>
       <External_Dependencies>mgi_lib_1d_array &gt;= 1.0.2.3</External_Dependencies>
@@ -35,10 +35,10 @@
       <External_Dependencies>oglib_lvdata &gt;= 5.0.0.27</External_Dependencies>
       <External_Dependencies>oglib_string &gt;= 5.0.0.25</External_Dependencies>
       <External_Dependencies>oglib_time &gt;= 4.0.1.3</External_Dependencies>
-      <Direct_Dependencies>hse_lib_git_api-2.0.2.1</Direct_Dependencies>
+      <Direct_Dependencies>hse_lib_git_api-2.1.0.98</Direct_Dependencies>
       <Direct_Dependencies>jki_lib_rest_client-1.3.3.25</Direct_Dependencies>
       <Direct_Dependencies>jki_lib_state_machine-2018.0.7.45</Direct_Dependencies>
-      <Direct_Dependencies>jki_lib_vipm_api-2020.0.2.73</Direct_Dependencies>
+      <Direct_Dependencies>jki_lib_vipm_api-2020.0.3.80</Direct_Dependencies>
       <Direct_Dependencies>jki_statemachineobjects-1.4.0.69</Direct_Dependencies>
       <Direct_Dependencies>labview_open_source_lib_unicity-1.1.0.6</Direct_Dependencies>
       <Direct_Dependencies>mgi_lib_1d_array-1.0.2.3</Direct_Dependencies>
@@ -69,7 +69,7 @@
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>- replace WF Progress with homegrown ProgressBar SMO</Release_Notes>
+      <Release_Notes>- build with VIPM 2023.1</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
@@ -222,6 +222,7 @@
       <close_labview_before_install>false</close_labview_before_install>
       <restart_labview_after_install>false</restart_labview_after_install>
       <skip_mass_compile_after_install>false</skip_mass_compile_after_install>
+      <install_into_global_environment>false</install_into_global_environment>
     </LabVIEW>
     <VI_Docs>
       <Edit_VI_Description>false</Edit_VI_Description>
@@ -349,7 +350,7 @@
         <Path>..\lvsrc\ProgressBar</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>07657C4BEB7547DBBCE73C343B509F77</GUID>
+      <GUID>D86319B623025F7403C99702926A8112</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -412,7 +413,7 @@
         <Path>..\lvsrc\PostBuildSupport\Test</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>25D1A82C34D7A9EEF9FE3366EF041F95</GUID>
+      <GUID>DE8A6B9E0EABC52CCCE2CBEC4FC83921</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -475,7 +476,7 @@
         <Path>..\lvsrc\PreBuildSupport\VIPT to rename.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>3F4674171511C4D9EAEE11A2AC4A8018</GUID>
+      <GUID>9E366F1A5C7050CD8986610307B71FF7</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -538,7 +539,7 @@
         <Path>..\lvsrc\ProjectItem\Protected</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>EB3C921079F21FB289CBE7120DD4D068</GUID>
+      <GUID>7D57275C19CC7ABDBBABEB37B57561F7</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -601,7 +602,7 @@
         <Path>..\lvsrc\SelfUpdate\private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>CE709041327449F9949549C1D5D0F1A8</GUID>
+      <GUID>2B625A024CC4F8A072E28E87419B54C0</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -664,7 +665,7 @@
         <Path>..\lvsrc\Templates\Pre-Build Custom Action.vit</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>2754D4A83CC6816CEE7B4EE8F1E8ECCF</GUID>
+      <GUID>464854BC187FF9F1365B49D5C9D55DC2</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>1</Parent_Palette_Index>
@@ -713,7 +714,7 @@
         <Path>..\lvsrc\PostBuildSupport\API\Post Build Script (manual build).vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>A0D1513129D3A8817C77FE24841C97F8</GUID>
+      <GUID>71A5877A08775BFA12E5214BCA230829</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>1</Parent_Palette_Index>
@@ -902,7 +903,7 @@
         <Path>..\lvsrc\PostBuildSupport\Private\Write 7z.bat.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>22636FBA02DFC7292E0743F0AEC23509</GUID>
+      <GUID>A1C9BFD5E72363630FDBB7E9F7FDA105</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>1</Parent_Palette_Index>
@@ -937,7 +938,7 @@
         <Path>..\lvsrc\PostBuildSupport\Test\Test 7z.bat.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>D024D42A1089266CA072614F9DCBA722</GUID>
+      <GUID>092B010A04430EA2DF97F8E39643827A</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -972,7 +973,7 @@
         <Path>..\lvsrc\PreBuildSupport\subVI\Find File By Name.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>B6D3540A2956A36083B6F16FC9E09713</GUID>
+      <GUID>6DD52546355AB529B41694E2E82F5B3E</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>3</Parent_Palette_Index>
@@ -1021,7 +1022,7 @@
         <Path>..\lvsrc\ProjectItem\API\Rename items.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>25FA663B7E8508D2F454BEA50292D2E9</GUID>
+      <GUID>3C831BAA1B8A559B4F9C9BC1468DC026</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>3</Parent_Palette_Index>
@@ -1098,7 +1099,7 @@
         <Path>..\lvsrc\ProjectItem\Private\Update Path.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>B8D075CCB3075E547606B6785A3292CC</GUID>
+      <GUID>37CBD6909F367336EC7017B3A0755EA6</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>3</Parent_Palette_Index>
@@ -1329,7 +1330,7 @@
         <Path>..\lvsrc\ProjectItem\Protected\Write Icon Data.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>ABE00C898DF2399213B9CC6E96BB0E22</GUID>
+      <GUID>863C3E44A12DD217217DD646BED0AEA4</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1420,7 +1421,7 @@
         <Path>..\lvsrc\SelfUpdate\API\Set User and Repository.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>FCCAAB0C3C96CAF1653AD67CF78CA066</GUID>
+      <GUID>D148A91D48C1A00504C4A06BF538814D</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1455,7 +1456,7 @@
         <Path>..\lvsrc\SelfUpdate\example\Self Update Example.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>B698C68210E18B2A68566D726A965805</GUID>
+      <GUID>FF252A389C2EEA139914B2094A09C7A6</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1518,7 +1519,7 @@
         <Path>..\lvsrc\SelfUpdate\private\Update Dialog.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>BBE49FDC07FC64B0288C4A93DB2B587E</GUID>
+      <GUID>79581978E13AB01A087E8F02095DFAE5</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1581,7 +1582,7 @@
         <Path>..\lvsrc\ProgressBar\API\Destroy ProgressBar.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>F663DE3A1710A31B2E99B269DD6FB514</GUID>
+      <GUID>543416CEF8C45D2D2913B35A5FB61318</GUID>
     </Functions_Palette_Data>
   </Library_Palette_Definition>
 </VI_Package_Builder_Settings>
