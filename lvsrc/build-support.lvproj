@@ -49,6 +49,8 @@
 		<Item Name="Git.lvclass" Type="LVClass" URL="../Git/Git.lvclass"/>
 		<Item Name="ProgressBar.lvclass" Type="LVClass" URL="../ProgressBar/ProgressBar.lvclass"/>
 		<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
+		<Item Name="(PPMS) Manual Build.vi" Type="VI" URL="../(PPMS) Manual Build.vi"/>
+		<Item Name="List this level build spec.vi" Type="VI" URL="../List this level build spec.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="Build Error Cluster__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/error/error.llb/Build Error Cluster__ogtk.vi"/>
@@ -801,7 +803,7 @@
 				<Item Name="Remove Duplicates from 1D Array (Path)__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi" Type="VI" URL="/&lt;vilib&gt;/JKI/_VIPM API_internal_deps/Remove Duplicates from 1D Array (Path)__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi"/>
 				<Item Name="GIT-API-for-LabVIEW.lvlib" Type="Library" URL="/&lt;vilib&gt;/Hampel Software Engineering/Git API/GIT-API-for-LabVIEW.lvlib"/>
 				<Item Name="smo.lvlib" Type="Library" URL="/&lt;vilib&gt;/JKI/JKI SMO/smo.lvlib"/>
-				<Item Name="GIT-api.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/Hampel Software Engineering/Git API/Source/Git API/GIT-api.lvclass"/>
+				<Item Name="NI_XML.lvlib" Type="Library" URL="/&lt;vilib&gt;/xml/NI_XML.lvlib"/>
 			</Item>
 			<Item Name="_ChannelScriptingSupport.lvlib" Type="Library" URL="/&lt;resource&gt;/ChannelSupport/_ChannelScriptingSupport/_ChannelScriptingSupport.lvlib"/>
 			<Item Name="AB_Build_Invoke_Preview.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/Builds/AppBuilder/AB_Build_Invoke_Preview.vi"/>
