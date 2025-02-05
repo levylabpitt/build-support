@@ -16,6 +16,7 @@
 		<Item Name="build support" Type="Folder">
 			<Item Name="build helper.ico" Type="Document" URL="../../build support/build helper.ico"/>
 			<Item Name="Build Support.vipb" Type="Document" URL="../../build support/Build Support.vipb"/>
+			<Item Name="Build Support.vipc" Type="Document" URL="../../build support/Build Support.vipc"/>
 			<Item Name="Pre-Build Custom Action.vi" Type="VI" URL="../../build support/Pre-Build Custom Action.vi"/>
 		</Item>
 		<Item Name="PreBuildSupport" Type="Folder">
