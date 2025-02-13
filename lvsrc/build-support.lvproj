@@ -32,6 +32,14 @@
 			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../Templates/Post-Install Custom Action.vit"/>
 			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../Templates/Pre-Build Custom Action.vit"/>
 		</Item>
+		<Item Name="G-CLI" Type="Folder">
+			<Item Name="build.bat" Type="Document" URL="../G-CLI/build.bat"/>
+			<Item Name="build.ps1" Type="Document" URL="../G-CLI/build.ps1"/>
+			<Item Name="PowerShell dotNET.vi" Type="VI" URL="../G-CLI/PowerShell dotNET.vi"/>
+			<Item Name="timer.ps1" Type="Document" URL="../G-CLI/timer.ps1"/>
+			<Item Name="Powershell Terminal.vi" Type="VI" URL="../G-CLI/Powershell Terminal.vi"/>
+			<Item Name="Powershell Test.vi" Type="VI" URL="../G-CLI/Powershell Test.vi"/>
+		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../Git/Git.lvclass"/>
 		<Item Name="ProgressBar.lvclass" Type="LVClass" URL="../ProgressBar/ProgressBar.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../PostBuildSupport/PostBuildSupport.lvclass"/>
@@ -798,6 +806,7 @@
 				<Item Name="TCP_NoDelay_Windows.vi" Type="VI" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/Dependencies/TCP_NoDelay_Windows.vi"/>
 				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
 				<Item Name="TCP_NoDelay_Linux.vi" Type="VI" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/Dependencies/TCP_NoDelay_Linux.vi"/>
+				<Item Name="dotnet_system_exec.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/JKI/JKI DotNet System Exec/dotnet_system_exec/dotnet_system_exec.lvclass"/>
 			</Item>
 			<Item Name="_ChannelScriptingSupport.lvlib" Type="Library" URL="/&lt;resource&gt;/ChannelSupport/_ChannelScriptingSupport/_ChannelScriptingSupport.lvlib"/>
 			<Item Name="AB_Build_Invoke_Preview.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/Builds/AppBuilder/AB_Build_Invoke_Preview.vi"/>
@@ -1397,6 +1406,12 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="libc.so.6" Type="Document" URL="libc.so.6">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="System.Management.Automation" Type="Document" URL="System.Management.Automation">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="mscorlib" Type="VI" URL="mscorlib">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 		</Item>
