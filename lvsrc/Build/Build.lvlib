@@ -21,12 +21,12 @@
 	<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
 	<Item Name="Extension to Mode.vi" Type="VI" URL="../Extension to Mode.vi"/>
 	<Item Name="Find Most Recent File.vi" Type="VI" URL="../Find Most Recent File.vi"/>
-	<Item Name="List Project Build Specifications.vi" Type="VI" URL="../List Project Build Specifications.vi"/>
 	<Item Name="Status.vi" Type="VI" URL="../Status.vi"/>
 	<Item Name="VIPM Append to Change Log.vi" Type="VI" URL="../VIPM Append to Change Log.vi"/>
 	<Item Name="VIPM Clear Change Log.vi" Type="VI" URL="../VIPM Clear Change Log.vi"/>
 	<Item Name="VIPM Format Build Spec Summary.vi" Type="VI" URL="../VIPM Format Build Spec Summary.vi"/>
 	<Item Name="VIPM Increment Patch.vi" Type="VI" URL="../VIPM Increment Patch.vi"/>
+	<Item Name="List Project Build Specifications.vi" Type="VI" URL="../List Project Build Specifications.vi"/>
 	<Item Name="Choose Build Spec.vi" Type="VI" URL="../Choose Build Spec.vi"/>
 	<Item Name="Version String to Build Spec Version.vi" Type="VI" URL="../Version String to Build Spec Version.vi"/>
 </Library>
