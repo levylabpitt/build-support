@@ -14,40 +14,42 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="build support" Type="Folder">
-			<Item Name="build helper.ico" Type="Document" URL="../../build support/build helper.ico"/>
-			<Item Name="Build Support.vipb" Type="Document" URL="../../build support/Build Support.vipb"/>
-			<Item Name="Build Support.vipc" Type="Document" URL="../../build support/Build Support.vipc"/>
-			<Item Name="Pre-Build Custom Action.vi" Type="VI" URL="../../build support/Pre-Build Custom Action.vi"/>
-			<Item Name="Build Patrick Builder.vi" Type="VI" URL="../../build support/Build Patrick Builder.vi"/>
+			<Item Name="build helper.ico" Type="Document" URL="../build support/build helper.ico"/>
+			<Item Name="Build Support.vipb" Type="Document" URL="../build support/Build Support.vipb"/>
+			<Item Name="Build Support.vipc" Type="Document" URL="../build support/Build Support.vipc"/>
+			<Item Name="Pre-Build Custom Action.vi" Type="VI" URL="../build support/Pre-Build Custom Action.vi"/>
+			<Item Name="Post-Build Custom Action.vi" Type="VI" URL="../build support/Post-Build Custom Action.vi"/>
+			<Item Name="Build Patrick Builder.vi" Type="VI" URL="../build support/Build Patrick Builder.vi"/>
+			<Item Name="Build Test.vipb" Type="Document" URL="../build support/Build Test.vipb"/>
 		</Item>
 		<Item Name="PreBuildSupport" Type="Folder">
 			<Item Name="subVIs" Type="Folder">
-				<Item Name="Find File By Name.vi" Type="VI" URL="../PreBuildSupport/subVI/Find File By Name.vi"/>
+				<Item Name="Find File By Name.vi" Type="VI" URL="../lvsrc/PreBuildSupport/subVI/Find File By Name.vi"/>
 			</Item>
-			<Item Name="rename to VIPT.vi" Type="VI" URL="../PreBuildSupport/rename to VIPT.vi"/>
-			<Item Name="VIPT to rename.vi" Type="VI" URL="../PreBuildSupport/VIPT to rename.vi"/>
+			<Item Name="rename to VIPT.vi" Type="VI" URL="../lvsrc/PreBuildSupport/rename to VIPT.vi"/>
+			<Item Name="VIPT to rename.vi" Type="VI" URL="../lvsrc/PreBuildSupport/VIPT to rename.vi"/>
 		</Item>
 		<Item Name="Templates" Type="Folder">
-			<Item Name="buildspec-template.vipt" Type="Document" URL="../Templates/buildspec-template.vipt"/>
-			<Item Name="Post-Build Custom Action.vit" Type="VI" URL="../Templates/Post-Build Custom Action.vit"/>
-			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../Templates/Post-Install Custom Action.vit"/>
-			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../Templates/Pre-Build Custom Action.vit"/>
+			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/Templates/buildspec-template.vipt"/>
+			<Item Name="Post-Build Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Post-Build Custom Action.vit"/>
+			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Post-Install Custom Action.vit"/>
+			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Pre-Build Custom Action.vit"/>
 		</Item>
 		<Item Name="G-CLI" Type="Folder">
-			<Item Name="build.bat" Type="Document" URL="../G-CLI/build.bat"/>
-			<Item Name="build.ps1" Type="Document" URL="../G-CLI/build.ps1"/>
-			<Item Name="PowerShell dotNET.vi" Type="VI" URL="../G-CLI/PowerShell dotNET.vi"/>
-			<Item Name="timer.ps1" Type="Document" URL="../G-CLI/timer.ps1"/>
-			<Item Name="Powershell Terminal.vi" Type="VI" URL="../G-CLI/Powershell Terminal.vi"/>
-			<Item Name="Powershell Test.vi" Type="VI" URL="../G-CLI/Powershell Test.vi"/>
+			<Item Name="build.bat" Type="Document" URL="../lvsrc/G-CLI/build.bat"/>
+			<Item Name="build.ps1" Type="Document" URL="../lvsrc/G-CLI/build.ps1"/>
+			<Item Name="PowerShell dotNET.vi" Type="VI" URL="../lvsrc/G-CLI/PowerShell dotNET.vi"/>
+			<Item Name="timer.ps1" Type="Document" URL="../lvsrc/G-CLI/timer.ps1"/>
+			<Item Name="Powershell Terminal.vi" Type="VI" URL="../lvsrc/G-CLI/Powershell Terminal.vi"/>
+			<Item Name="Powershell Test.vi" Type="VI" URL="../lvsrc/G-CLI/Powershell Test.vi"/>
 		</Item>
-		<Item Name="Git.lvclass" Type="LVClass" URL="../Git/Git.lvclass"/>
-		<Item Name="ProgressBar.lvclass" Type="LVClass" URL="../ProgressBar/ProgressBar.lvclass"/>
-		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../PostBuildSupport/PostBuildSupport.lvclass"/>
-		<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../PostBuildSupport (2013)/PostBuildSupport (2013).lvclass"/>
-		<Item Name="ProjectItem.lvclass" Type="LVClass" URL="../ProjectItem/ProjectItem.lvclass"/>
-		<Item Name="SelfUpdate.lvclass" Type="LVClass" URL="../SelfUpdate/SelfUpdate.lvclass"/>
-		<Item Name="Build.lvlib" Type="Library" URL="../Build/Build.lvlib"/>
+		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
+		<Item Name="ProgressBar.lvclass" Type="LVClass" URL="../lvsrc/ProgressBar/ProgressBar.lvclass"/>
+		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
+		<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport (2013)/PostBuildSupport (2013).lvclass"/>
+		<Item Name="ProjectItem.lvclass" Type="LVClass" URL="../lvsrc/ProjectItem/ProjectItem.lvclass"/>
+		<Item Name="SelfUpdate.lvclass" Type="LVClass" URL="../lvsrc/SelfUpdate/SelfUpdate.lvclass"/>
+		<Item Name="Build.lvlib" Type="Library" URL="../lvsrc/Build/Build.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="Build Error Cluster__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/error/error.llb/Build Error Cluster__ogtk.vi"/>
@@ -1427,8 +1429,8 @@
 			<Item Name="mscorlib" Type="VI" URL="mscorlib">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="NI_MDF.lvlib" Type="Library" URL="../../../../../../../../Program Files (x86)/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NI_MDF.lvlib"/>
-			<Item Name="NIMdf.dll" Type="Document" URL="../../../../../../../../Program Files (x86)/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NIMdf.dll"/>
+			<Item Name="NI_MDF.lvlib" Type="Library" URL="../../../../../../../Program Files/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NI_MDF.lvlib"/>
+			<Item Name="NIMdf.dll" Type="Document" URL="../../../../../../../Program Files/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NIMdf.dll"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="Patrick Builder" Type="EXE">
@@ -1445,7 +1447,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{C3786147-54D9-4EFB-9A94-FC7AC7C65BCA}</Property>
-				<Property Name="Bld_version.build" Type="Int">20</Property>
+				<Property Name="Bld_version.build" Type="Int">21</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">Patrick Builder.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/Application/Patrick Builder.exe</Property>
@@ -1478,10 +1480,10 @@
 				<Property Name="Destination[0].type" Type="Str">userFolder</Property>
 				<Property Name="DestinationCount" Type="Int">1</Property>
 				<Property Name="DistPart[0].flavorID" Type="Str">DefaultFull</Property>
-				<Property Name="DistPart[0].productID" Type="Str">{2BB15880-EA12-40AA-B577-27419E77E2F9}</Property>
-				<Property Name="DistPart[0].productName" Type="Str">NI LabVIEW Runtime 2019 SP1 f5</Property>
+				<Property Name="DistPart[0].productID" Type="Str">{A118FE33-F27D-486D-BE81-C4C0D31EFC8E}</Property>
+				<Property Name="DistPart[0].productName" Type="Str">NI LabVIEW Runtime 2019 SP1 f5 (64-bit)</Property>
 				<Property Name="DistPart[0].SoftDep[0].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[0].SoftDep[0].productName" Type="Str">NI ActiveX Container</Property>
+				<Property Name="DistPart[0].SoftDep[0].productName" Type="Str">NI ActiveX Container (64-bit)</Property>
 				<Property Name="DistPart[0].SoftDep[0].upgradeCode" Type="Str">{1038A887-23E1-4289-B0BD-0C4B83C6BA21}</Property>
 				<Property Name="DistPart[0].SoftDep[1].exclude" Type="Bool">false</Property>
 				<Property Name="DistPart[0].SoftDep[1].productName" Type="Str">NI Deployment Framework 2019</Property>
@@ -1508,7 +1510,7 @@
 				<Property Name="DistPart[0].SoftDep[8].productName" Type="Str">NI TDM Streaming 19.0</Property>
 				<Property Name="DistPart[0].SoftDep[8].upgradeCode" Type="Str">{4CD11BE6-6BB7-4082-8A27-C13771BC309B}</Property>
 				<Property Name="DistPart[0].SoftDepCount" Type="Int">9</Property>
-				<Property Name="DistPart[0].upgradeCode" Type="Str">{7D6295E5-8FB8-4BCE-B1CD-B5B396FA1D3F}</Property>
+				<Property Name="DistPart[0].upgradeCode" Type="Str">{0F4FB023-A713-40CF-AC56-843EEEB44133}</Property>
 				<Property Name="DistPartCount" Type="Int">1</Property>
 				<Property Name="INST_author" Type="Str">University of Pittsburgh</Property>
 				<Property Name="INST_buildLocation" Type="Path">../builds/Installer</Property>
@@ -1518,7 +1520,7 @@
 				<Property Name="INST_installerName" Type="Str">setup.exe</Property>
 				<Property Name="INST_productName" Type="Str">Patrick Builder</Property>
 				<Property Name="INST_productVersion" Type="Str">1.0.0</Property>
-				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
+				<Property Name="InstSpecBitness" Type="Str">64-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">19018009</Property>
 				<Property Name="MSI_arpCompany" Type="Str">University of Pittsburgh</Property>
 				<Property Name="MSI_autoselectDrivers" Type="Bool">true</Property>
