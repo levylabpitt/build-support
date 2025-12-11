@@ -43,7 +43,6 @@
 			<Item Name="Powershell Test.vi" Type="VI" URL="../lvsrc/G-CLI/Powershell Test.vi"/>
 		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
-		<Item Name="ProgressBar.lvclass" Type="LVClass" URL="../lvsrc/ProgressBar/ProgressBar.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
 		<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport (2013)/PostBuildSupport (2013).lvclass"/>
 		<Item Name="ProjectItem.lvclass" Type="LVClass" URL="../lvsrc/ProjectItem/ProjectItem.lvclass"/>
@@ -1431,6 +1430,7 @@
 			</Item>
 			<Item Name="NI_MDF.lvlib" Type="Library" URL="../../../../../../../Program Files/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NI_MDF.lvlib"/>
 			<Item Name="NIMdf.dll" Type="Document" URL="../../../../../../../Program Files/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NIMdf.dll"/>
+			<Item Name="ProgressBar.lvclass" Type="LVClass" URL="../lvsrc/ProgressBar/ProgressBar.lvclass"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="Patrick Builder" Type="EXE">
