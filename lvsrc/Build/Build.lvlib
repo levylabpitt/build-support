@@ -13,12 +13,12 @@
 		<Item Name="Build Spec--cluster.ctl" Type="VI" URL="../Typedefs/Build Spec--cluster.ctl"/>
 		<Item Name="Build Type--enum.ctl" Type="VI" URL="../Typedefs/Build Type--enum.ctl"/>
 	</Item>
+	<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
 	<Item Name="File List Window.vi" Type="VI" URL="../File List Window.vi"/>
 	<Item Name="Manual Build.vi" Type="VI" URL="../Manual Build.vi"/>
 	<Item Name="Manual Build SM.vi" Type="VI" URL="../Manual Build SM.vi"/>
 	<Item Name="buildWithGCLI.vi" Type="VI" URL="../buildWithGCLI.vi"/>
 	<Item Name="Build Application and Installer.vi" Type="VI" URL="../Build Application and Installer.vi"/>
-	<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
 	<Item Name="Extension to Mode.vi" Type="VI" URL="../Extension to Mode.vi"/>
 	<Item Name="Find Most Recent File.vi" Type="VI" URL="../Find Most Recent File.vi"/>
 	<Item Name="Status.vi" Type="VI" URL="../Status.vi"/>
@@ -26,8 +26,9 @@
 	<Item Name="VIPM Clear Change Log.vi" Type="VI" URL="../VIPM Clear Change Log.vi"/>
 	<Item Name="VIPM Format Build Spec Summary.vi" Type="VI" URL="../VIPM Format Build Spec Summary.vi"/>
 	<Item Name="VIPM Increment Patch.vi" Type="VI" URL="../VIPM Increment Patch.vi"/>
+	<Item Name="VIPM Format build.bat.vi" Type="VI" URL="../VIPM Format build.bat.vi"/>
 	<Item Name="List Project Build Specifications.vi" Type="VI" URL="../List Project Build Specifications.vi"/>
 	<Item Name="Choose Build Spec.vi" Type="VI" URL="../Choose Build Spec.vi"/>
 	<Item Name="Version String to Build Spec Version.vi" Type="VI" URL="../Version String to Build Spec Version.vi"/>
-	<Item Name="VIPM Format build.bat.vi" Type="VI" URL="../VIPM Format build.bat.vi"/>
+	<Item Name="VIPM Increment Minor.vi" Type="VI" URL="../VIPM Increment Minor.vi"/>
 </Library>
