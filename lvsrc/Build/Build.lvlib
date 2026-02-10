@@ -29,4 +29,5 @@
 	<Item Name="List Project Build Specifications.vi" Type="VI" URL="../List Project Build Specifications.vi"/>
 	<Item Name="Choose Build Spec.vi" Type="VI" URL="../Choose Build Spec.vi"/>
 	<Item Name="Version String to Build Spec Version.vi" Type="VI" URL="../Version String to Build Spec Version.vi"/>
+	<Item Name="VIPM Format build.bat.vi" Type="VI" URL="../VIPM Format build.bat.vi"/>
 </Library>

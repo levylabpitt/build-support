@@ -1,0 +1,107 @@
+REM build.bat.template: template file for building build.bat with string substitution done in LabVIEW
+
+@echo off
+setlocal EnableDelayedExpansion
+
+REM Go to repository root (one level up from builds folder)
+cd /d "\%~dp0\\.."
+
+REM Arguments passed from Patrick Builder
+set "VERSION=%1$s"
+set "TITLE=%2$s %1$s"
+set "NOTES=%3$s"
+
+set "VIPB_FILE=%4$s"
+
+set "LVVER=%5$d"
+set "LVBIT=%6$d"
+
+echo ======================================
+echo Building \%TITLE\%
+echo ======================================
+
+REM Git flow start
+echo Starting release \%VERSION\%...
+git flow release start \%VERSION\%
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git flow release start failed
+    exit /b 1
+)
+
+REM Archive old releases
+echo Archiving previous release...
+if not exist "builds\\old releases" mkdir "builds\\old releases"
+
+if exist "builds\\latest\\*.*" (
+    move /Y "builds\\latest\\*.*" "builds\\old releases\\"
+) else (
+    if not exist "builds\\latest" mkdir "builds\\latest"
+)
+
+REM Build VIP
+echo Building VIP...
+g-cli --lv-ver \%LVVER\% --arch \%LVBIT\% vipBuild -- "\%VIPB_FILE\%"
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: VIP build failed
+    exit /b 1
+)
+
+REM Execute generated launcher script (builds exe/installer/7z)
+echo Building executables and installers...
+call "builds\\7z Install\\7zip.bat"
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: Executable build failed
+    exit /b 1
+)
+
+REM Git flow finish
+echo Committing changes...
+git commit -m "Build \%VERSION\%" -a
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git commit failed
+    exit /b 1
+)
+
+echo Finishing release \%VERSION\%...
+git flow release finish \%VERSION\% -m "Build \%VERSION\%"
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git flow release finish failed
+    exit /b 1
+)
+
+git reset --hard
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git reset failed
+    exit /b 1
+)
+
+echo Pushing to remote...
+git push --all
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git push --all failed
+    exit /b 1
+)
+
+git push --tags
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git push --tags failed
+    exit /b 1
+)
+
+REM GitHub release
+echo Creating GitHub release \%VERSION\%...
+set ASSETS=
+for \%\%F in (builds\\latest\\*.vip builds\\latest\\*.exe) do (
+    set ASSETS=!ASSETS! "\%\%F"
+)
+gh release create \%VERSION\% !ASSETS! -t "\%TITLE\%" -n "%3$s"
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: GitHub release creation failed
+    exit /b 1
+)
+
+echo.
+echo ======================================
+echo Build \%VERSION\% completed successfully
+echo ======================================
+exit /b 0
