@@ -1,4 +1,5 @@
 REM build.bat.template: template file for building build.bat with string substitution done in LabVIEW
+REM save to <repository root>\\builds\\build.bat
 
 @echo off
 setlocal EnableDelayedExpansion
@@ -9,12 +10,11 @@ cd /d "\%~dp0\\.."
 REM Arguments passed from Patrick Builder
 set "VERSION=%1$s"
 set "TITLE=%2$s %1$s"
-set "NOTES=%3$s"
 
-set "VIPB_FILE=%4$s"
+set "VIPB_FILE=%3$s"
 
-set "LVVER=%5$d"
-set "LVBIT=%6$d"
+set "LVVER=%4$d"
+set "LVBIT=%5$d"
 
 echo ======================================
 echo Building \%TITLE\%
@@ -90,15 +90,21 @@ if \%ERRORLEVEL\% neq 0 (
 
 REM GitHub release
 echo Creating GitHub release \%VERSION\%...
+
+REM Notes written to builds\release_notes.txt by Patrick Builder
+
 set ASSETS=
 for \%\%F in (builds\\latest\\*.vip builds\\latest\\*.exe) do (
     set ASSETS=!ASSETS! "\%\%F"
 )
-gh release create \%VERSION\% !ASSETS! -t "\%TITLE\%" -n "%3$s"
+gh release create \%VERSION\% !ASSETS! -t "\%TITLE\%" -F builds\\release_notes.txt
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: GitHub release creation failed
     exit /b 1
 )
+
+REM Clean up temp file
+del builds\\release_notes.txt
 
 echo.
 echo ======================================
@@ -112,21 +118,11 @@ echo ==========================================
 echo BUILD FAILED - Cleaning up git state
 echo ==========================================
 
-REM Check if we're on a release branch
-git rev-parse --abbrev-ref HEAD | findstr /B "release/" >nul
-if \%ERRORLEVEL\% equ 0 (
-    echo Aborting git flow release...
-    
-    REM Get the release branch name
-    for /f "delims=" \%\%B in ('git rev-parse --abbrev-ref HEAD') do set RELEASE_BRANCH=\%\%B
-    
-    REM Switch back to develop
-    git checkout develop
-    
-    REM Delete the release branch
-    git branch -D \%RELEASE_BRANCH\%
-    
-    echo Git state cleaned up
-)
+REM Try git flow delete first
+git flow release delete \%VERSION\% 2>nul
+
+REM If that didn't work, manual cleanup
+git checkout develop 2>nul
+git branch -D release\%VERSION\% 2>nul
 
 exit /b 1
