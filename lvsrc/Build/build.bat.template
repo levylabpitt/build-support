@@ -25,7 +25,7 @@ echo Starting release \%VERSION\%...
 git flow release start \%VERSION\%
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: git flow release start failed
-    exit /b 1
+    goto error_handler
 )
 
 REM Archive old releases
@@ -43,7 +43,7 @@ echo Building VIP...
 g-cli --lv-ver \%LVVER\% --arch \%LVBIT\% vipBuild -- "\%VIPB_FILE\%"
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: VIP build failed
-    exit /b 1
+    goto error_handler
 )
 
 REM Execute generated launcher script (builds exe/installer/7z)
@@ -51,7 +51,7 @@ echo Building executables and installers...
 call "builds\\7z Install\\7zip.bat"
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: Executable build failed
-    exit /b 1
+    goto error_handler
 )
 
 REM Git flow finish
@@ -59,14 +59,14 @@ echo Committing changes...
 git commit -m "Build \%VERSION\%" -a
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: git commit failed
-    exit /b 1
+    goto error_handler
 )
 
 echo Finishing release \%VERSION\%...
 git flow release finish \%VERSION\% -m "Build \%VERSION\%"
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: git flow release finish failed
-    exit /b 1
+    goto error_handler
 )
 
 git reset --hard
@@ -105,3 +105,28 @@ echo ======================================
 echo Build \%VERSION\% completed successfully
 echo ======================================
 exit /b 0
+
+:error_handler
+echo.
+echo ==========================================
+echo BUILD FAILED - Cleaning up git state
+echo ==========================================
+
+REM Check if we're on a release branch
+git rev-parse --abbrev-ref HEAD | findstr /B "release/" >nul
+if \%ERRORLEVEL\% equ 0 (
+    echo Aborting git flow release...
+    
+    REM Get the release branch name
+    for /f "delims=" \%\%B in ('git rev-parse --abbrev-ref HEAD') do set RELEASE_BRANCH=\%\%B
+    
+    REM Switch back to develop
+    git checkout develop
+    
+    REM Delete the release branch
+    git branch -D \%RELEASE_BRANCH\%
+    
+    echo Git state cleaned up
+)
+
+exit /b 1
