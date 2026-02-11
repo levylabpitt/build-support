@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-10 22:37:17" Creator="Patrick Irvin" Comments="" ID="935aa43b84e8aa3f7eb38095bae081e8">
+<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-11 09:34:57" Creator="Patrick Irvin" Comments="" ID="39974ac544c6b702efade46343ba5ba9">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.6.1.21</Library_Version>
+    <Library_Version>1.6.1.22</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -81,7 +81,8 @@
       <Packager/>
       <URL/>
       <Release_Notes>[1.6.1]
-- Change Post Build Script (G-CLI build).vi to not open Explorer window if Dry Run? == T</Release_Notes>
+- Change Post Build Script (G-CLI build).vi to not open Explorer window if Dry Run? == T
+- Change 7zip.bat template to use %~dp0</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
