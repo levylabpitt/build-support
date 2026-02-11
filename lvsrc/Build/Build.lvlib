@@ -28,6 +28,7 @@
 	<Item Name="VIPM Increment Minor.vi" Type="VI" URL="../VIPM Increment Minor.vi"/>
 	<Item Name="VIPM Increment Patch.vi" Type="VI" URL="../VIPM Increment Patch.vi"/>
 	<Item Name="VIPM Format build.bat.vi" Type="VI" URL="../VIPM Format build.bat.vi"/>
+	<Item Name="VIPM Format build_all.bat.vi" Type="VI" URL="../VIPM Format build_all.bat.vi"/>
 	<Item Name="VIPM Get Package_LabVIEW_Version.vi" Type="VI" URL="../VIPM Get Package_LabVIEW_Version.vi"/>
 	<Item Name="List Project Build Specifications.vi" Type="VI" URL="../List Project Build Specifications.vi"/>
 	<Item Name="Choose Build Spec.vi" Type="VI" URL="../Choose Build Spec.vi"/>
