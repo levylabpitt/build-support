@@ -1452,20 +1452,23 @@
 				<Property Name="Bld_excludeLibraryItems" Type="Bool">true</Property>
 				<Property Name="Bld_excludePolymorphicVIs" Type="Bool">true</Property>
 				<Property Name="Bld_localDestDir" Type="Path">../builds/Application</Property>
-				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
+				<Property Name="Bld_localDestDirType" Type="Str">relativeToProject</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{C3786147-54D9-4EFB-9A94-FC7AC7C65BCA}</Property>
-				<Property Name="Bld_version.build" Type="Int">26</Property>
+				<Property Name="Bld_version.build" Type="Int">29</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
+				<Property Name="Bld_version.minor" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">Patrick Builder.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/Application/Patrick Builder.exe</Property>
+				<Property Name="Destination[0].path.type" Type="Str">relativeToProject</Property>
 				<Property Name="Destination[0].preserveHierarchy" Type="Bool">true</Property>
 				<Property Name="Destination[0].type" Type="Str">App</Property>
 				<Property Name="Destination[1].destName" Type="Str">Support Directory</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/Application/data</Property>
+				<Property Name="Destination[1].path.type" Type="Str">relativeToProject</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
 				<Property Name="Exe_iconItemID" Type="Ref">/My Computer/build support/build helper.ico</Property>
-				<Property Name="Source[0].itemID" Type="Str">{23B6880A-8E6E-447F-94F4-6F99DECE3E1B}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{28A5C4A7-5939-4FC1-ADC2-CAADA2E950BE}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/Build.lvlib/Patrick Builder.vi</Property>
@@ -1528,12 +1531,12 @@
 				<Property Name="DistPartCount" Type="Int">1</Property>
 				<Property Name="INST_author" Type="Str">University of Pittsburgh</Property>
 				<Property Name="INST_buildLocation" Type="Path">../builds/Installer</Property>
-				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
+				<Property Name="INST_buildLocation.type" Type="Str">relativeToProject</Property>
 				<Property Name="INST_buildSpecName" Type="Str">Patrick Builder Installer</Property>
 				<Property Name="INST_defaultDir" Type="Str">{254A36E4-4AEB-4E93-8646-E5F812D87291}</Property>
 				<Property Name="INST_installerName" Type="Str">setup.exe</Property>
 				<Property Name="INST_productName" Type="Str">Patrick Builder</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.0</Property>
+				<Property Name="INST_productVersion" Type="Str">1.1.0</Property>
 				<Property Name="InstSpecBitness" Type="Str">64-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">19018009</Property>
 				<Property Name="MSI_arpCompany" Type="Str">University of Pittsburgh</Property>
