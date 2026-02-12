@@ -1,5 +1,5 @@
 REM build.bat.template: template file for building build.bat with string substitution done in LabVIEW
-REM save to <repository root>\\builds\\build.bat
+REM saves to <repository root>\\builds\\build.bat
 
 @echo off
 setlocal EnableDelayedExpansion

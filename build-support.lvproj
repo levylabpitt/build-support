@@ -34,6 +34,11 @@
 			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Post-Install Custom Action.vit"/>
 			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Pre-Build Custom Action.vit"/>
 		</Item>
+		<Item Name="Batch Templates" Type="Folder">
+			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
+			<Item Name="build.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build.bat.template"/>
+			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
+		</Item>
 		<Item Name="G-CLI" Type="Folder">
 			<Item Name="build.bat" Type="Document" URL="../lvsrc/G-CLI/build.bat"/>
 			<Item Name="build.ps1" Type="Document" URL="../lvsrc/G-CLI/build.ps1"/>
@@ -826,6 +831,7 @@
 				<Item Name="SMO.UI.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/JKI/JKI SMO/SMO.UI/SMO.UI.lvclass"/>
 				<Item Name="G CLI VIP.lvlib" Type="Library" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI VI Package Manager Tools/G CLI VIP.lvlib"/>
 				<Item Name="Option Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/Argument Parser/Option Parser.lvlib"/>
+				<Item Name="GIT-Add.vi" Type="VI" URL="/&lt;vilib&gt;/Hampel Software Engineering/Git API/Source/Git API/API/Basic/GIT-Add.vi"/>
 			</Item>
 			<Item Name="_ChannelScriptingSupport.lvlib" Type="Library" URL="/&lt;resource&gt;/ChannelSupport/_ChannelScriptingSupport/_ChannelScriptingSupport.lvlib"/>
 			<Item Name="AB_Build_Invoke_Preview.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/Builds/AppBuilder/AB_Build_Invoke_Preview.vi"/>

@@ -1,0 +1,101 @@
+REM 7zip.bat.template: template file for building 7zip.bat with string substitution done in LabVIEW
+REM saves to <repository root>\\builds\\7zip\\7zip.bat
+
+@echo off
+setlocal enabledelayedexpansion
+rem build script 2026-02-10 10:00pm patrick irvin
+
+rem Step 1: Start build
+echo Step 1: Starting %1$s build...
+
+rem Set unique window title for PID detection
+set UNIQUE_TITLE=BUILD_\%RANDOM\%
+title !UNIQUE_TITLE!
+
+rem Wait a moment for title to take effect
+timeout /t 1 /nobreak >nul
+
+rem Get PID using the unique title
+for /f "tokens=2" \%\%i in ('tasklist /fi "windowtitle eq !UNIQUE_TITLE!" /fo table /nh 2^>nul') do (
+    set PID=\%\%i
+    goto :found_pid
+)
+
+:found_pid
+rem Reset title
+title Command Prompt
+
+rem Write PID to file
+echo !PID! > "\%~dp0build_pid.txt"
+echo Found PID: !PID!
+
+rem Test PID detection (only if PID is not empty)
+if not "!PID!"=="" (
+    echo Testing PID !PID!:
+    tasklist /fi "PID eq !PID!" /nh
+) else (
+    echo Warning: Could not determine PID
+)
+
+rem Initialize status
+echo RUNNING,\%TIME\%,Getting PID... > "\%~dp0build_status.txt"
+timeout /t 1 /nobreak >nul
+
+echo RUNNING,\%TIME\%,PID=!PID! detected > "\%~dp0build_status.txt"
+timeout /t 1 /nobreak >nul
+
+rem Step 2: Quit LabVIEW
+echo Step 2: Quitting LabVIEW...
+echo RUNNING,\%TIME\%,Step 2 - Quitting LabVIEW > "\%~dp0build_status.txt"
+%2$s
+if !errorlevel! neq 0 (
+    echo ERROR,\%TIME\%,Step 2 failed - Quitting LabVIEW failed > "\%~dp0build_status.txt"
+    goto :error_exit
+)
+
+rem Step 3: Clear Cache
+echo Step 3: Clearing cache...
+echo RUNNING,\%TIME\%,Step 3 - Clearing cache > "\%~dp0build_status.txt"
+%3$s
+if !errorlevel! neq 0 (
+    echo ERROR,\%TIME\%,Step 3 failed - Cache clearing failed > "\%~dp0build_status.txt"
+    goto :error_exit
+)
+
+rem Step 4: Build Application
+echo Step 4: Building application...
+echo RUNNING,\%TIME\%,Step 4 - Building application > "\%~dp0build_status.txt"
+%4$s
+if !errorlevel! neq 0 (
+    echo ERROR,\%TIME\%,Step 4 failed - Application build failed > \%%~dp0build_status.txt"
+    goto :error_exit
+)
+
+rem Step 5: Build Installer
+echo Step 5: Building installer...
+echo RUNNING,\%TIME\%,Step 5 - Building installer > "\%~dp0build_status.txt"
+%5$s
+if !errorlevel! neq 0 (
+    echo ERROR,\%TIME\%,Step 5 failed - Installer build failed > "\%~dp0build_status.txt"
+    goto :error_exit
+)
+
+rem Step 6: Creating 7z archive and self-extracting installer
+echo Step 6: Creating 7z archive and self-extracting installer...
+echo RUNNING,\%TIME\%,Step 6 - Creating 7z archive and self-extracting installer > "\%~dp0build_status.txt"
+%6$s
+if !errorlevel! neq 0 (
+    echo ERROR,\%TIME\%,Step 6 failed - 7z archive creation failed > "\%~dp0build_status.txt"
+    goto :error_exit
+)
+
+rem Success - Update final status
+echo SUCCESS,\%TIME\%,Build completed successfully! > "\%~dp0build_status.txt"
+echo Build process finished successfully. (PID=!PID!)
+goto :end
+
+:error_exit
+echo Build process failed. Check "\%~dp0build_status.txt" for details. (PID=!PID!)
+exit /b 1
+
+:end
