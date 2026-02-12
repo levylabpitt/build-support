@@ -67,7 +67,7 @@ echo Step 4: Building application...
 echo RUNNING,\%TIME\%,Step 4 - Building application > "\%~dp0build_status.txt"
 %4$s
 if !errorlevel! neq 0 (
-    echo ERROR,\%TIME\%,Step 4 failed - Application build failed > \%%~dp0build_status.txt"
+    echo ERROR,\%TIME\%,Step 4 failed - Application build failed > \%~dp0build_status.txt"
     goto :error_exit
 )
 
