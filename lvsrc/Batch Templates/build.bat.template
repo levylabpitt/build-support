@@ -91,7 +91,7 @@ if \%ERRORLEVEL\% neq 0 (
 REM GitHub release
 echo Creating GitHub release \%VERSION\%...
 
-REM Notes written to builds\release_notes.txt by Patrick Builder
+REM Notes written to builds\\release_notes.txt by Patrick Builder
 
 set ASSETS=
 for \%\%F in (builds\\latest\\*.vip builds\\latest\\*.exe) do (
