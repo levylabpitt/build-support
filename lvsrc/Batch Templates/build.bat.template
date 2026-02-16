@@ -10,23 +10,13 @@ cd /d "\%~dp0\\.."
 REM Arguments passed from Patrick Builder
 set "VERSION=%1$s"
 set "TITLE=%2$s %1$s"
-
 set "VIPB_FILE=%3$s"
-
 set "LVVER=%4$d"
 set "LVBIT=%5$d"
 
 echo ======================================
 echo Building \%TITLE\%
 echo ======================================
-
-REM Git flow start
-echo Starting release \%VERSION\%...
-git flow release start \%VERSION\%
-if \%ERRORLEVEL\% neq 0 (
-    echo ERROR: git flow release start failed
-    goto error_handler
-)
 
 REM Archive old releases
 echo Archiving previous release...
@@ -46,7 +36,7 @@ if \%ERRORLEVEL\% neq 0 (
     goto error_handler
 )
 
-REM Execute generated launcher script (builds exe/installer/7z)
+REM Execute generated script (builds exe/installer/7z)
 echo Building executables and installers...
 call "builds\\7z Install\\7zip.bat"
 if \%ERRORLEVEL\% neq 0 (
@@ -54,49 +44,43 @@ if \%ERRORLEVEL\% neq 0 (
     goto error_handler
 )
 
-REM Git flow finish
+REM Commit and tag release
 echo Committing changes...
-git commit -m "Build \%VERSION\%" -a
+git add -A
+git commit -m "Release \%VERSION\%" --allow-empty
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: git commit failed
     goto error_handler
 )
 
-echo Finishing release \%VERSION\%...
-git flow release finish \%VERSION\% -m "Build \%VERSION\%"
+echo Tagging release \%VERSION\%...
+git tag \%VERSION\%
 if \%ERRORLEVEL\% neq 0 (
-    echo ERROR: git flow release finish failed
+    echo ERROR: git tag failed
     goto error_handler
 )
 
-git reset --hard
-if \%ERRORLEVEL\% neq 0 (
-    echo ERROR: git reset failed
-    exit /b 1
-)
-
 echo Pushing to remote...
-git push --all
+git push origin main
 if \%ERRORLEVEL\% neq 0 (
-    echo ERROR: git push --all failed
+    echo ERROR: git push failed
     exit /b 1
 )
 
-git push --tags
+git push origin \%VERSION\%
 if \%ERRORLEVEL\% neq 0 (
-    echo ERROR: git push --tags failed
+    echo ERROR: git push tag failed
     exit /b 1
 )
 
 REM GitHub release
 echo Creating GitHub release \%VERSION\%...
-
 REM Notes written to builds\\release_notes.txt by Patrick Builder
-
 set ASSETS=
 for \%\%F in (builds\\latest\\*.vip builds\\latest\\*.exe) do (
     set ASSETS=!ASSETS! "\%\%F"
 )
+
 gh release create \%VERSION\% !ASSETS! -t "\%TITLE\%" -F builds\\release_notes.txt
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: GitHub release creation failed
@@ -115,14 +99,6 @@ exit /b 0
 :error_handler
 echo.
 echo ==========================================
-echo BUILD FAILED - Cleaning up git state
+echo BUILD FAILED
 echo ==========================================
-
-REM Try git flow delete first
-git flow release delete \%VERSION\% 2>nul
-
-REM If that didn't work, manual cleanup
-git checkout develop 2>nul
-git branch -D release\%VERSION\% 2>nul
-
 exit /b 1
