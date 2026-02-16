@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-16 11:33:54" Creator="Patrick Irvin" Comments="" ID="942f8d4e98265f94a4dd9bcaa0b69ff5">
+<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-16 11:44:17" Creator="Patrick Irvin" Comments="" ID="9e1223cb05cdd4746c23c3971d824014">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.7.2.26</Library_Version>
+    <Library_Version>1.7.2.27</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
