@@ -855,6 +855,7 @@
 				<Item Name="SMO.UI.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/JKI/JKI SMO/SMO.UI/SMO.UI.lvclass"/>
 				<Item Name="G CLI VIP.lvlib" Type="Library" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI VI Package Manager Tools/G CLI VIP.lvlib"/>
 				<Item Name="Option Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/Argument Parser/Option Parser.lvlib"/>
+				<Item Name="GIT-Add.vi" Type="VI" URL="/&lt;vilib&gt;/Hampel Software Engineering/Git API/Source/Git API/API/Basic/GIT-Add.vi"/>
 			</Item>
 			<Item Name="_ChannelScriptingSupport.lvlib" Type="Library" URL="/&lt;resource&gt;/ChannelSupport/_ChannelScriptingSupport/_ChannelScriptingSupport.lvlib"/>
 			<Item Name="AB_Build_Invoke_Preview.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/Builds/AppBuilder/AB_Build_Invoke_Preview.vi"/>
@@ -1478,10 +1479,10 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToProject</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{C3786147-54D9-4EFB-9A94-FC7AC7C65BCA}</Property>
-				<Property Name="Bld_version.build" Type="Int">33</Property>
+				<Property Name="Bld_version.build" Type="Int">34</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Bld_version.minor" Type="Int">2</Property>
-				<Property Name="Bld_version.patch" Type="Int">3</Property>
+				<Property Name="Bld_version.patch" Type="Int">4</Property>
 				<Property Name="Destination[0].destName" Type="Str">Patrick Builder.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/Application/Patrick Builder.exe</Property>
 				<Property Name="Destination[0].path.type" Type="Str">relativeToProject</Property>
@@ -1560,7 +1561,7 @@
 				<Property Name="INST_defaultDir" Type="Str">{254A36E4-4AEB-4E93-8646-E5F812D87291}</Property>
 				<Property Name="INST_installerName" Type="Str">setup.exe</Property>
 				<Property Name="INST_productName" Type="Str">Patrick Builder</Property>
-				<Property Name="INST_productVersion" Type="Str">1.2.3</Property>
+				<Property Name="INST_productVersion" Type="Str">1.2.4</Property>
 				<Property Name="InstSpecBitness" Type="Str">64-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">19018009</Property>
 				<Property Name="MSI_arpCompany" Type="Str">University of Pittsburgh</Property>
