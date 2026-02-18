@@ -8,42 +8,6 @@ rem build script 2026-02-10 10:00pm patrick irvin
 rem Step 1: Start build
 echo Step 1: Starting %1$s build...
 
-rem Set unique window title for PID detection
-set UNIQUE_TITLE=BUILD_\%RANDOM\%
-title !UNIQUE_TITLE!
-
-rem Wait a moment for title to take effect
-timeout /t 1 /nobreak >nul
-
-rem Get PID using the unique title
-for /f "tokens=2" \%\%i in ('tasklist /fi "windowtitle eq !UNIQUE_TITLE!" /fo table /nh 2^>nul') do (
-    set PID=\%\%i
-    goto :found_pid
-)
-
-:found_pid
-rem Reset title
-title Command Prompt
-
-rem Write PID to file
-echo !PID! > "\%~dp0build_pid.txt"
-echo Found PID: !PID!
-
-rem Test PID detection (only if PID is not empty)
-if not "!PID!"=="" (
-    echo Testing PID !PID!:
-    tasklist /fi "PID eq !PID!" /nh
-) else (
-    echo Warning: Could not determine PID
-)
-
-rem Initialize status
-echo RUNNING,\%TIME\%,Getting PID... > "\%~dp0build_status.txt"
-timeout /t 1 /nobreak >nul
-
-echo RUNNING,\%TIME\%,PID=!PID! detected > "\%~dp0build_status.txt"
-timeout /t 1 /nobreak >nul
-
 rem Step 2: Quit LabVIEW
 echo Step 2: Quitting LabVIEW...
 echo RUNNING,\%TIME\%,Step 2 - Quitting LabVIEW > "\%~dp0build_status.txt"
@@ -67,7 +31,7 @@ echo Step 4: Building application...
 echo RUNNING,\%TIME\%,Step 4 - Building application > "\%~dp0build_status.txt"
 %4$s
 if !errorlevel! neq 0 (
-    echo ERROR,\%TIME\%,Step 4 failed - Application build failed > \%~dp0build_status.txt"
+    echo ERROR,\%TIME\%,Step 4 failed - Application build failed > "\%~dp0build_status.txt"
     goto :error_exit
 )
 
@@ -91,11 +55,11 @@ if !errorlevel! neq 0 (
 
 rem Success - Update final status
 echo SUCCESS,\%TIME\%,Build completed successfully! > "\%~dp0build_status.txt"
-echo Build process finished successfully. (PID=!PID!)
+echo Build process finished successfully.
 goto :end
 
 :error_exit
-echo Build process failed. Check "\%~dp0build_status.txt" for details. (PID=!PID!)
+echo Build process failed. Check "\%~dp0build_status.txt" for details.
 exit /b 1
 
 :end
