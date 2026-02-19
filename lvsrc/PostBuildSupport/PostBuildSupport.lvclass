@@ -292,6 +292,15 @@
 			<Property Name="NI.ClassItem.Priority" Type="Int">1</Property>
 			<Property Name="NI.ClassItem.State" Type="Int">1082143248</Property>
 		</Item>
+		<Item Name="Version String to Build Spec Version.vi" Type="VI" URL="../Private/Version String to Build Spec Version.vi">
+			<Property Name="NI.ClassItem.ConnectorPane" Type="Bin">'1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!$2!!!!"Q!,1!9!"5VB;G^S!!N!"A!&amp;47FO&lt;X)!#5!'!!.';8A!#U!'!!6#&gt;7FM:!"P!0%!!!!!!!!!!BB/36^"=("@1H6J&lt;'2F=F^"5%EO&lt;(:M;7)@1H6J&lt;'1A5X"F9WFG;7.B&gt;'FP&lt;C"7:8*T;7^O,G.U&lt;!!O1&amp;!!"!!!!!%!!A!$'U*V;7RE)&amp;.Q:7.J:GFD982J&lt;WYA6G6S=WFP&lt;A!91$$`````$V"B9WNB:W5A6G6S=WFP&lt;A!9!0!!!A!%!!5#!!!)!!!*!!!!#!!!!!!"!!9!!!!!</Property>
+			<Property Name="NI.ClassItem.ExecutionSystem" Type="Int">-1</Property>
+			<Property Name="NI.ClassItem.Flags" Type="Int">0</Property>
+			<Property Name="NI.ClassItem.IsStaticMethod" Type="Bool">true</Property>
+			<Property Name="NI.ClassItem.MethodScope" Type="UInt">2</Property>
+			<Property Name="NI.ClassItem.Priority" Type="Int">1</Property>
+			<Property Name="NI.ClassItem.State" Type="Int">1074278912</Property>
+		</Item>
 		<Item Name="CMD Build Bat.vi" Type="VI" URL="../Private/CMD Build Bat.vi">
 			<Property Name="NI.ClassItem.ConnectorPane" Type="Bin">'1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!$2!!!!#!!-1#%'=X2B&gt;(6T!!!,1!-!"'.P:'5!!""!-0````]'=W^V=G.F!!!71&amp;!!!Q!!!!%!!AFF=H*P=C"P&gt;81!"!!!!#"!5!!$!!!!!1!#%W6S=G^S)'FO)#BO&lt;S"F=H*P=CE!&amp;%!S`````QJC982D;#"G;7RF!!"5!0!!$!!$!!1!"!!%!!1!"!!%!!1!"1!%!!1!"A-!!(A!!!E!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#A!!!!!!!!!!!!!!#!!!!!!"!!=!!!!!</Property>
 			<Property Name="NI.ClassItem.ExecutionSystem" Type="Int">-1</Property>

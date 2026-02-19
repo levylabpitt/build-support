@@ -15,6 +15,5 @@
 	<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
 	<Item Name="File List Window.vi" Type="VI" URL="../File List Window.vi"/>
 	<Item Name="Extension to Mode.vi" Type="VI" URL="../Extension to Mode.vi"/>
-	<Item Name="Version String to Build Spec Version.vi" Type="VI" URL="../Version String to Build Spec Version.vi"/>
 	<Item Name="Create build_all.bat.vi" Type="VI" URL="../Create build_all.bat.vi"/>
 </Library>

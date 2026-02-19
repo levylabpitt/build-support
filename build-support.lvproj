@@ -29,10 +29,10 @@
 			<Item Name="VIPT to rename.vi" Type="VI" URL="../lvsrc/PreBuildSupport/VIPT to rename.vi"/>
 		</Item>
 		<Item Name="VI Templates" Type="Folder">
-			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/Templates/buildspec-template.vipt"/>
-			<Item Name="Post-Build Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Post-Build Custom Action.vit"/>
-			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Post-Install Custom Action.vit"/>
-			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Pre-Build Custom Action.vit"/>
+			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/VI Templates/buildspec-template.vipt"/>
+			<Item Name="Post-Build Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Post-Build Custom Action.vit"/>
+			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Post-Install Custom Action.vit"/>
+			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Pre-Build Custom Action.vit"/>
 		</Item>
 		<Item Name="Batch Templates" Type="Folder">
 			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
