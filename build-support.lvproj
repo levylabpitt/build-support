@@ -40,10 +40,6 @@
 			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
 		</Item>
 		<Item Name="G-CLI" Type="Folder">
-			<Item Name="build.bat" Type="Document" URL="../lvsrc/G-CLI/build.bat"/>
-			<Item Name="build.ps1" Type="Document" URL="../lvsrc/G-CLI/build.ps1"/>
-			<Item Name="PowerShell dotNET.vi" Type="VI" URL="../lvsrc/G-CLI/PowerShell dotNET.vi"/>
-			<Item Name="timer.ps1" Type="Document" URL="../lvsrc/G-CLI/timer.ps1"/>
 			<Item Name="Powershell Terminal.vi" Type="VI" URL="../lvsrc/G-CLI/Powershell Terminal.vi"/>
 			<Item Name="Powershell Test.vi" Type="VI" URL="../lvsrc/G-CLI/Powershell Test.vi"/>
 		</Item>
@@ -1452,9 +1448,6 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="libc.so.6" Type="Document" URL="libc.so.6">
-				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
-			</Item>
-			<Item Name="System.Management.Automation" Type="Document" URL="System.Management.Automation">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="mscorlib" Type="VI" URL="mscorlib">
