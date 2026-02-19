@@ -1,4 +1,4 @@
-<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-19 11:37:26" Creator="Patrick Irvin" Comments="" ID="013b1920563b71b5f3668b59949852db">
+<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-19 11:43:14" Creator="Patrick Irvin" Comments="" ID="aa026b28e235caae66a50dc886297d99">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
     <Library_Version>1.8.0.27</Library_Version>
@@ -36,7 +36,10 @@
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes/>
+      <Release_Notes>[1.8.0]
+- reorganize folder, libraries, and classes into a more logical structure
+- update 7zip.bat to better handle missing *.7z files
+- update and rename build.bat to build_vip.bat, build 7zip is optional and executes only if 7zip.bat exists</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
