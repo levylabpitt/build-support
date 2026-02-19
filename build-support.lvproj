@@ -35,9 +35,9 @@
 			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Pre-Build Custom Action.vit"/>
 		</Item>
 		<Item Name="Batch Templates" Type="Folder">
-			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
-			<Item Name="build.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build.bat.template"/>
 			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
+			<Item Name="build_vip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_vip.bat.template"/>
+			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
 		</Item>
 		<Item Name="CLI" Type="Folder">
 			<Item Name="Tests" Type="Folder">
@@ -57,6 +57,7 @@
 		<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport (2013)/PostBuildSupport (2013).lvclass"/>
 		<Item Name="ProjectItem.lvclass" Type="LVClass" URL="../lvsrc/ProjectItem/ProjectItem.lvclass"/>
 		<Item Name="SelfUpdate.lvclass" Type="LVClass" URL="../lvsrc/SelfUpdate/SelfUpdate.lvclass"/>
+		<Item Name="VIPM.lvlib" Type="Library" URL="../lvsrc/VIPM/VIPM.lvlib"/>
 		<Item Name="Build.lvlib" Type="Library" URL="../lvsrc/Build/Build.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
@@ -147,7 +148,6 @@
 				<Item Name="Index 2D Array Elements (U64)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Index 2D Array Elements (U64)__ogtk.vi"/>
 				<Item Name="Index 1D Array Elements (LVObject)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Index 1D Array Elements (LVObject)__ogtk.vi"/>
 				<Item Name="Index 2D Array Elements (LVObject)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Index 2D Array Elements (LVObject)__ogtk.vi"/>
-				<Item Name="MGI Is Runtime.vi" Type="VI" URL="/&lt;userlib&gt;/_MGI/Application Control/MGI Is Runtime.vi"/>
 				<Item Name="ProgressBar.lvclass" Type="LVClass" URL="/&lt;userlib&gt;/LevyLab/Progress Bar/ProgressBar/ProgressBar.lvclass"/>
 				<Item Name="Read Key (Variant)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/variantconfig/variantconfig.llb/Read Key (Variant)__ogtk.vi"/>
 				<Item Name="Get Data Name__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Get Data Name__ogtk.vi"/>

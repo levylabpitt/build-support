@@ -13,7 +13,7 @@ set FAILED_BUILDS=
 set SUCCESS_COUNT=0
 set TOTAL_COUNT=0
 
-REM List of build.bat files to execute
+REM List of build_vipb.bat files to execute
 set BUILD_LIST=(%s)
 
 REM Execute each build

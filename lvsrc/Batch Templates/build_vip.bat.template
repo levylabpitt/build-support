@@ -1,5 +1,5 @@
-REM build.bat.template: template file for building build.bat with string substitution done in LabVIEW
-REM saves to <repository root>\\builds\\build.bat
+REM build.bat.template: template file for building build_vip.bat with string substitution done in LabVIEW
+REM save to <repository root>\\builds\\build_vip.bat
 
 @echo off
 setlocal EnableDelayedExpansion
@@ -36,12 +36,16 @@ if \%ERRORLEVEL\% neq 0 (
     goto error_handler
 )
 
-REM Execute generated script (builds exe/installer/7z)
-echo Building executables and installers...
-call "builds\\7z Install\\7zip.bat"
-if \%ERRORLEVEL\% neq 0 (
-    echo ERROR: Executable build failed
-    goto error_handler
+REM Execute generated script (builds exe/installer/7z) - if it exists
+if exist "builds\\7z Install\\7zip.bat" (
+    echo Building executables and installers...
+    call "builds\\7z Install\\7zip.bat"
+    if \%ERRORLEVEL\% neq 0 (
+        echo ERROR: Executable build failed
+        goto error_handler
+    )
+) else (
+    echo Skipping executable/installer build ^(7zip.bat not found^)
 )
 
 REM Commit and tag release
