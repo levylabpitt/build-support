@@ -28,7 +28,7 @@
 			<Item Name="rename to VIPT.vi" Type="VI" URL="../lvsrc/PreBuildSupport/rename to VIPT.vi"/>
 			<Item Name="VIPT to rename.vi" Type="VI" URL="../lvsrc/PreBuildSupport/VIPT to rename.vi"/>
 		</Item>
-		<Item Name="Templates" Type="Folder">
+		<Item Name="VI Templates" Type="Folder">
 			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/Templates/buildspec-template.vipt"/>
 			<Item Name="Post-Build Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Post-Build Custom Action.vit"/>
 			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../lvsrc/Templates/Post-Install Custom Action.vit"/>
@@ -39,9 +39,18 @@
 			<Item Name="build.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build.bat.template"/>
 			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
 		</Item>
-		<Item Name="G-CLI" Type="Folder">
-			<Item Name="Powershell Terminal.vi" Type="VI" URL="../lvsrc/G-CLI/Powershell Terminal.vi"/>
-			<Item Name="Powershell Test.vi" Type="VI" URL="../lvsrc/G-CLI/Powershell Test.vi"/>
+		<Item Name="CLI" Type="Folder">
+			<Item Name="Tests" Type="Folder">
+				<Item Name="Test .NET Terminal.vi" Type="VI" URL="../lvsrc/CLI/Tests/Test .NET Terminal.vi"/>
+			</Item>
+			<Item Name=".NET Terminal.vi" Type="VI" URL="../lvsrc/CLI/.NET Terminal.vi"/>
+			<Item Name="Status.vi" Type="VI" URL="../lvsrc/CLI/Status.vi"/>
+		</Item>
+		<Item Name="Build Templates" Type="Folder">
+			<Item Name="Manual Build.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build.vi"/>
+			<Item Name="Manual Build SM.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build SM.vi"/>
+			<Item Name="buildWithGCLI.vi" Type="VI" URL="../lvsrc/Build Templates/buildWithGCLI.vi"/>
+			<Item Name="Build Application and Installer.vi" Type="VI" URL="../lvsrc/Build Templates/Build Application and Installer.vi"/>
 		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
