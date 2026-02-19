@@ -15,9 +15,6 @@
 	<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
 	<Item Name="File List Window.vi" Type="VI" URL="../File List Window.vi"/>
 	<Item Name="Extension to Mode.vi" Type="VI" URL="../Extension to Mode.vi"/>
-	<Item Name="Find Most Recent File.vi" Type="VI" URL="../Find Most Recent File.vi"/>
-	<Item Name="List Project Build Specifications.vi" Type="VI" URL="../List Project Build Specifications.vi"/>
-	<Item Name="Choose Build Spec.vi" Type="VI" URL="../Choose Build Spec.vi"/>
 	<Item Name="Version String to Build Spec Version.vi" Type="VI" URL="../Version String to Build Spec Version.vi"/>
-	<Item Name="Format build_all.bat.vi" Type="VI" URL="../../VIPM/Format build_all.bat.vi"/>
+	<Item Name="Create build_all.bat.vi" Type="VI" URL="../Create build_all.bat.vi"/>
 </Library>
