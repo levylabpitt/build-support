@@ -73,7 +73,7 @@ if \%ERRORLEVEL\% neq 0 (
     goto error_handler
 )
 
-git merge develop --no-ff -m "Merge release %VERSION%"
+git merge develop --no-ff -m "Merge release \%VERSION\%"
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: git merge failed
     goto error_handler
