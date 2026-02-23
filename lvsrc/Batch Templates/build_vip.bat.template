@@ -48,20 +48,13 @@ if exist "builds\\7z Install\\7zip.bat" (
     echo Skipping executable/installer build ^(7zip.bat not found^)
 )
 
-REM Commit and tag release on develop
+REM Commit on develop
 echo Committing changes on develop...
 git checkout develop
 git add -A
 git commit -m "Release \%VERSION\%" --allow-empty
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: git commit failed
-    goto error_handler
-)
-
-echo Tagging release \%VERSION\%...
-git tag \%VERSION\%
-if \%ERRORLEVEL\% neq 0 (
-    echo ERROR: git tag failed
     goto error_handler
 )
 
@@ -76,6 +69,14 @@ if \%ERRORLEVEL\% neq 0 (
 git merge develop --no-ff -m "Merge release \%VERSION\%"
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: git merge failed
+    goto error_handler
+)
+
+REM Tag on main (after merge)
+echo Tagging release \%VERSION\% on main...
+git tag \%VERSION\%
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git tag failed
     goto error_handler
 )
 
@@ -100,7 +101,6 @@ if \%ERRORLEVEL\% neq 0 (
 )
 
 REM Return to develop
-echo Returning to develop branch...
 git checkout develop
 
 REM GitHub release
