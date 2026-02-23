@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-20 17:52:10" Creator="Patrick Irvin" Comments="" ID="6f078faefc94d20297c6610fa7d98d6e">
+<VI_Package_Builder_Settings Version="2018" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-02-23 08:39:33" Creator="Patrick Irvin" Comments="" ID="b741958d7c3e7f121d6ed6e63112e356">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.8.2.31</Library_Version>
+    <Library_Version>1.8.3.32</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -17,12 +17,10 @@
   </Library_General_Settings>
   <Advanced_Settings>
     <Package_Dependencies>
-      <External_Dependencies>jki_lib_vipm_api &gt;= 2020.0.3.80</External_Dependencies>
-      <External_Dependencies>wiresmith_technology_lib_g_cli &gt;= 3.0.1.98</External_Dependencies>
       <Additional_External_Dependencies>levylab_lib_progress_bar &gt;=1.0.0.1</Additional_External_Dependencies>
-      <Direct_Dependencies>jki_lib_vipm_api-2020.0.3.80</Direct_Dependencies>
-      <Direct_Dependencies>wiresmith_technology_lib_g_cli-3.0.1.98</Direct_Dependencies>
-      <Direct_Dependencies>wiresmith_technology_lib_g_cli_vi_package_manager_tools-0.2.1.15</Direct_Dependencies>
+      <Additional_External_Dependencies>wiresmith_technology_lib_g_cli &gt;=3.0.1.98</Additional_External_Dependencies>
+      <Additional_External_Dependencies>wiresmith_technology_lib_g_cli_labview_builder &gt;=0.2.0.9</Additional_External_Dependencies>
+      <Additional_External_Dependencies>wiresmith_technology_lib_g_cli_vi_package_manager_tools &gt;=0.2.1.15</Additional_External_Dependencies>
     </Package_Dependencies>
     <Custom_Action_VIs>
       <Pre-Build_VI/>
@@ -39,8 +37,8 @@
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>[1.8.2]
-update template to better handle git branches</Release_Notes>
+      <Release_Notes>[1.8.3]
+- build_vip.bat.template: Create tag after checking out main and merging, so the tag points to the commit on main, not develop. then finish by checking out develop</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
@@ -372,7 +370,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\Build Templates</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>CDB7D6EFE77C812656A41E2785CC06BD</GUID>
+      <GUID>56E215D03133481EF4FB3DD5CC672748</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -813,7 +811,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\Git\API\gh-cli Release View.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>5406ED5AC2AD2FF565FA3D4A4A22BAC4</GUID>
+      <GUID>3A3906F414F59EAA62D5EC968762BFFD</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -904,7 +902,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\PostBuildSupport\Private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>275DF6C56E7201A9B33426554110662C</GUID>
+      <GUID>57DEC326CE1FA69E237A82CE8D575FD6</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -967,7 +965,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\PreBuildSupport\VIPT to rename.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>8DD08F101B2CF57A2BAD68FEDB74F7F1</GUID>
+      <GUID>33CAAC845905F24CF492AC22E75FFC26</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1072,7 +1070,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\ProjectItem\Protected</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>645459D28B48A05BA530EBA301E0B6BA</GUID>
+      <GUID>3310D215A1DEBDAC22ECAB91678E0840</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1191,7 +1189,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\SelfUpdate\private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>1A93EA99D0935784F5BF539082BDD738</GUID>
+      <GUID>246E5EF475E6A2BF54F2DDBBF8F16CC3</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -1226,7 +1224,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\PostBuildSupport\Test\Test 7z.bat.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>259BE03E8775511FE5903EF9083F3CF4</GUID>
+      <GUID>2964EF836A7E1F0B5F7117A104861098</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>3</Parent_Palette_Index>
@@ -1261,7 +1259,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\PreBuildSupport\subVI\Find File By Name.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>0171A5EFCB58766E5C20E2BE637074EE</GUID>
+      <GUID>C7F8734138F7F3F9D660CAC18E9F1CCF</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1352,7 +1350,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\ProjectItem\Private\Update Path.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>40FE6EC84E1F9BDD0B798BCB5A1658EC</GUID>
+      <GUID>87208273EC40FE61CEACDD825564AA4C</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1653,7 +1651,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\ProjectItem\Protected\Write Wire Color Data.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>72E1920586A8FF8D70BFA86D2A84B84D</GUID>
+      <GUID>4E6DDE9FC6AE211C428C238DE289213E</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1688,7 +1686,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\SelfUpdate\example\Self Update Example.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>FBB182DEC89B30ADCB55D241CD0EE72A</GUID>
+      <GUID>0301B05F9172B47A5F0E48F4943AF70D</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1751,7 +1749,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\SelfUpdate\private\Update Dialog.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>F0611CE20EBF515CB2CBFD12F6FBE262</GUID>
+      <GUID>B0C66807737EDF639F4AE82C02347382</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -2094,7 +2092,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\PostBuildSupport\Private\Create 7z config.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>533977F5F58DB1F7EF9705C1DFA47854</GUID>
+      <GUID>74444599ABC97AB9466EEC4227BEC9F2</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2171,7 +2169,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\Build\Patrick Builder.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>769C475A71CEC7AFE6038C7857719B8E</GUID>
+      <GUID>17BFD3E9E1117F01DFEB70B990315949</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2318,7 +2316,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\VIPM\Read Targets from VIPM Settings.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>C177CF6E7EBE8A8D758E11A15FA80EE3</GUID>
+      <GUID>D34DBF1920DCA9308C68D32ED08AF46B</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2367,7 +2365,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\CLI\Status.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>CB94D5D0E38422F4C67ED4E859B1D14D</GUID>
+      <GUID>AED02E0B8DC1429FC837D5C79A7AB409</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2444,7 +2442,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\Build Templates\Manual Build.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>9B43013779714E0F3E05B02FAEA70472</GUID>
+      <GUID>B7B87CC060559D2A8F9170FEBC0E5CE7</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2507,7 +2505,7 @@ update template to better handle git branches</Release_Notes>
         <Path>..\lvsrc\VI Templates\Pre-Build Custom Action.vit</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>A1B6EFBBDEB9BCD26EA197F46C0D1449</GUID>
+      <GUID>E11D8544336723AB87590ED2F09FDF5C</GUID>
     </Functions_Palette_Data>
   </Library_Palette_Definition>
 </VI_Package_Builder_Settings>
