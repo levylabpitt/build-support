@@ -14,7 +14,8 @@ set SUCCESS_COUNT=0
 set TOTAL_COUNT=0
 
 REM List of build_vipb.bat files to execute
-set BUILD_LIST=(%s)
+set BUILD_LIST=
+%s
 
 REM Execute each build
 for \%\%B in \%BUILD_LIST\% do (
