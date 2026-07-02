@@ -52,6 +52,10 @@
 			<Item Name="buildWithGCLI.vi" Type="VI" URL="../lvsrc/Build Templates/buildWithGCLI.vi"/>
 			<Item Name="Build Application and Installer.vi" Type="VI" URL="../lvsrc/Build Templates/Build Application and Installer.vi"/>
 		</Item>
+		<Item Name="G-CLI" Type="Folder">
+			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_PostBuild.vi"/>
+			<Item Name="noVIPM_IncrementBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_IncrementBuild.vi"/>
+		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
 		<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport (2013)/PostBuildSupport (2013).lvclass"/>

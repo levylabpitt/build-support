@@ -13,6 +13,8 @@ set "TITLE=%2$s %1$s"
 set "VIPB_FILE=%3$s"
 set "LVVER=%4$d"
 set "LVBIT=%5$d"
+set "SKIP_VIP_BUILD=%6$s"
+set "LVPROJ_FILE=%7$s"
 
 echo ======================================
 echo Building \%TITLE\%
@@ -28,9 +30,18 @@ if exist "builds\\latest\\*.*" (
     if not exist "builds\\latest" mkdir "builds\\latest"
 )
 
-REM Build VIP
-echo Building VIP...
-g-cli --lv-ver \%LVVER\% --arch \%LVBIT\% vipBuild -- "\%VIPB_FILE\%"
+REM Build VIP (or skip and run the post-build custom action directly)
+if /I "\%SKIP_VIP_BUILD\%"=="true" (
+    echo Skipping VIP build, running post-build custom action directly...
+    if not "\%LVPROJ_FILE\%"=="" (
+        g-cli --lv-ver \%LVVER\% --arch \%LVBIT\% noVIPM_PostBuild -- -LVProject "\%LVPROJ_FILE\%" "\%VIPB_FILE\%"
+    ) else (
+        g-cli --lv-ver \%LVVER\% --arch \%LVBIT\% noVIPM_PostBuild -- "\%VIPB_FILE\%"
+    )
+) else (
+    echo Building VIP...
+    g-cli --lv-ver \%LVVER\% --arch \%LVBIT\% vipBuild -- "\%VIPB_FILE\%"
+)
 if \%ERRORLEVEL\% neq 0 (
     echo ERROR: VIP build failed
     goto error_handler
@@ -102,6 +113,27 @@ if \%ERRORLEVEL\% neq 0 (
 
 REM Return to develop
 git checkout develop
+
+REM Bump build number for next release
+echo Bumping build number...
+g-cli --lv-ver \%LVVER\% --arch \%LVBIT\% noVIPM_IncrementBuild -- "\%VIPB_FILE\%"
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: build number increment failed
+    exit /b 1
+)
+
+git add -A
+git commit -m "Bump build number" --allow-empty
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git commit failed
+    exit /b 1
+)
+
+git push origin develop
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: git push develop failed
+    exit /b 1
+)
 
 REM GitHub release
 echo Creating GitHub release \%VERSION\%...
