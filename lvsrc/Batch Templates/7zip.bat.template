@@ -43,7 +43,14 @@ if !errorlevel! neq 0 (
     goto :error_exit
 )
 
-rem Step 6: Creating 7z archive and self-extracting installer
+rem Step 6: Creating 7z archive and self-extracting installer.
+rem Skipped ONLY when build_vip.bat explicitly sets DO_7ZIP=false (PACKAGER=inno).
+rem If DO_7ZIP is unset (e.g. 7zip.bat run directly / via launcher.bat), 7z still runs
+rem -- backward compatible. Keeping %6$s here means Write 7z.bat.vi is unchanged.
+if /I "\%DO_7ZIP\%"=="false" (
+    echo Step 6: Skipping 7-Zip packaging ^(PACKAGER=inno^)...
+    goto :skip_7zip
+)
 echo Step 6: Creating 7z archive and self-extracting installer...
 echo RUNNING,\%TIME\%,Step 6 - Creating 7z archive and self-extracting installer > "\%~dp0build_status.txt"
 %6$s
@@ -51,6 +58,7 @@ if !errorlevel! neq 0 (
     echo ERROR,\%TIME\%,Step 6 failed - 7z archive creation failed > "\%~dp0build_status.txt"
     goto :error_exit
 )
+:skip_7zip
 
 rem Success - Update final status
 echo SUCCESS,\%TIME\%,Build completed successfully! > "\%~dp0build_status.txt"

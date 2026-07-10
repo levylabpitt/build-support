@@ -17,5 +17,5 @@
 	<Item Name="File List Window.vi" Type="VI" URL="../File List Window.vi"/>
 	<Item Name="Extension to Mode.vi" Type="VI" URL="../Extension to Mode.vi"/>
 	<Item Name="Create build_all.bat.vi" Type="VI" URL="../Create build_all.bat.vi"/>
-	<Item Name="Publish Packages to Package Repositoryvi.vi" Type="VI" URL="../Publish Packages to Package Repositoryvi.vi"/>
+	<Item Name="Publish Packages to Package Repository.vi" Type="VI" URL="../Publish Packages to Package Repository.vi"/>
 </Library>

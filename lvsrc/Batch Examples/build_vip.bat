@@ -1,0 +1,134 @@
+REM build.bat.template: template file for building build_vip.bat with string substitution done in LabVIEW
+REM save to <repository root>\builds\build_vip.bat
+
+@echo off
+setlocal EnableDelayedExpansion
+
+REM Go to repository root (one level up from builds folder)
+cd /d "%~dp0\.."
+
+REM Arguments passed from Patrick Builder
+set "VERSION=1.12.2.34"
+set "TITLE=PPMS Monitor and Control 1.12.2.34"
+set "VIPB_FILE=C:\Users\patrick\Documents\GitHub\levylabpitt\PPMS-Monitor-and-Control\build support\PPMS Instrument.vipb"
+set "LVVER=2019"
+set "LVBIT=32"
+
+echo ======================================
+echo Building %TITLE%
+echo ======================================
+
+REM Archive old releases
+echo Archiving previous release...
+if not exist "builds\old releases" mkdir "builds\old releases"
+
+if exist "builds\latest\*.*" (
+    move /Y "builds\latest\*.*" "builds\old releases\"
+) else (
+    if not exist "builds\latest" mkdir "builds\latest"
+)
+
+REM Build VIP
+echo Building VIP...
+g-cli --lv-ver %LVVER% --arch %LVBIT% vipBuild -- "%VIPB_FILE%"
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: VIP build failed
+    goto error_handler
+)
+
+REM Execute generated script (builds exe/installer/7z) - if it exists
+if exist "builds\7z Install\7zip.bat" (
+    echo Building executables and installers...
+    call "builds\7z Install\7zip.bat"
+    if %ERRORLEVEL% neq 0 (
+        echo ERROR: Executable build failed
+        goto error_handler
+    )
+) else (
+    echo Skipping executable/installer build ^(7zip.bat not found^)
+)
+
+REM Commit on develop
+echo Committing changes on develop...
+git checkout develop
+git add -A
+git commit -m "Release %VERSION%" --allow-empty
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: git commit failed
+    goto error_handler
+)
+
+REM Merge to main
+echo Merging to main...
+git checkout main
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: git checkout main failed
+    goto error_handler
+)
+
+git merge develop --no-ff -m "Merge release %VERSION%"
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: git merge failed
+    goto error_handler
+)
+
+REM Tag on main (after merge)
+echo Tagging release %VERSION% on main...
+git tag %VERSION%
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: git tag failed
+    goto error_handler
+)
+
+REM Push both branches and tag
+echo Pushing to remote...
+git push origin main
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: git push main failed
+    exit /b 1
+)
+
+git push origin develop
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: git push develop failed
+    exit /b 1
+)
+
+git push origin %VERSION%
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: git push tag failed
+    exit /b 1
+)
+
+REM Return to develop
+git checkout develop
+
+REM GitHub release
+echo Creating GitHub release %VERSION%...
+REM Notes written to builds\release_notes.txt by Patrick Builder
+set ASSETS=
+for %%F in (builds\latest\*.vip builds\latest\*.exe) do (
+    set ASSETS=!ASSETS! "%%F"
+)
+
+gh release create %VERSION% !ASSETS! -t "%TITLE%" -F builds\release_notes.txt
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: GitHub release creation failed
+    exit /b 1
+)
+
+REM Clean up temp file
+del builds\release_notes.txt
+
+echo.
+echo ======================================
+echo Build %VERSION% completed successfully
+echo ======================================
+exit /b 0
+
+:error_handler
+echo.
+echo ==========================================
+echo BUILD FAILED
+echo ==========================================
+exit /b 1

@@ -15,6 +15,25 @@ set "LVVER=%4$d"
 set "LVBIT=%5$d"
 set "SKIP_VIP_BUILD=%6$s"
 set "LVPROJ_FILE=%7$s"
+set "PACKAGER=%8$s"
+REM Folder holding CodeDependencies.iss (the Inno #include). Resolved at runtime from
+REM %LOCALAPPDATA%; Setup-BuildMachine.bat deposits the file here, so no substitution needed.
+set "BUILD_SUPPORT=\%LOCALAPPDATA\%\\LevyLab\\build-support\\ISCC"
+
+REM Inno installer identity - sourced from the build, never hand-entered.
+REM APP_NAME reuses the product-name substitution (same value as TITLE); publisher is the org.
+set "APP_NAME=%2$s"
+set "APP_PUBLISHER=Levylab"
+
+REM Packager mode: 7zip | inno | both  (default 7zip for backward compatibility).
+REM DO_7ZIP is exported to 7zip.bat (inherited across the call) to gate its Step 6.
+if "\%PACKAGER\%"=="" set "PACKAGER=7zip"
+set "DO_7ZIP=false"
+set "DO_INNO=false"
+if /I "\%PACKAGER\%"=="7zip" set "DO_7ZIP=true"
+if /I "\%PACKAGER\%"=="inno" set "DO_INNO=true"
+if /I "\%PACKAGER\%"=="both" set "DO_7ZIP=true"
+if /I "\%PACKAGER\%"=="both" set "DO_INNO=true"
 
 echo ======================================
 echo Building \%TITLE\%
@@ -58,6 +77,31 @@ if exist "builds\\7z Install\\7zip.bat" (
 ) else (
     echo Skipping executable/installer build ^(7zip.bat not found^)
 )
+
+REM Package with Inno Setup (when PACKAGER mode selects it). Goto-guards keep the
+REM ISCC error check at top level so %ERRORLEVEL% isn't captured stale inside a block.
+if /I not "\%DO_INNO\%"=="true" goto :after_inno
+if not exist "build support\\Inno.iss" (
+    echo WARNING: PACKAGER includes inno but "build support\\Inno.iss" not found -- no Inno installer produced
+    goto :after_inno
+)
+REM Resolve ISCC.exe. Honors a preset ISCC env var (e.g. set by Setup-BuildMachine.ps1);
+REM otherwise finds any installed "Inno Setup N" (6, 7, ...) in either Program Files dir,
+REM 32- or 64-bit, then falls back to PATH. No hard-coded version/bitness.
+if defined ISCC if not exist "\%ISCC\%" set "ISCC="
+if not defined ISCC for /d \%\%D in ("\%ProgramFiles(x86)\%\\Inno Setup *" "\%ProgramFiles\%\\Inno Setup *") do if exist "\%\%~D\\ISCC.exe" set "ISCC=\%\%~D\\ISCC.exe"
+if not defined ISCC for \%\%I in (ISCC.exe) do if not "\%\%~$PATH:I"=="" set "ISCC=\%\%~$PATH:I"
+if not defined ISCC (
+    echo ERROR: ISCC.exe not found -- install Inno Setup 6.4+ ^(run Setup-BuildMachine.bat^)
+    goto error_handler
+)
+echo Building Inno Setup installer with "\%ISCC\%"...
+"\%ISCC\%" /DAppName="\%APP_NAME\%" /DAppVersion="\%VERSION\%" /DAppPublisher="\%APP_PUBLISHER\%" /DRepoRoot="\%CD\%" /DBuildSupport="\%BUILD_SUPPORT\%" "build support\\Inno.iss"
+if \%ERRORLEVEL\% neq 0 (
+    echo ERROR: Inno Setup build failed
+    goto error_handler
+)
+:after_inno
 
 REM Commit on develop
 echo Committing changes on develop...
@@ -139,7 +183,7 @@ REM GitHub release
 echo Creating GitHub release \%VERSION\%...
 REM Notes written to builds\\release_notes.txt by Patrick Builder
 set ASSETS=
-for \%\%F in (builds\\latest\\*.vip builds\\latest\\*.exe) do (
+for \%\%F in (builds\\latest\\*.vip builds\\latest\\*-install.exe builds\\latest\\*_Setup.exe) do (
     set ASSETS=!ASSETS! "\%\%F"
 )
 

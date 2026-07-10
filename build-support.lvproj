@@ -19,6 +19,7 @@
 			<Item Name="Build Support.vipc" Type="Document" URL="../build support/Build Support.vipc"/>
 			<Item Name="Pre-Build Custom Action.vi" Type="VI" URL="../build support/Pre-Build Custom Action.vi"/>
 			<Item Name="Post-Build Custom Action.vi" Type="VI" URL="../build support/Post-Build Custom Action.vi"/>
+			<Item Name="Post-Install Custom Action.vi" Type="VI" URL="../build support/Post-Install Custom Action.vi"/>
 			<Item Name="Build Patrick Builder.vi" Type="VI" URL="../build support/Build Patrick Builder.vi"/>
 		</Item>
 		<Item Name="PreBuildSupport" Type="Folder">
@@ -27,6 +28,9 @@
 			</Item>
 			<Item Name="rename to VIPT.vi" Type="VI" URL="../lvsrc/PreBuildSupport/rename to VIPT.vi"/>
 			<Item Name="VIPT to rename.vi" Type="VI" URL="../lvsrc/PreBuildSupport/VIPT to rename.vi"/>
+		</Item>
+		<Item Name="Scripts" Type="Folder">
+			<Item Name="Setup-BuildMachine.bat" Type="Document" URL="../lvsrc/Scripts/Setup-BuildMachine.bat"/>
 		</Item>
 		<Item Name="VI Templates" Type="Folder">
 			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/VI Templates/buildspec-template.vipt"/>
@@ -38,6 +42,13 @@
 			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
 			<Item Name="build_vip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_vip.bat.template"/>
 			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
+			<Item Name="Inno.iss.template" Type="Document" URL="../lvsrc/Batch Templates/Inno.iss.template"/>
+		</Item>
+		<Item Name="Build Templates" Type="Folder">
+			<Item Name="Manual Build.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build.vi"/>
+			<Item Name="Manual Build SM.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build SM.vi"/>
+			<Item Name="buildWithGCLI.vi" Type="VI" URL="../lvsrc/Build Templates/buildWithGCLI.vi"/>
+			<Item Name="Build Application and Installer.vi" Type="VI" URL="../lvsrc/Build Templates/Build Application and Installer.vi"/>
 		</Item>
 		<Item Name="CLI" Type="Folder">
 			<Item Name="Tests" Type="Folder">
@@ -45,12 +56,6 @@
 			</Item>
 			<Item Name=".NET Terminal.vi" Type="VI" URL="../lvsrc/CLI/.NET Terminal.vi"/>
 			<Item Name="Status.vi" Type="VI" URL="../lvsrc/CLI/Status.vi"/>
-		</Item>
-		<Item Name="Build Templates" Type="Folder">
-			<Item Name="Manual Build.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build.vi"/>
-			<Item Name="Manual Build SM.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build SM.vi"/>
-			<Item Name="buildWithGCLI.vi" Type="VI" URL="../lvsrc/Build Templates/buildWithGCLI.vi"/>
-			<Item Name="Build Application and Installer.vi" Type="VI" URL="../lvsrc/Build Templates/Build Application and Installer.vi"/>
 		</Item>
 		<Item Name="G-CLI" Type="Folder">
 			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_PostBuild.vi"/>
@@ -860,7 +865,6 @@
 				<Item Name="Attribute.StartupBehavior.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/JKI/JKI SMO/Support/Attribute.StartupBehavior/Attribute.StartupBehavior.lvclass"/>
 				<Item Name="Attribute.ErrorHandling.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/JKI/JKI SMO/Support/Attribute.ErrorHandling/Attribute.ErrorHandling.lvclass"/>
 				<Item Name="SMO.UI.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/JKI/JKI SMO/SMO.UI/SMO.UI.lvclass"/>
-				<Item Name="G CLI VIP.lvlib" Type="Library" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI VI Package Manager Tools/G CLI VIP.lvlib"/>
 				<Item Name="Option Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/Argument Parser/Option Parser.lvlib"/>
 			</Item>
 			<Item Name="_ChannelScriptingSupport.lvlib" Type="Library" URL="/&lt;resource&gt;/ChannelSupport/_ChannelScriptingSupport/_ChannelScriptingSupport.lvlib"/>
