@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-10 12:07:53" Creator="Patrick Irvin" Comments="" ID="fe753381968da8dac02e8422979c3cc7">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-10 12:30:47" Creator="Patrick Irvin" Comments="" ID="8a389e87d7fbf57f20c8614a96ca7b05">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.10.0.36</Library_Version>
+    <Library_Version>1.10.0.37</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -153,15 +153,6 @@
         <Namespace_Type>Prefix</Namespace_Type>
         <Namespace/>
       </Namespace_Overrides>
-      <Exclusions>
-        <Path>PostBuildSupport (2013)</Path>
-      </Exclusions>
-      <Exclusions>
-        <Path>PostBuildSupport (saved for 2013)</Path>
-      </Exclusions>
-      <Exclusions>
-        <Path>SelfUpdate (saved for 2013)</Path>
-      </Exclusions>
       <Exclusions>
         <Path>TestProject</Path>
       </Exclusions>
@@ -397,7 +388,7 @@
         <Path>..\lvsrc\Build Templates</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>4BD2D6B41E0BEDCC1C0AD93FD0BCD75F</GUID>
+      <GUID>07997AD437ED84FE52029CE83158B8CC</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -838,7 +829,7 @@
         <Path>..\lvsrc\Git\API\gh-cli Release View.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>6CC2FDCA9A95AF5D2B05C3C686753201</GUID>
+      <GUID>87ECF3570B43984B77964FBC5B6D86D3</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -929,7 +920,7 @@
         <Path>..\lvsrc\PostBuildSupport\Private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>77C56D1891A09DA9B1098DF85D9B0628</GUID>
+      <GUID>48671788BC0E3BB48F58C5B1251881F5</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -992,7 +983,7 @@
         <Path>..\lvsrc\PreBuildSupport\VIPT to rename.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>D76C4B63980866050F53F61222499E4B</GUID>
+      <GUID>6141F27FEC82DF488FBB8C4074AFB0D5</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1097,7 +1088,7 @@
         <Path>..\lvsrc\ProjectItem\Protected</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>2012036BEE0F1FC1D796022B47B9B55E</GUID>
+      <GUID>15DBDB422FBC08BA705BE27473B4D5CB</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1216,7 +1207,7 @@
         <Path>..\lvsrc\SelfUpdate\private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>A27E76EB797B5F11635372D5575801B5</GUID>
+      <GUID>4D92B338D322235C180C3C1E82943E25</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -1251,7 +1242,7 @@
         <Path>..\lvsrc\PostBuildSupport\Test\Test 7z.bat.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>32DFC7409FC42A49402560127A86125E</GUID>
+      <GUID>EAFD1F5FCE855AFF66B08982981979E5</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>3</Parent_Palette_Index>
@@ -1286,7 +1277,7 @@
         <Path>..\lvsrc\PreBuildSupport\subVI\Find File By Name.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>DA90E382C7A4EF1BB876BB53DBA887E5</GUID>
+      <GUID>7F06E3F583EB8FDFFD1ADE770539BA60</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1377,7 +1368,7 @@
         <Path>..\lvsrc\ProjectItem\Private\Update Path.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>41D70EF6460FD9D0B3C13FFCF75F36A1</GUID>
+      <GUID>CB070A4DC049FE700468B3B7F98DA359</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1678,7 +1669,7 @@
         <Path>..\lvsrc\ProjectItem\Protected\Write Wire Color Data.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>4D96DE03D7138B88E8CA8EE3B572561C</GUID>
+      <GUID>AF756126AC25BC884E0D1A28A08527C3</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1713,7 +1704,7 @@
         <Path>..\lvsrc\SelfUpdate\example\Self Update Example.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>31562AB55D9C982C54F6F613EC6115FE</GUID>
+      <GUID>B02F4756C65AA730984C5AC08DD40417</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1776,7 +1767,7 @@
         <Path>..\lvsrc\SelfUpdate\private\Update Dialog.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>C55EBEBF3D69810C294122AC199F093A</GUID>
+      <GUID>591BD90450A914C77FF46A3977BDE4C6</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -2119,7 +2110,7 @@
         <Path>..\lvsrc\PostBuildSupport\Private\Create 7z config.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>681F57697D0CA9B0FC31955F732996F9</GUID>
+      <GUID>C94B9239D4C6024F93EBDF8C6909C6B8</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2196,7 +2187,7 @@
         <Path>..\lvsrc\Build\Patrick Builder.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>640A97ACF78FD09243BFCEC596474CCE</GUID>
+      <GUID>7C36BCBC9DD6635D7B27ED4153CAE78E</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2343,7 +2334,7 @@
         <Path>..\lvsrc\VIPM\Read Targets from VIPM Settings.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>7BBBA6AAB0D131E038F354D052A1EB5F</GUID>
+      <GUID>282284ADCF624F451D3F6567ABF98F46</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2392,7 +2383,7 @@
         <Path>..\lvsrc\CLI\Status.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>C3F425AFEC895A7FE5370075433F0BBB</GUID>
+      <GUID>E251EC14FB8FB119C11D276C914101B5</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2469,7 +2460,7 @@
         <Path>..\lvsrc\Build Templates\Manual Build.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>5624E88FAB99BCAB391E1CB9FD6C2A9C</GUID>
+      <GUID>ECBDA46FE7266F463E2664C8BD77F2B6</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2532,7 +2523,7 @@
         <Path>..\lvsrc\VI Templates\Pre-Build Custom Action.vit</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>23FE425E2C2059072A4DEC4F271B41A4</GUID>
+      <GUID>250B11703DED6B47AF0CEECA96C1471A</GUID>
     </Functions_Palette_Data>
   </Library_Palette_Definition>
 </VI_Package_Builder_Settings>
