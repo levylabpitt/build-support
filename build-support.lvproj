@@ -45,12 +45,6 @@
 			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
 			<Item Name="Inno.iss.template" Type="Document" URL="../lvsrc/Batch Templates/Inno.iss.template"/>
 		</Item>
-		<Item Name="Build Templates" Type="Folder">
-			<Item Name="Manual Build.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build.vi"/>
-			<Item Name="Manual Build SM.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build SM.vi"/>
-			<Item Name="buildWithGCLI.vi" Type="VI" URL="../lvsrc/Build Templates/buildWithGCLI.vi"/>
-			<Item Name="Build Application and Installer.vi" Type="VI" URL="../lvsrc/Build Templates/Build Application and Installer.vi"/>
-		</Item>
 		<Item Name="CLI" Type="Folder">
 			<Item Name="Tests" Type="Folder">
 				<Item Name="Test .NET Terminal.vi" Type="VI" URL="../lvsrc/CLI/Tests/Test .NET Terminal.vi"/>
@@ -60,7 +54,7 @@
 		</Item>
 		<Item Name="G-CLI" Type="Folder">
 			<Item Name="noVIPM_IncrementBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_IncrementBuild.vi"/>
-			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="/&lt;vilib&gt;/G CLI Tools/noVIPM_PostBuild.vi"/>
+			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_PostBuild.vi"/>
 		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
