@@ -17,7 +17,7 @@ set "SKIP_VIP_BUILD=%6$s"
 set "LVPROJ_FILE=%7$s"
 set "PACKAGER=%8$s"
 REM Folder holding CodeDependencies.iss (the Inno #include). Resolved at runtime from
-REM %LOCALAPPDATA%; Setup-BuildMachine.bat deposits the file here, so no substitution needed.
+REM \%LOCALAPPDATA\%; Setup-BuildMachine.bat deposits the file here, so no substitution needed.
 set "BUILD_SUPPORT=\%LOCALAPPDATA\%\\LevyLab\\build-support\\ISCC"
 
 REM Inno installer identity - sourced from the build, never hand-entered.
@@ -79,7 +79,7 @@ if exist "builds\\7z Install\\7zip.bat" (
 )
 
 REM Package with Inno Setup (when PACKAGER mode selects it). Goto-guards keep the
-REM ISCC error check at top level so %ERRORLEVEL% isn't captured stale inside a block.
+REM ISCC error check at top level so \%ERRORLEVEL\% isn't captured stale inside a block.
 if /I not "\%DO_INNO\%"=="true" goto :after_inno
 if not exist "build support\\Inno.iss" (
     echo WARNING: PACKAGER includes inno but "build support\\Inno.iss" not found -- no Inno installer produced
