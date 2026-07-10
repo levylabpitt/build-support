@@ -1,96 +1,116 @@
-# InnoSetup Integration - Change Reference
+# Inno Setup Installers
 
-Replace the 7-Zip self-extracting installer with an Inno Setup installer, with a per-project toggle so 7-Zip and Inno Setup can coexist during migration.
+The build system can package a LabVIEW application into a single Inno Setup installer (`<App>_<version>_Setup.exe`) that installs any prerequisites your app needs and then runs the standard NI installer. This is an alternative to the older 7-Zip self-extracting installer, which could not install prerequisites - for example, an app that links against a Visual C++ runtime would fail to launch on a machine where that runtime was missing.
 
-**Why:** the 7-Zip SFX can't chain-install prerequisites. For example, when the VC++ 2013 redistributable is missing on a target machine, the application fails to execute correctly. Inno Setup can install prerequisites (via [InnoDependencyInstaller](https://github.com/DomGries/InnoDependencyInstaller)) and bundle additional installers (C++ drivers, etc.) per project.
+Whether a build produces the 7-Zip installer or the Inno installer is decided per project by one thing: whether the project has an `Inno.iss` file in its `build support\` folder.
 
-**Scope:** LabVIEW 2019 is fine - no LabVIEW upgrade needed. The only new floor is **Inno Setup 6.4+** on the build machine.
+## How it works
 
-## Design decisions
+The Inno installer is a thin **bootstrapper**. It does not install your application itself - the NI installer (built from your project's Installer build spec) still does all the real work: it installs the app to Program Files, installs the LabVIEW Run-Time Engine, creates shortcuts, and registers the Add/Remove Programs entry that handles uninstall and upgrades. Inno's only added job is to install prerequisites (the VC++ redistributable, extra C++ installers, etc.) and wrap everything into one `.exe`.
 
-- **Static per-project `Inno.iss`, volatile values via ISCC `/D`.** Each repository owns a hand-editable `Inno.iss`. Build-varying data (version, paths) is injected at compile time with `/DAppVersion`, `/DRepoRoot`, `/DBuildSupport` - so nothing needs regenerating per build, and per-project extra installers are never clobbered.
-- **No new `write the iss.vi`.** ISCC is a CLI compiler; everything the `.iss` needs already flows through `build_vip.bat`. This avoids new block-diagram work.
-- **Inno wraps the installers you already build** (approach "a"): the NI LabVIEW installer keeps owning the Run-Time Engine + Program Files + shortcuts; Inno chains it plus the VC++ redist and any extra installers into one `*_Setup.exe`.
-- **The NI (MSI) installer owns uninstall and upgrade management** via its Upgrade Code in the `.lvproj` build spec, so the Inno bootstrapper is `Uninstallable=no` with only a nominal `AppId` - exactly the role the old 7-Zip SFX played. Setting `Uninstallable=yes` would create a phantom Add/Remove Programs entry that removes nothing; don't. (Inno would only need its own `AppId`/uninstall if it *replaced* the NI installer - the not-chosen approach "b".)
-- **VC++ (and other prereqs) via InnoDependencyInstaller**, not hand-rolled registry checks. `Dependency_AddVC2013;` etc.
-- **`PACKAGER` toggle (`7zip` | `inno` | `both`)** for a safe, per-project migration.
-- **The Post-Build Variant contract is untouched.** It carries only generic build metadata (name-keyed); the 7-Zip command is generated downstream in `Write 7z.bat.vi`, not in the Variant. Retiring 7-Zip never touches `noVIPM_PostBuild` or the Variant.
+When you build a project that has an `Inno.iss` (see below):
 
-## Confirmed paths (from a real generated `7zip.bat`)
+1. `build_vip.bat` builds the app and the NI installer as usual.
+2. It then runs the Inno compiler (`ISCC.exe`) on the project's `Inno.iss`, passing the app name, version, and paths automatically.
+3. The result is written to `builds\latest\<App>_<version>_Setup.exe`, alongside the `.vip`, ready for the GitHub release.
 
-| Thing | Path (relative to repo root) |
+At install time on the end user's machine, the Inno installer installs the prerequisites, then runs the NI installer silently.
+
+## Enabling Inno for a project
+
+The switch is the file itself: if a project has `build support\Inno.iss`, its build produces the Inno installer; if not, it produces the 7-Zip installer. There is no separate setting to change.
+
+First make sure the build machine is set up once (see [Build-machine setup](#build-machine-setup)). Then, per project:
+
+1. **Add `Inno.iss` to the repo.** Place it in the repo's `build support\` folder, beside the `.vipb`. Patrick Builder scaffolds it for you (a copy of the template) when it writes the build scripts, or you can copy `Inno.iss.template` there yourself. Its presence is what enables the Inno installer.
+2. **Set the prerequisites your app needs.** In `Inno.iss`, under `[Code]` -> `InitializeSetup`, list the `Dependency_Add...` calls. The template ships with `Dependency_AddVC2013;`; change it to whatever your app requires (see [Prerequisites](#prerequisites)).
+3. **Add any extra installers** (optional) - C++ drivers and the like - in the two `EXTRA INSTALLERS` regions of `Inno.iss`.
+4. **Build.** The installer appears at `builds\latest\<App>_<version>_Setup.exe`.
+
+In the common case - an app that needs only a standard VC++ redistributable and uses the standard build layout - steps 2 and 3 are the only per-project work, and step 2 is a single line.
+
+To revert a project to the 7-Zip installer, remove (or rename) its `Inno.iss` and rebuild.
+
+## Inno or 7-Zip: how the build chooses
+
+When Patrick Builder generates a project's `build_vip.bat`, it checks whether `build support\Inno.iss` exists:
+
+- **`Inno.iss` present** -> the build produces the Inno installer (`<App>_<version>_Setup.exe`).
+- **`Inno.iss` absent** -> the build produces the 7-Zip self-extracting installer (the original behavior).
+
+So adopting Inno for a project is just adding the file, and reverting is just removing it - the 7-Zip path stays as the fallback for any project without an `Inno.iss`. To try out a new Inno installer, add `Inno.iss`, build, and test the result; if something is wrong, remove `Inno.iss` to fall back to 7-Zip while you sort it out.
+
+## Configuring Inno.iss
+
+Each project owns its own `Inno.iss`. It is a plain, committed file - not regenerated each build - so any edits you make persist.
+
+**Set automatically at build time (do not edit):**
+
+- `AppName`, `AppVersion`, `AppPublisher`, `AppId` - injected from the build.
+- The installer output path, the `CodeDependencies.iss` include path, and the output filename and location.
+
+**Edit per project as needed:**
+
+- **Prerequisites** - the `Dependency_Add...` calls in `InitializeSetup`.
+- **Extra installers** - the `EXTRA INSTALLERS` regions in `[Files]` and `[Run]`.
+
+**Verify once (these are assumptions baked into the template, uniform across projects):**
+
+- The Installer build spec outputs to `builds\Installer`, so the NI media is at `builds\Installer\Volume`.
+- The NI installer accepts the silent-install flags in the `[Run]` line (`/q /AcceptLicenses yes /r:n /disableNotificationCheck`), which are the standard NI App Builder switches.
+
+### Prerequisites
+
+Prerequisites are provided by [InnoDependencyInstaller](https://github.com/DomGries/InnoDependencyInstaller) (`CodeDependencies.iss`, installed on the build machine). You call one function per prerequisite in `InitializeSetup`. Common ones:
+
+- `Dependency_AddVC2010;`, `Dependency_AddVC2012;`, `Dependency_AddVC2013;`, `Dependency_AddVC2015To2022;` - Visual C++ runtimes.
+- `Dependency_AddDotNet48;` - .NET.
+
+The NI installer already bundles the **VC++ 2015** runtime, so you only need to add the *other* VC runtime versions your app's components link against. This library is also why the build machine needs Inno Setup **6.4 or newer**.
+
+## Build-machine setup
+
+Run `Setup-BuildMachine.bat` once on each build machine (or new VM). It is idempotent and safe to re-run. It:
+
+1. Installs Inno Setup 6.4+ if missing (via winget, or a direct download that elevates itself).
+2. Downloads `CodeDependencies.iss` into `%LOCALAPPDATA%\LevyLab\build-support\ISCC`.
+3. Reports whether `g-cli`, `git`, and `gh` are on the path.
+
+It needs `curl.exe` (built into Windows 10 1803+ and Windows 11). Pass `/q` to skip the closing pause when running non-interactively. If the build-support package's Post-Install action is configured, this runs automatically when the package is installed.
+
+## Where things live
+
+| Item | Location |
 | --- | --- |
-| App build-spec output | `builds\Application` |
-| Installer build-spec output (NI media, holds `setup.exe`) | `builds\Installer\Volume` |
-| Final installer output (picked up by the GitHub release) | `builds\latest` |
-| Build-support templates dir (Patrick Builder reads templates here) | `%LOCALAPPDATA%\LevyLab\build-support\templates` |
-| CodeDependencies.iss dir (Inno `#include`) | `%LOCALAPPDATA%\LevyLab\build-support\ISCC` |
+| App build output | `<repo>\builds\Application` |
+| NI installer media (holds `setup.exe`) | `<repo>\builds\Installer\Volume` |
+| Final installer (for the GitHub release) | `<repo>\builds\latest` |
+| Project's `Inno.iss` | `<repo>\build support\Inno.iss` |
+| `CodeDependencies.iss` (Inno include) | `%LOCALAPPDATA%\LevyLab\build-support\ISCC` |
+| Build-support templates | `%LOCALAPPDATA%\LevyLab\build-support\templates` |
+| `Setup-BuildMachine.bat` | `%LOCALAPPDATA%\LevyLab\build-support\scripts` |
 
-## Files in this repo
+## Troubleshooting and notes
 
-### Changed - `lvsrc\Batch Templates\`
+- **"Setup must restart your computer" at the end.** Normal for a first-time install. The NI installer needs a reboot after installing the LabVIEW Run-Time Engine and NI components; it reports this instead of rebooting itself, and Inno relays it as a single prompt on the finish page. On a machine that already has the runtime you usually will not see it.
+- **Uninstalling the app.** Use the app's Add/Remove Programs entry, registered by the NI installer. The Inno bootstrapper deliberately does not create its own uninstall entry, because it installs nothing itself.
+- **"ISCC.exe not found" during a build.** Inno Setup is not installed, or not where expected. Run `Setup-BuildMachine.bat`.
+- **Edits to `Inno.iss.template` do not affect existing projects.** A project's `Inno.iss` is a one-time copy of the template; changing the template only affects newly scaffolded projects. Edit the project's `Inno.iss` directly, or re-copy it.
+- **Slow compile.** The template stores the NI media without recompressing it (`nocompression`), since it is already-compressed `.cab`/`.msi` data. If you copied an older `Inno.iss`, add `nocompression` to the NI installer's `[Files]` line.
 
-- **`build_vip.bat.template`**
-  - New substitution slot: `%8$s` → `PACKAGER`. `BUILD_SUPPORT` is not a slot - it's set at runtime from `%LOCALAPPDATA%\LevyLab\build-support\ISCC` (where `Setup-BuildMachine.bat` puts `CodeDependencies.iss`), so nothing needs to supply it.
-  - Derives `DO_7ZIP` / `DO_INNO` from `PACKAGER` (default `7zip`); exports `DO_7ZIP` to `7zip.bat` via the environment.
-  - New Inno Setup step (ISCC on `Inno.iss`) after the `7zip.bat` call, guarded so it only runs when `DO_INNO=true` and `Inno.iss` exists. `ISCC.exe` is auto-located at build time (any installed `Inno Setup N` - 6, 7, ... - in either Program Files dir, 32- or 64-bit; then PATH; honors a preset `ISCC` env var as an override). No hard-coded path.
-  - Release-asset glob now matches `*-install.exe` (7z) **and** `*_Setup.exe` (Inno).
-- **`7zip.bat.template`**
-  - Step 6 (7-Zip) is now gated: skipped **only** when `build_vip.bat` explicitly sets `DO_7ZIP=false` (i.e. `PACKAGER=inno`). If `DO_7ZIP` is unset (e.g. `7zip.bat` run directly or via `launcher.bat`), 7-Zip still runs - backward compatible.
-  - `%6$s` is retained, so **`Write 7z.bat.vi` is unchanged** during the transition.
+## Maintaining this integration
 
-### Added
+These are one-time tasks for the build-support package itself, not per-project work.
 
-- **`lvsrc\Batch Templates\Inno.iss.template`** - scaffolded per repo as `Inno.iss`. Chains the NI installer from `builds\Installer\Volume`, calls `Dependency_AddVC2013;`, has marked "EXTRA INSTALLERS" regions for per-project payloads. No identity to fill in - `AppName` / `AppVersion` / `AppPublisher` / `AppId` all come from the build via `/D` (see below). The only per-repo edits are prerequisites and extra installers.
-- **`lvsrc\Scripts\Setup-BuildMachine.bat`** - idempotent build-machine provisioner: installs Inno Setup (winget, or a `curl` direct download that self-elevates via UAC), fetches `CodeDependencies.iss` into `%LOCALAPPDATA%\LevyLab\build-support\ISCC`, and reports g-cli/git/gh presence. Needs `curl.exe` (built into Windows 10 1803+/11). Pass `/q` to skip the closing pause. Plain batch - no PowerShell / ExecutionPolicy dependency.
+- **`Create build_vip.bat.vi`** decides the packager by checking whether the repo's `build support\Inno.iss` exists, and bakes that choice into the generated `build_vip.bat` (as the `PACKAGER` value the batch consumes). It also passes the app name and paths; the template resolves the rest (identity, ISCC location) on its own.
+- **Packaging** - `Inno.iss.template` installs to the `templates` destination; `Setup-BuildMachine.bat` installs to a `scripts` destination (`%LOCALAPPDATA%\LevyLab\build-support\scripts`).
+- **Post-Install action** - the package's Post-Install VI runs `Setup-BuildMachine.bat /q`, so installing the build-support package provisions the machine automatically.
+- The 7-Zip path is untouched by all of this: `Write 7z.bat.vi`, `noVIPM_PostBuild`, and the Post-Build Variant contract are unchanged, and 7-Zip still runs unless a project selects `PACKAGER=inno`.
 
-## `PACKAGER` modes
+### Retiring 7-Zip later
 
-`build_vip.bat` sets, from the baked-in `PACKAGER` value:
+When every project has moved to Inno and you want to drop 7-Zip entirely:
 
-| PACKAGER | DO_7ZIP | DO_INNO | Result |
-| --- | --- | --- | --- |
-| `7zip` (default) | true | false | 7-Zip SFX only (legacy behavior) |
-| `inno` | false | true | Inno `*_Setup.exe` only |
-| `both` | true | true | Both - for A/B comparison during migration |
-
-Per-project migration: `7zip` → `both` (verify the Inno output) → `inno`. `7zip` is always the fallback.
-
-## LabVIEW / VIPM changes
-
-### Required now (ship Inno + the toggle) - one VI edit + packaging
-
-1. **`lvsrc\VIPM\Create build_vip.bat.vi`** - grow the main Format Into String from **7 → 8** inputs (it uses positional `%N$s`, so append at the bottom). **Input 8 (`%8$s` `PACKAGER`):** add a new string/enum input to the connector pane; interim, wire a `"both"` constant. (No `BUILD_SUPPORT` input - the template sets it from `%LOCALAPPDATA%` at runtime.)
-2. **Patrick Builder** - pass the per-project `PACKAGER` choice into input 8 above (ideally a field on the Build Spec cluster typedef).
-3. **Patrick Builder scaffold step** - copy `Inno.iss.template` → `repo\build support\Inno.iss` (beside the `.vipb`) **only if absent**. No token substitution: `AppName` (= the product name Patrick Builder already uses), `AppVersion`, and `AppPublisher` (`Levylab`) are injected at build time via ISCC `/D`, and `AppId` derives from the name. So the copy is verbatim.
-4. **`build support\Build Support.vipb`** - add both new files. `Inno.iss.template` rides the existing "Batch Templates" destination `<OS User Application Data>\LevyLab\build-support\templates` (which resolves to `%LOCALAPPDATA%\...\templates` - LabVIEW's "User Application Data" is Local AppData, not Roaming). `Setup-BuildMachine.bat` (source in `lvsrc\Scripts\`) needs a new Additional_Destination `<OS User Application Data>\LevyLab\build-support\scripts` → `%LOCALAPPDATA%\LevyLab\build-support\scripts`, keyed on the `Scripts` source folder so the folder→destination mapping stays one-to-one.
-5. **New Post-Install VI** - one `System Exec` node running `cmd /c "%LOCALAPPDATA%\LevyLab\build-support\scripts\Setup-BuildMachine.bat" /q` (the `/q` skips the pause for the non-interactive install); set it as the Post-Install custom action in the Package Builder GUI. (`Build Support.vipb`'s `<Post-Install_VI/>` is currently empty.)
-
-> Nothing in `Write 7z.bat.vi`, `noVIPM_PostBuild`, or the Variant changes for this.
-
-### Phase 2 - only when retiring 7-Zip globally
-
-1. **`7zip.bat.template`** - delete the gated Step 6 block entirely (the `if…DO_7ZIP…`, `%6$s`, `:skip_7zip`).
-2. **`lvsrc\PostBuildSupport\Private\Write 7z.bat.vi`** - the Format Into String has 6 string inputs: `%1$s` = Product Name, `%2$s`-`%6$s` from the command-builder chain (`quitLabVIEW`, `ClearCache`, `lvBuild Application`, `lvBuild Installer`, **`Create 7z.bat Script`**). Remove the 6th/bottom input, delete the `Create 7z.bat Script.vi` node, and carry the object + error wires straight through.
-3. **Optional dead-code sweep** (unreferenced once Step 6 is gone): `Create 7z.bat Script.vi`, `Create 7z config.vi`, `Copy 7zSD.SFX.vi`, `Get Installed 7z.vi`, `Execute 7z bat.vi`, and the `7zSD.sfx` / `config.txt` assets.
-
-### Not required
-
-- **`noVIPM_PostBuild.vi` / the Variant contract** - no change, ever. The Variant is a name-keyed bag of build metadata with no 7-Zip element.
-- **`Create build_all.bat.vi`** - no change. `build_all.bat` calls each `build_vip.bat` with no arguments (all values are baked in at generation).
-
-## One-time build-machine setup
-
-Handled by `Setup-BuildMachine.bat` (run standalone on a new VM, or automatically via the Post-Install VI):
-
-1. Inno Setup 6.4+ (`ISCC.exe`).
-2. `CodeDependencies.iss` from InnoDependencyInstaller, placed in `%LOCALAPPDATA%\LevyLab\build-support\ISCC`.
-
-Both are idempotent and safe to re-run.
-
-## Per-project migration checklist
-
-1. `Setup-BuildMachine.bat` has run on the build machine.
-2. Repo has an `Inno.iss` (scaffolded by Patrick Builder or copied from the template), with identity filled in and the NI installer silent flags / extra installers verified.
-3. Build with `PACKAGER=both`; confirm `builds\latest\<App>_<ver>_Setup.exe` installs correctly (including the VC++ prereq) on a clean machine.
-4. Switch that project to `PACKAGER=inno`.
+1. Remove the gated Step 6 block from `7zip.bat.template`.
+2. In `Write 7z.bat.vi`, remove the 6th `Format Into String` input and delete the `Create 7z.bat Script.vi` node.
+3. Optionally delete the now-unused 7-Zip helper VIs and the `7zSD.sfx` / `config.txt` assets.
