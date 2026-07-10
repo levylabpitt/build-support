@@ -70,8 +70,10 @@ WizardStyle=modern
 #include AddBackslash(BuildSupport) + "CodeDependencies.iss"
 
 [Files]
-; The NI installer, carried inside this bootstrapper and unpacked at runtime:
-Source: "{#NIInstallerDir}\*"; DestDir: "{tmp}\ni"; Flags: recursesubdirs createallsubdirs ignoreversion
+; The NI installer, carried inside this bootstrapper and unpacked at runtime.
+; nocompression: the NI media is already-compressed .cab/.msi, so re-compressing it
+; (lzma2/solid) costs minutes of build time for near-zero size gain. Store it as-is.
+Source: "{#NIInstallerDir}\*"; DestDir: "{tmp}\ni"; Flags: recursesubdirs createallsubdirs ignoreversion nocompression
 ; ---- EXTRA INSTALLERS (per project) — bundle payloads here ------------------
 ; Source: "{#RepoRoot}\thirdparty\SomeCppDriver.exe"; DestDir: "{tmp}\extra"; Flags: ignoreversion
 ; ----------------------------------------------------------------------------
