@@ -59,7 +59,7 @@
 			<Item Name="Status.vi" Type="VI" URL="../lvsrc/CLI/Status.vi"/>
 		</Item>
 		<Item Name="G-CLI" Type="Folder">
-			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_PostBuild.vi"/>
+			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="/&lt;vilib&gt;/G CLI Tools/noVIPM_PostBuild.vi"/>
 			<Item Name="noVIPM_IncrementBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_IncrementBuild.vi"/>
 		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
