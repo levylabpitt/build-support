@@ -64,7 +64,6 @@
 		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
-		<Item Name="PostBuildSupport (2013).lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport (2013)/PostBuildSupport (2013).lvclass"/>
 		<Item Name="ProjectItem.lvclass" Type="LVClass" URL="../lvsrc/ProjectItem/ProjectItem.lvclass"/>
 		<Item Name="SelfUpdate.lvclass" Type="LVClass" URL="../lvsrc/SelfUpdate/SelfUpdate.lvclass"/>
 		<Item Name="VIPM.lvlib" Type="Library" URL="../lvsrc/VIPM/VIPM.lvlib"/>
