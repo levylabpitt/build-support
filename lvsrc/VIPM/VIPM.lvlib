@@ -18,15 +18,15 @@
 	<Item Name="Increment Version Build.vi" Type="VI" URL="../Increment Version Build.vi"/>
 	<Item Name="Read Targets from VIPM Settings.vi" Type="VI" URL="../Read Targets from VIPM Settings.vi"/>
 	<Item Name="LabVIEW_Version to LV_VERS and LV_BIT.vi" Type="VI" URL="../LabVIEW_Version to LV_VERS and LV_BIT.vi"/>
-	<Item Name="Read Package_LabVIEW_Version from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Package_LabVIEW_Version from VIPB.vi"/>
-	<Item Name="Read Library_Source_Folder from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Source_Folder from VIPB.vi"/>
-	<Item Name="Read Library_Output_Folder from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Output_Folder from VIPB.vi"/>
+	<Item Name="Read Package_LabVIEW_Version from VIPB.vi" Type="VI" URL="../Read Package_LabVIEW_Version from VIPB.vi"/>
+	<Item Name="Read Library_Source_Folder from VIPB.vi" Type="VI" URL="../Read Library_Source_Folder from VIPB.vi"/>
+	<Item Name="Read Library_Output_Folder from VIPB.vi" Type="VI" URL="../Read Library_Output_Folder from VIPB.vi"/>
 	<Item Name="Write Library_Version to VIPB.vi" Type="VI" URL="../Write Library_Version to VIPB.vi"/>
 	<Item Name="Read Library_Version from VIPB.vi" Type="VI" URL="../Read Library_Version from VIPB.vi"/>
-	<Item Name="Read Product_Name from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Product_Name from VIPB.vi"/>
-	<Item Name="Read Library_Name from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Name from VIPB.vi"/>
-	<Item Name="Read Post Build VI from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Post Build VI from VIPB.vi"/>
-	<Item Name="VIPB to VIPM variant.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/VIPB to VIPM variant.vi"/>
+	<Item Name="Read Product_Name from VIPB.vi" Type="VI" URL="../Read Product_Name from VIPB.vi"/>
+	<Item Name="Read Library_Name from VIPB.vi" Type="VI" URL="../Read Library_Name from VIPB.vi"/>
+	<Item Name="Read Post Build VI from VIPB.vi" Type="VI" URL="../Read Post Build VI from VIPB.vi"/>
+	<Item Name="VIPB to VIPM variant.vi" Type="VI" URL="../VIPB to VIPM variant.vi"/>
 	<Item Name="Read Node from VIPB.vi" Type="VI" URL="../Read Node from VIPB.vi"/>
 	<Item Name="Write Node to VIPB.vi" Type="VI" URL="../Write Node to VIPB.vi"/>
 </Library>

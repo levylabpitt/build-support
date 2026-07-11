@@ -32,18 +32,20 @@
 		</Item>
 		<Item Name="Scripts" Type="Folder">
 			<Item Name="Setup-BuildMachine.bat" Type="Document" URL="../lvsrc/Scripts/Setup-BuildMachine.bat"/>
+			<Item Name="build.bat" Type="Document" URL="../lvsrc/Scripts/build.bat"/>
+		</Item>
+		<Item Name="Templates" Type="Folder">
+			<Item Name="build.conf.template" Type="Document" URL="../lvsrc/Templates/build.conf.template"/>
+			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Templates/build_all.bat.template"/>
+			<Item Name="build_vip.bat.template" Type="Document" URL="../lvsrc/Templates/build_vip.bat.template"/>
+			<Item Name="Inno.iss.template" Type="Document" URL="../lvsrc/Templates/Inno.iss.template"/>
+			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Templates/7zip.bat.template"/>
 		</Item>
 		<Item Name="VI Templates" Type="Folder">
 			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/VI Templates/buildspec-template.vipt"/>
 			<Item Name="Post-Build Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Post-Build Custom Action.vit"/>
 			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Post-Install Custom Action.vit"/>
 			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Pre-Build Custom Action.vit"/>
-		</Item>
-		<Item Name="Batch Templates" Type="Folder">
-			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
-			<Item Name="build_vip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_vip.bat.template"/>
-			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
-			<Item Name="Inno.iss.template" Type="Document" URL="../lvsrc/Batch Templates/Inno.iss.template"/>
 		</Item>
 		<Item Name="CLI" Type="Folder">
 			<Item Name="Tests" Type="Folder">
@@ -53,8 +55,7 @@
 			<Item Name="Status.vi" Type="VI" URL="../lvsrc/CLI/Status.vi"/>
 		</Item>
 		<Item Name="G-CLI" Type="Folder">
-			<Item Name="noVIPM_IncrementBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_IncrementBuild.vi"/>
-			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="/&lt;vilib&gt;/G CLI Tools/noVIPM_PostBuild.vi"/>
+			<Item Name="g-cli.noVIPM.lvlib" Type="Library" URL="../lvsrc/G-CLI/g-cli.noVIPM.lvlib"/>
 		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
@@ -1597,19 +1598,19 @@
 				<Property Name="Source[0].type" Type="Str">EXE</Property>
 				<Property Name="Source[1].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[1].name" Type="Str">7zip.bat.template</Property>
-				<Property Name="Source[1].tag" Type="Ref">/My Computer/Batch Templates/7zip.bat.template</Property>
+				<Property Name="Source[1].tag" Type="Ref"></Property>
 				<Property Name="Source[1].type" Type="Str">File</Property>
 				<Property Name="Source[2].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[2].name" Type="Str">build_all.bat.template</Property>
-				<Property Name="Source[2].tag" Type="Ref">/My Computer/Batch Templates/build_all.bat.template</Property>
+				<Property Name="Source[2].tag" Type="Ref"></Property>
 				<Property Name="Source[2].type" Type="Str">File</Property>
 				<Property Name="Source[3].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[3].name" Type="Str">build_vip.bat.template</Property>
-				<Property Name="Source[3].tag" Type="Ref">/My Computer/Batch Templates/build_vip.bat.template</Property>
+				<Property Name="Source[3].tag" Type="Ref"></Property>
 				<Property Name="Source[3].type" Type="Str">File</Property>
 				<Property Name="Source[4].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[4].name" Type="Str">Inno.iss.template</Property>
-				<Property Name="Source[4].tag" Type="Ref">/My Computer/Batch Templates/Inno.iss.template</Property>
+				<Property Name="Source[4].tag" Type="Ref"></Property>
 				<Property Name="Source[4].type" Type="Str">File</Property>
 				<Property Name="Source[5].dest" Type="Str">{7C1D3CE0-42D9-4628-B1FF-255252E5DC26}</Property>
 				<Property Name="Source[5].name" Type="Str">Setup-BuildMachine.bat</Property>

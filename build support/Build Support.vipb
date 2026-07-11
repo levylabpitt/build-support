@@ -1,4 +1,4 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-10 19:44:03" Creator="Patrick Irvin" Comments="" ID="68b9d84e261c8a2f43d1fcbc0371658f">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-11 08:13:31" Creator="Patrick Irvin" Comments="" ID="9b8d3a860249c6d3a740c912404d30fb">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
     <Library_Version>1.10.2.44</Library_Version>
@@ -138,7 +138,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Additional_Destination_Index>2</Additional_Destination_Index>
       </Destination_Overrides>
       <Destination_Overrides>
-        <Path>Batch Templates</Path>
+        <Path>Templates</Path>
         <Destination>0</Destination>
         <Additional_Destination>true</Additional_Destination>
         <Additional_Destination_Index>0</Additional_Destination_Index>
@@ -167,6 +167,9 @@ fix cross linking and remove unused VIs</Release_Notes>
       </Place_Folder_Contents>
       <Place_Folder_Contents>
         <Path>Scripts</Path>
+      </Place_Folder_Contents>
+      <Place_Folder_Contents>
+        <Path>Templates</Path>
       </Place_Folder_Contents>
     </Source_Files>
     <License_Agreement_Filepath>..\LICENSE</License_Agreement_Filepath>
@@ -380,7 +383,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\VI Templates</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>855A50E56DD11652B53D803AA37F6683</GUID>
+      <GUID>9AA31B726673515C4F0F4B10D4E36FF8</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -821,7 +824,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\Git\API\gh-cli Release View.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>7412F57F9580F2951469067976174A99</GUID>
+      <GUID>FDF324D146AA32D6424C735335CDE473</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -912,7 +915,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\PostBuildSupport\Private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>D7FA33FA6DFAE8AB49FBD6097CFFDA19</GUID>
+      <GUID>7B702DB9D6871478B5096B81B7861060</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -975,7 +978,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\PreBuildSupport\VIPT to rename.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>2E5DAA88FA1DFEBB6E9C065EAE83D610</GUID>
+      <GUID>7459580A2FB2FB923C75A139569E8FD3</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1080,7 +1083,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\ProjectItem\Protected</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>E2824153B6C9C3E723537613B2C73E5A</GUID>
+      <GUID>815169163D9BF9F874FA9AFDF619BC80</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1199,7 +1202,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\SelfUpdate\private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>E54A31E6646E582BD8E3837790DAA2F5</GUID>
+      <GUID>3B981828FC83372A2B4018A1DC886A42</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -1234,7 +1237,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\PostBuildSupport\Test\Test 7z.bat.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>C2B9BDFE23045B3F1C760BCD7E82F630</GUID>
+      <GUID>23A2185AAEE68B371C076DFB2BD68022</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>3</Parent_Palette_Index>
@@ -1269,7 +1272,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\PreBuildSupport\subVI\Find File By Name.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>D8F2B21E898C2A71D44357664CC42FB6</GUID>
+      <GUID>0C458126F2D0B892BFCD7917B06733F2</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1360,7 +1363,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\ProjectItem\Private\Update Path.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>8E08E1F65B16D1B7B7905722333DD8F2</GUID>
+      <GUID>1303BE6E3A24D8D55D7CF8142AD765AD</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1661,7 +1664,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\ProjectItem\Protected\Write Wire Color Data.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>3C64107AB87009AFFA6CE6B9F7616E8F</GUID>
+      <GUID>754031CF016FCC7A29F011E5B9EA9377</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1696,7 +1699,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\SelfUpdate\example\Self Update Example.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>3187B11E4C996737FD02DC44F38CF267</GUID>
+      <GUID>CDADEFB71FA66ACED33D78185A3A380F</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1759,7 +1762,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\SelfUpdate\private\Update Dialog.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>2993DDE1FDBBB72C8F0236090231814C</GUID>
+      <GUID>5BD38F05737E7D6FDBEDF911A6C293A7</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -2102,7 +2105,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\PostBuildSupport\Private\Create 7z config.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>2F74A2954438B47FEED69BAC6DB30039</GUID>
+      <GUID>CFE28CC5AC2AEF38042E1260E7165ECE</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2179,7 +2182,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\Build\Patrick Builder.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>8E55D69188A1897DBBFEEE6B11955F59</GUID>
+      <GUID>767C0BB973CD7E57FFB6DEFDB9E7E8A9</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2326,7 +2329,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\VIPM\Read Targets from VIPM Settings.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>814924E8EB122BABEA3854376049C8C6</GUID>
+      <GUID>998FC56EE6FAFA98EB053064047C37BD</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2375,7 +2378,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\CLI\Status.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>7DAB370D28AED83656C60224DAD4D7B7</GUID>
+      <GUID>A19CE48CD2B4AA1B8D46ECF5A6E5B620</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2438,7 +2441,7 @@ fix cross linking and remove unused VIs</Release_Notes>
         <Path>..\lvsrc\VI Templates\Pre-Build Custom Action.vit</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>A9939D6ABC333D31251D0A25FC24B000</GUID>
+      <GUID>3B08026A9EE294BEBC6004958401CDCC</GUID>
     </Functions_Palette_Data>
   </Library_Palette_Definition>
 </VI_Package_Builder_Settings>

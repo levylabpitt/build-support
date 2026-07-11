@@ -13,26 +13,25 @@ set FAILED_BUILDS=
 set SUCCESS_COUNT=0
 set TOTAL_COUNT=0
 
-REM List of build_vipb.bat files to execute
+REM One shared build.bat builds each repo, passed as an argument.
+set "BUILD=\%LOCALAPPDATA\%\\LevyLab\\build-support\\scripts\\build.bat"
+
+REM List of repository roots to build.
 set BUILD_LIST=
 %s
 
 REM Execute each build
-for \%\%B in (\%BUILD_LIST\%) do (
+for \%\%R in (\%BUILD_LIST\%) do (
     set /a TOTAL_COUNT+=1
-    
-    REM Extract repo name from path (second-to-last folder)
-    for \%\%P in ("\%\%~dpB..") do set REPO_NAME=\%\%~nxP
-    
+    set "REPO_NAME=\%\%~nxR"
+
     echo.
     echo ==========================================
     echo [!TOTAL_COUNT!] Building !REPO_NAME!
     echo ==========================================
-    
-    REM Change to the build.bat directory and execute
-    cd /d "\%\%~dpB"
-    call "\%\%~nxB"
-    
+
+    call "\%BUILD\%" "\%\%~R"
+
     if !ERRORLEVEL! neq 0 (
         echo ERROR: !REPO_NAME! failed
         set FAILED_BUILDS=!FAILED_BUILDS! !REPO_NAME!

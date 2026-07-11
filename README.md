@@ -1,58 +1,47 @@
 # build-support
 
-LabVIEW VIs for supporting package and application builds. The package has two main features:
-1. Build a self-extracting installer
-2. Create a project from a template
+LabVIEW VIs and scripts for building the lab's LabVIEW projects - producing VI packages (`.vip`) and Windows installers - plus creating projects from templates.
 
-## Installation & Requirements
+The build workflow (`build.bat`, `build.conf`, and the Inno Setup installer) is documented in **[documentation/INNOSETUP.md](documentation/INNOSETUP.md)** - start there to build a repo.
 
-Use VI Package Manager to install. The package is built using VIPM 2016. Manual building of a self-extracting installer has been tested with LabVIEW 2013 but automatic building is not supported.
+## Installation & requirements
 
-## Usage
+Install the package with VI Package Manager. Build machines also need Inno Setup 6.4+ and `CodeDependencies.iss`, both handled by `Setup-BuildMachine.bat` (see the build doc). Tested with LabVIEW 2019.
 
-In all of the following example images the variable *Product Name* = General AFM Lithography
+## Setting up a project's build specs
+
+To build an installer, the project's `.lvproj` needs two build specs, by convention named *Product Name* Application and *Product Name* Installer. Put those spec names in the repo's `build support\build.conf` (`APP_SPEC` / `INST_SPEC`).
+
+In the following example images *Product Name* = General AFM Lithography.
 
 ![VIPM-Product-Name.png](documentation/VIPM-Product-Name.png)
 
-### Self-Extracting Installer
+### *Product Name* Application
 
-Use the Project Explorer to create two build specs: *Product Name* Application and *Product Name* Installer
-
-#### *Product Name* Application
-The output of the Application builder should be /builds/Application
+Output to `/builds/Application`. Disable automatic version increment (the build handles versioning).
 
 ![LV-Application-Information.png](documentation/LV-Application-Information.png)
-
-Disable automatic version increment (the script will handle this)
-
 ![LV-Application-Version.png](documentation/LV-Application-Version.png)
 
-#### *Product Name* Installer
-The output of the Installer builder should be /builds/Installer
+### *Product Name* Installer
+
+Output to `/builds/Installer`. Disable automatic version increment.
 
 ![LV-Installer-Product.png](documentation/LV-Installer-Product.png)
-
-Disable automatic version increment (the script will handle this)
-
 ![LV-Installer-Version.png](documentation/LV-Installer-Version.png)
 
-#### Manual build: Post Build Script (manual build).vi
+## Building
 
-After manually building the Application and Installer (right click > build) you can call this script to automate the creation of a self-extracting installer.
+See **[documentation/INNOSETUP.md](documentation/INNOSETUP.md)**: set the repo's `build support\build.conf`, then run `build support\build.bat` - or `build_all.bat` to build a batch of repos in sequence.
 
-#### Auto build: Post Build Script (auto build).vi
+## Project setup
 
-It is recommended to manually build both the Application and Installer (right click > build) one time before trying automatic building via script methods.
-
-**Post Build Script (auto build).vi** will programmatically build the applicataion, installer, and self-extracting installer. It can be called by **Post-Build Custom Action.vi** (called by VIPM during package build) to automate this sequence while building a VI package. There is a template in the /templates/ folder. 
-
-### Project Setup
-
-Experimental. Contact Patrick for assistance. 
+Experimental. Contact Patrick for assistance.
 
 ## Contributing
 
-Contact Patrick
+Contact Patrick.
 
 ## License
+
 [BSD-3](https://choosealicense.com/licenses/bsd-3-clause/)
