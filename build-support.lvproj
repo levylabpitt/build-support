@@ -45,12 +45,6 @@
 			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
 			<Item Name="Inno.iss.template" Type="Document" URL="../lvsrc/Batch Templates/Inno.iss.template"/>
 		</Item>
-		<Item Name="Build Templates" Type="Folder">
-			<Item Name="Manual Build.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build.vi"/>
-			<Item Name="Manual Build SM.vi" Type="VI" URL="../lvsrc/Build Templates/Manual Build SM.vi"/>
-			<Item Name="buildWithGCLI.vi" Type="VI" URL="../lvsrc/Build Templates/buildWithGCLI.vi"/>
-			<Item Name="Build Application and Installer.vi" Type="VI" URL="../lvsrc/Build Templates/Build Application and Installer.vi"/>
-		</Item>
 		<Item Name="CLI" Type="Folder">
 			<Item Name="Tests" Type="Folder">
 				<Item Name="Test .NET Terminal.vi" Type="VI" URL="../lvsrc/CLI/Tests/Test .NET Terminal.vi"/>
@@ -180,6 +174,13 @@
 				<Item Name="Reshape 1D Array__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Reshape 1D Array__ogtk.vi"/>
 				<Item Name="Cluster to Array of VData__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Cluster to Array of VData__ogtk.vi"/>
 				<Item Name="Parse String with TDs__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Parse String with TDs__ogtk.vi"/>
+				<Item Name="Read Post Build VI from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Post Build VI from VIPB.vi"/>
+				<Item Name="VIPB to VIPM variant.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/VIPB to VIPM variant.vi"/>
+				<Item Name="Read Library_Name from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Name from VIPB.vi"/>
+				<Item Name="Read Product_Name from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Product_Name from VIPB.vi"/>
+				<Item Name="Read Library_Source_Folder from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Source_Folder from VIPB.vi"/>
+				<Item Name="Read Package_LabVIEW_Version from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Package_LabVIEW_Version from VIPB.vi"/>
+				<Item Name="Read Library_Output_Folder from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Output_Folder from VIPB.vi"/>
 			</Item>
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="1D String Array to Delimited String.vi" Type="VI" URL="/&lt;vilib&gt;/AdvancedString/1D String Array to Delimited String.vi"/>
@@ -1470,6 +1471,20 @@
 			</Item>
 			<Item Name="NI_MDF.lvlib" Type="Library" URL="../../../../../../../Program Files/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NI_MDF.lvlib"/>
 			<Item Name="NIMdf.dll" Type="Document" URL="../../../../../../../Program Files/National Instruments/LabVIEW 2019/applibs/distkit/MDF/NIMdf.dll"/>
+			<Item Name="Format Build Spec Summary.vi" Type="VI" URL="../lvsrc/VIPM/Format Build Spec Summary.vi"/>
+			<Item Name="Increment Version Patch.vi" Type="VI" URL="../lvsrc/VIPM/Increment Version Patch.vi"/>
+			<Item Name="Read Library_Version from VIPB.vi" Type="VI" URL="../lvsrc/VIPM/Read Library_Version from VIPB.vi"/>
+			<Item Name="Read Node from VIPB.vi" Type="VI" URL="../lvsrc/VIPM/Read Node from VIPB.vi"/>
+			<Item Name="Write Library_Version to VIPB.vi" Type="VI" URL="../lvsrc/VIPM/Write Library_Version to VIPB.vi"/>
+			<Item Name="Write Node to VIPB.vi" Type="VI" URL="../lvsrc/VIPM/Write Node to VIPB.vi"/>
+			<Item Name="Increment Version Minor.vi" Type="VI" URL="../lvsrc/VIPM/Increment Version Minor.vi"/>
+			<Item Name="Clear Change Log.vi" Type="VI" URL="../lvsrc/VIPM/Clear Change Log.vi"/>
+			<Item Name="Append to Change Log.vi" Type="VI" URL="../lvsrc/VIPM/Append to Change Log.vi"/>
+			<Item Name="Create build_vip.bat.vi" Type="VI" URL="../lvsrc/VIPM/Create build_vip.bat.vi"/>
+			<Item Name="Read Package_LabVIEW_Version from VIPB.vi" Type="VI" URL="../lvsrc/VIPM/Read Package_LabVIEW_Version from VIPB.vi"/>
+			<Item Name="LabVIEW_Version to LV_VERS and LV_BIT.vi" Type="VI" URL="../lvsrc/VIPM/LabVIEW_Version to LV_VERS and LV_BIT.vi"/>
+			<Item Name="Read Targets from VIPM Settings.vi" Type="VI" URL="../lvsrc/VIPM/Read Targets from VIPM Settings.vi"/>
+			<Item Name="Increment Version Build.vi" Type="VI" URL="../lvsrc/VIPM/Increment Version Build.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="Patrick Builder" Type="EXE">
