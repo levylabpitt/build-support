@@ -104,7 +104,7 @@ ISCC is located automatically at build time (any installed `Inno Setup N`, 32- o
 - **"ISCC.exe not found" during a build.** Inno Setup is not installed. Run `Setup-BuildMachine.bat`.
 - **"project in use" / a stale LabVIEW build.** `build.bat` force-closes LabVIEW at the start of each run; if you build on a dev box, save any open LabVIEW work first, since it will be closed.
 - **Wrong version or product name.** `build.bat` reads `<Library_Version>` and `<Product_Name>` from the `.vipb`. If a build uses the wrong values, check those tags.
-- **Slow ISCC compile.** `Inno.iss` stores the NI media without recompressing it (`nocompression`), since it is already-compressed `.cab`/`.msi`. If you copied an older `Inno.iss`, add `nocompression` to the NI installer's `[Files]` line.
+- **ISCC compile time vs installer size.** The NI media compresses meaningfully (about 26%: ~380 MB -> ~279 MB in testing), so `Inno.iss` compresses it by default (~70 s). To trade that size back for a near-instant compile while iterating, add `nocompression` to the NI installer's `[Files]` line.
 
 ## Architecture notes
 

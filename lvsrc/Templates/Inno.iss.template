@@ -71,9 +71,10 @@ WizardStyle=modern
 
 [Files]
 ; The NI installer, carried inside this bootstrapper and unpacked at runtime.
-; nocompression: the NI media is already-compressed .cab/.msi, so re-compressing it
-; (lzma2/solid) costs minutes of build time for near-zero size gain. Store it as-is.
-Source: "{#NIInstallerDir}\*"; DestDir: "{tmp}\ni"; Flags: recursesubdirs createallsubdirs ignoreversion nocompression
+; Compressed (lzma2/solid): re-compressing the NI media pays off - about 26% smaller
+; (~380 MB -> ~279 MB in testing) for ~70 s of build time. Add "nocompression" to the
+; flags below to trade that size back for a near-instant compile while iterating.
+Source: "{#NIInstallerDir}\*"; DestDir: "{tmp}\ni"; Flags: recursesubdirs createallsubdirs ignoreversion
 ; ---- EXTRA INSTALLERS (per project) — bundle payloads here ------------------
 ; Source: "{#RepoRoot}\thirdparty\SomeCppDriver.exe"; DestDir: "{tmp}\extra"; Flags: ignoreversion
 ; ----------------------------------------------------------------------------
