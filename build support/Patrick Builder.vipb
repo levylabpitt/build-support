@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-10 17:03:20" Creator="Patrick Irvin" Comments="" ID="d03a6c9757ba37ad042f531615c183d4">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-11 10:20:17" Creator="Patrick Irvin" Comments="" ID="540dd4877bbcd854742c11702945042d">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_patrick_builder</Package_File_Name>
-    <Library_Version>1.3.0.46</Library_Version>
+    <Library_Version>1.3.1.46</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -136,12 +136,6 @@ This vipb file is intended not to be built directly but is used for configuring 
       </Exclusions>
       <Exclusions>
         <Path>Batch Examples</Path>
-      </Exclusions>
-      <Exclusions>
-        <Path>Batch Templates</Path>
-      </Exclusions>
-      <Exclusions>
-        <Path>Build Templates</Path>
       </Exclusions>
       <Exclusions>
         <Path>CLI</Path>
