@@ -51,7 +51,7 @@ The installer, if built, lands at `builds\latest\<App>_<version>_Setup.exe`, alo
 
 The Inno installer is a thin **bootstrapper**. It does not install your app itself - the NI installer (built from your Installer build spec) still installs the app to Program Files, installs the LabVIEW Run-Time Engine, creates shortcuts, and owns the Add/Remove Programs entry (uninstall and upgrades, via its Upgrade Code). Inno's added job is to install prerequisites (a Visual C++ redistributable, extra C++ installers, etc.) and wrap everything into one `.exe`.
 
-Each repo has its own committed `Inno.iss` in `build support\` (a copy of `Inno.iss.template`, hand-maintained). Almost everything in it is automatic:
+Each repo has its own committed `Inno.iss` in `build support\` (scaffolded from the shared `Inno.iss` template, hand-maintained). Almost everything in it is automatic:
 
 **Set automatically at build time (do not edit):** `AppName`, `AppVersion`, `AppPublisher`, `AppId`, the NI-installer source path, the `CodeDependencies.iss` include path, and the output filename and location.
 

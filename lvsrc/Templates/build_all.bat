@@ -1,4 +1,4 @@
-REM build_all.bat.template: template file for building build_all.bat with string substitution done in LabVIEW
+REM build_all.bat: TEMPLATE - Patrick Builder does the string substitution in LabVIEW and writes the finished script to the path below. Not runnable as-is.
 REM saves to \%LOCALAPPDATA\\LevyLab\\build-support\\build_all.bat
 
 @echo off
