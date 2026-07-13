@@ -11,7 +11,6 @@
 	<Item Name="Append to Change Log.vi" Type="VI" URL="../Append to Change Log.vi"/>
 	<Item Name="Clear Change Log.vi" Type="VI" URL="../Clear Change Log.vi"/>
 	<Item Name="Format Build Spec Summary.vi" Type="VI" URL="../Format Build Spec Summary.vi"/>
-	<Item Name="Create build_vip.bat.vi" Type="VI" URL="../Create build_vip.bat.vi"/>
 	<Item Name="Increment Version Major.vi" Type="VI" URL="../Increment Version Major.vi"/>
 	<Item Name="Increment Version Minor.vi" Type="VI" URL="../Increment Version Minor.vi"/>
 	<Item Name="Increment Version Patch.vi" Type="VI" URL="../Increment Version Patch.vi"/>

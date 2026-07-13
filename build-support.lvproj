@@ -35,11 +35,9 @@
 			<Item Name="build.bat" Type="Document" URL="../lvsrc/Scripts/build.bat"/>
 		</Item>
 		<Item Name="Templates" Type="Folder">
-			<Item Name="build.conf.template" Type="Document" URL="../lvsrc/Templates/build.conf.template"/>
-			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Templates/build_all.bat.template"/>
-			<Item Name="build_vip.bat.template" Type="Document" URL="../lvsrc/Templates/build_vip.bat.template"/>
-			<Item Name="Inno.iss.template" Type="Document" URL="../lvsrc/Templates/Inno.iss.template"/>
-			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Templates/7zip.bat.template"/>
+			<Item Name="build_all.bat" Type="Document" URL="../lvsrc/Templates/build_all.bat"/>
+			<Item Name="Inno.iss" Type="Document" URL="../lvsrc/Templates/Inno.iss"/>
+			<Item Name="build.conf" Type="Document" URL="../lvsrc/Templates/build.conf"/>
 		</Item>
 		<Item Name="VI Templates" Type="Folder">
 			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/VI Templates/buildspec-template.vipt"/>
@@ -833,7 +831,6 @@
 				<Item Name="Read Section Cluster__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi" Type="VI" URL="/&lt;vilib&gt;/JKI/_VIPM API_internal_deps/Read Section Cluster__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi"/>
 				<Item Name="Remove Duplicates from 1D Array (Path)__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi" Type="VI" URL="/&lt;vilib&gt;/JKI/_VIPM API_internal_deps/Remove Duplicates from 1D Array (Path)__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi"/>
 				<Item Name="NI_XML.lvlib" Type="Library" URL="/&lt;vilib&gt;/xml/NI_XML.lvlib"/>
-				<Item Name="LMH-Toolbox.lvlib" Type="Library" URL="/&lt;vilib&gt;/MakerHub/Toolbox/LMH-Toolbox.lvlib"/>
 				<Item Name="CLI.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/CLI Class/CLI.lvclass"/>
 				<Item Name="TCP Get Raw Net Object.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/tcp.llb/TCP Get Raw Net Object.vi"/>
 				<Item Name="TCP_NoDelay_Windows.vi" Type="VI" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/Dependencies/TCP_NoDelay_Windows.vi"/>
@@ -1606,23 +1603,23 @@
 				<Property Name="Source[2].type" Type="Str">File</Property>
 				<Property Name="Source[3].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[3].name" Type="Str">7zip.bat.template</Property>
-				<Property Name="Source[3].tag" Type="Ref">/My Computer/Templates/7zip.bat.template</Property>
+				<Property Name="Source[3].tag" Type="Ref"></Property>
 				<Property Name="Source[3].type" Type="Str">File</Property>
 				<Property Name="Source[4].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[4].name" Type="Str">build.conf.template</Property>
-				<Property Name="Source[4].tag" Type="Ref">/My Computer/Templates/build.conf.template</Property>
+				<Property Name="Source[4].tag" Type="Ref"></Property>
 				<Property Name="Source[4].type" Type="Str">File</Property>
 				<Property Name="Source[5].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[5].name" Type="Str">build_all.bat.template</Property>
-				<Property Name="Source[5].tag" Type="Ref">/My Computer/Templates/build_all.bat.template</Property>
+				<Property Name="Source[5].tag" Type="Ref"></Property>
 				<Property Name="Source[5].type" Type="Str">File</Property>
 				<Property Name="Source[6].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[6].name" Type="Str">build_vip.bat.template</Property>
-				<Property Name="Source[6].tag" Type="Ref">/My Computer/Templates/build_vip.bat.template</Property>
+				<Property Name="Source[6].tag" Type="Ref"></Property>
 				<Property Name="Source[6].type" Type="Str">File</Property>
 				<Property Name="Source[7].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
 				<Property Name="Source[7].name" Type="Str">Inno.iss.template</Property>
-				<Property Name="Source[7].tag" Type="Ref">/My Computer/Templates/Inno.iss.template</Property>
+				<Property Name="Source[7].tag" Type="Ref"></Property>
 				<Property Name="Source[7].type" Type="Str">File</Property>
 				<Property Name="SourceCount" Type="Int">8</Property>
 			</Item>
