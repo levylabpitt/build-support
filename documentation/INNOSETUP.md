@@ -1,8 +1,8 @@
 # Building Packages and Installers
 
-A repo is built by one script, `build.bat`, driven by a per-project `build.conf`. Depending on the config, a build produces the LabVIEW **VIP package**, a Windows **installer** (an Inno Setup `*_Setup.exe` that wraps the NI installer and its prerequisites), or both - and optionally runs the git release workflow.
+A repo is built by one script, `build.bat`, driven by a per-project `build.cfg`. Depending on the config, a build produces the LabVIEW **VIP package**, a Windows **installer** (an Inno Setup `*_Setup.exe` that wraps the NI installer and its prerequisites), or both - and optionally runs the git release workflow.
 
-`build.bat` is a single static script, installed once on the build machine (in `%LOCALAPPDATA%\LevyLab\build-support\scripts\`) and shared by every repo - it is not copied into each one. You run it with the repo path as an argument (or from inside the repo), and it reads that repo's per-project settings from `build.conf` and the version, product name, and LabVIEW target straight from the `.vipb`.
+`build.bat` is a single static script, installed once on the build machine (in `%LOCALAPPDATA%\LevyLab\build-support\scripts\`) and shared by every repo - it is not copied into each one. You run it with the repo path as an argument (or from inside the repo), and it reads that repo's per-project settings from `build.cfg` and the version, product name, and LabVIEW target straight from the `.vipb`.
 
 ## Per-project files
 
@@ -11,12 +11,12 @@ Each repo keeps these in its `build support\` folder. The build script itself is
 | File | Purpose |
 | --- | --- |
 | `<name>.vipb` | The VI package spec (source of the version, product name, and LabVIEW target). |
-| `build.conf` | Per-project build configuration (what to build, build-spec names). |
+| `build.cfg` | Per-project build configuration (what to build, build-spec names). |
 | `Inno.iss` | The Inno Setup installer script (only needed when building an installer). |
 
-## build.conf
+## build.cfg
 
-`build.conf` is `KEY=VALUE`, one per line. A `#` at column 0 is a whole-line comment. Do not put an inline comment after a value - it becomes part of the value.
+`build.cfg` is `KEY=VALUE`, one per line. A `#` at column 0 is a whole-line comment. Do not put an inline comment after a value - it becomes part of the value.
 
 | Key | Meaning |
 | --- | --- |
@@ -41,7 +41,7 @@ The two flags give you the three build modes:
 ## Building a repo
 
 1. Make sure the build machine is set up once (see [Build-machine setup](#build-machine-setup)).
-2. Set the repo's `build support\build.conf` for what you want (at minimum `BUILD_VIP` / `BUILD_INSTALLER` and `LVVER` / `LVBIT`).
+2. Set the repo's `build support\build.cfg` for what you want (at minimum `BUILD_VIP` / `BUILD_INSTALLER` and `LVVER` / `LVBIT`).
 3. If building an installer, make sure `build support\Inno.iss` exists and its prerequisites are set (see [The installer](#the-installer)).
 4. Build the repo by running the shared script against it: `"%LOCALAPPDATA%\LevyLab\build-support\scripts\build.bat" "<repo root>"` - or `cd` into the repo and run it with no argument. To build a batch of repos, use `build_all.bat`.
 
@@ -78,7 +78,7 @@ It needs `curl.exe` (built into Windows 10 1803+ and Windows 11). Pass `/q` to s
 | App build output | `<repo>\builds\Application` |
 | NI installer media (holds `setup.exe`) | `<repo>\builds\Installer\Volume` |
 | Final `.vip` + installer (for the GitHub release) | `<repo>\builds\latest` |
-| Project's build files (`build.conf`, `Inno.iss`, `.vipb`) | `<repo>\build support\` |
+| Project's build files (`build.cfg`, `Inno.iss`, `.vipb`) | `<repo>\build support\` |
 | `build.bat` (shared build script) | `%LOCALAPPDATA%\LevyLab\build-support\scripts` |
 | `CodeDependencies.iss` (Inno include) | `%LOCALAPPDATA%\LevyLab\build-support\ISCC` |
 | Build-support templates | `%LOCALAPPDATA%\LevyLab\build-support\templates` |
@@ -88,7 +88,7 @@ It needs `curl.exe` (built into Windows 10 1803+ and Windows 11). Pass `/q` to s
 
 `build.bat` (the shared script, given a repo) does, in order:
 
-1. `cd` to the repo root, load `build.conf`, and read `VERSION`, product name, and the LabVIEW target (`LVVER`/`LVBIT`) from the `.vipb`.
+1. `cd` to the repo root, load `build.cfg`, and read `VERSION`, product name, and the LabVIEW target (`LVVER`/`LVBIT`) from the `.vipb`.
 2. Close any running LabVIEW (`taskkill`) so g-cli starts clean - important when `build_all.bat` runs repos that use different LabVIEW versions.
 3. Archive the previous release from `builds\latest` to `builds\old releases`.
 4. If `BUILD_VIP`: `g-cli vipBuild`.
@@ -110,4 +110,4 @@ ISCC is located automatically at build time (any installed `Inno Setup N`, 32- o
 
 This design replaced an earlier three-layer chain where a VIPM Post-Build Custom Action VI *generated* a second batch file (`7zip.bat`) during the VIP build, which then built the app/installer and packaged it. That indirection is gone: Patrick Builder already has everything needed, so `build.bat` calls `g-cli lvBuild` directly. Retired along with it: `7zip.bat`, the Post-Build Custom Action VI, `Write 7z.bat.vi`, `Create 7z.bat Script.vi`, the `PostBuildSupport` 7-Zip chain, `noVIPM_PostBuild.vi`, `VIPB to VIPM variant.vi`, and the Variant contract. `noVIPM_IncrementBuild.vi` stays (the version bump).
 
-Patrick Builder now scaffolds `build.conf` and `Inno.iss`, drops in the static `build.bat`, and generates `build_all.bat` (which calls each repo's `build support\build.bat`).
+Patrick Builder now scaffolds `build.cfg` and `Inno.iss`, drops in the static `build.bat`, and generates `build_all.bat` (which calls each repo's `build support\build.bat`).

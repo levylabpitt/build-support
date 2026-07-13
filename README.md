@@ -2,7 +2,7 @@
 
 LabVIEW VIs and scripts for building the lab's LabVIEW projects - producing VI packages (`.vip`) and Windows installers - plus creating projects from templates.
 
-The build workflow (`build.bat`, `build.conf`, and the Inno Setup installer) is documented in **[documentation/INNOSETUP.md](documentation/INNOSETUP.md)** - start there to build a repo.
+The build workflow (`build.bat`, `build.cfg`, and the Inno Setup installer) is documented in **[documentation/INNOSETUP.md](documentation/INNOSETUP.md)** - start there to build a repo.
 
 ## Installation & requirements
 
@@ -10,7 +10,7 @@ Install the package with VI Package Manager. Build machines also need Inno Setup
 
 ## Setting up a project's build specs
 
-To build an installer, the project's `.lvproj` needs two build specs, by convention named *Product Name* Application and *Product Name* Installer. Put those spec names in the repo's `build support\build.conf` (`APP_SPEC` / `INST_SPEC`).
+To build an installer, the project's `.lvproj` needs two build specs, by convention named *Product Name* Application and *Product Name* Installer. Put those spec names in the repo's `build support\build.cfg` (`APP_SPEC` / `INST_SPEC`).
 
 In the following example images *Product Name* = General AFM Lithography.
 
@@ -32,7 +32,7 @@ Output to `/builds/Installer`. Disable automatic version increment.
 
 ## Building
 
-See **[documentation/INNOSETUP.md](documentation/INNOSETUP.md)**: set the repo's `build support\build.conf`, then run `build support\build.bat` - or `build_all.bat` to build a batch of repos in sequence.
+See **[documentation/INNOSETUP.md](documentation/INNOSETUP.md)**: set the repo's `build support\build.cfg`, then run `build support\build.bat` - or `build_all.bat` to build a batch of repos in sequence.
 
 ## Project setup
 
