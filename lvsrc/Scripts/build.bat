@@ -7,7 +7,7 @@ REM  ONE shared, static script for every repo - lives in
 REM  %LOCALAPPDATA%\LevyLab\build-support\scripts\, NOT copied per repo. Pass the
 REM  target repo root as the first argument (or run from inside the repo):
 REM      build.bat "C:\path\to\repo"
-REM  It reads that repo's per-project config from "build support\build.conf" and
+REM  It reads that repo's per-project config from "build support\build.cfg" and
 REM  the version / LabVIEW target from the .vipb, so nothing is generated per repo.
 REM
 REM  Replaces the old build_vip.bat + VIPM-generated 7zip.bat + post-build VI
@@ -19,15 +19,15 @@ REM --- target repo: first argument, else the current directory ----------------
 if not "%~1"=="" cd /d "%~1"
 set "REPO=%CD%"
 set "SUPPORT=%REPO%\build support\"
-set "CONF=%SUPPORT%build.conf"
+set "CONF=%SUPPORT%build.cfg"
 set "BUILD_SUPPORT=%LOCALAPPDATA%\LevyLab\build-support\ISCC"
 if not exist "%CONF%" (
-    echo ERROR: build.conf not found at "%CONF%"
+    echo ERROR: build.cfg not found at "%CONF%"
     echo Usage: build.bat "^<repo root^>"   or run from inside the repo
     exit /b 1
 )
 
-REM --- defaults, then load build.conf (KEY=VALUE, '#' comments) ---------------
+REM --- defaults, then load build.cfg (KEY=VALUE, '#' comments) ---------------
 set "BUILD_VIP=true"
 set "BUILD_INSTALLER=false"
 set "DO_RELEASE=true"
@@ -57,14 +57,14 @@ set "LINE=!LINE:<Product_Name>=!"
 set "VIPB_PRODUCT=!LINE:</Product_Name>=!"
 
 REM --- LabVIEW target from the VIPB (Package_LabVIEW_Version = "19.0 (64-bit)"),
-REM     unless build.conf overrides LVVER / LVBIT. Year = 2000 + major version. -----
+REM     unless build.cfg overrides LVVER / LVBIT. Year = 2000 + major version. -----
 for /f "usebackq tokens=*" %%L in (`findstr /C:"<Package_LabVIEW_Version>" "%VIPB_FILE%"`) do set "LINE=%%L"
 set "LINE=!LINE:<Package_LabVIEW_Version>=!"
 set "LVFULL=!LINE:</Package_LabVIEW_Version>=!"
 if not defined LVVER for /f "tokens=1 delims=." %%a in ("!LVFULL!") do set /a LVVER=2000+%%a
 if not defined LVBIT if "!LVFULL:64-bit=!"=="!LVFULL!" (set "LVBIT=32") else (set "LVBIT=64")
-if not defined LVVER ( echo ERROR: LVVER not in build.conf and no Package_LabVIEW_Version in the VIPB & exit /b 1 )
-if not defined LVBIT ( echo ERROR: LVBIT not in build.conf and no Package_LabVIEW_Version in the VIPB & exit /b 1 )
+if not defined LVVER ( echo ERROR: LVVER not in build.cfg and no Package_LabVIEW_Version in the VIPB & exit /b 1 )
+if not defined LVBIT ( echo ERROR: LVBIT not in build.cfg and no Package_LabVIEW_Version in the VIPB & exit /b 1 )
 
 REM Inno installer name: conf override, else "<INST_SPEC minus ' Installer'>",
 REM else the VIPB product name.
@@ -103,8 +103,8 @@ if errorlevel 1 ( echo ERROR: VIP build failed & goto error )
 
 REM --- 2) Application + installer + Inno --------------------------------------
 if /I not "%BUILD_INSTALLER%"=="true" goto :after_installer
-if not defined APP_SPEC ( echo ERROR: APP_SPEC not set in build.conf & goto error )
-if not defined INST_SPEC ( echo ERROR: INST_SPEC not set in build.conf & goto error )
+if not defined APP_SPEC ( echo ERROR: APP_SPEC not set in build.cfg & goto error )
+if not defined INST_SPEC ( echo ERROR: INST_SPEC not set in build.cfg & goto error )
 echo Clearing compiled cache...
 g-cli --lv-ver %LVVER% --arch %LVBIT% ClearCache
 echo Building application "%APP_SPEC%"...
