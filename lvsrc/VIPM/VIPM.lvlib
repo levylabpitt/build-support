@@ -11,13 +11,13 @@
 	<Item Name="Append to Change Log.vi" Type="VI" URL="../Append to Change Log.vi"/>
 	<Item Name="Clear Change Log.vi" Type="VI" URL="../Clear Change Log.vi"/>
 	<Item Name="Format Build Spec Summary.vi" Type="VI" URL="../Format Build Spec Summary.vi"/>
-	<Item Name="Create build_vip.bat.vi" Type="VI" URL="../Create build_vip.bat.vi"/>
 	<Item Name="Increment Version Major.vi" Type="VI" URL="../Increment Version Major.vi"/>
 	<Item Name="Increment Version Minor.vi" Type="VI" URL="../Increment Version Minor.vi"/>
 	<Item Name="Increment Version Patch.vi" Type="VI" URL="../Increment Version Patch.vi"/>
 	<Item Name="Increment Version Build.vi" Type="VI" URL="../Increment Version Build.vi"/>
 	<Item Name="Read Targets from VIPM Settings.vi" Type="VI" URL="../Read Targets from VIPM Settings.vi"/>
 	<Item Name="LabVIEW_Version to LV_VERS and LV_BIT.vi" Type="VI" URL="../LabVIEW_Version to LV_VERS and LV_BIT.vi"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<Item Name="Read Package_LabVIEW_Version from VIPB.vi" Type="VI" URL="../Read Package_LabVIEW_Version from VIPB.vi"/>
 	<Item Name="Read Library_Source_Folder from VIPB.vi" Type="VI" URL="../Read Library_Source_Folder from VIPB.vi"/>
@@ -26,6 +26,11 @@
 	<Item Name="Read Package_LabVIEW_Version from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Package_LabVIEW_Version from VIPB.vi"/>
 	<Item Name="Read Library_Source_Folder from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Source_Folder from VIPB.vi"/>
 	<Item Name="Read Library_Output_Folder from VIPB.vi" Type="VI" URL="/&lt;userlib&gt;/LevyLab/Build Support/VIPM/Read Library_Output_Folder from VIPB.vi"/>
+>>>>>>> develop
+=======
+	<Item Name="Read Package_LabVIEW_Version from VIPB.vi" Type="VI" URL="../Read Package_LabVIEW_Version from VIPB.vi"/>
+	<Item Name="Read Library_Source_Folder from VIPB.vi" Type="VI" URL="../Read Library_Source_Folder from VIPB.vi"/>
+	<Item Name="Read Library_Output_Folder from VIPB.vi" Type="VI" URL="../Read Library_Output_Folder from VIPB.vi"/>
 >>>>>>> develop
 	<Item Name="Write Library_Version to VIPB.vi" Type="VI" URL="../Write Library_Version to VIPB.vi"/>
 	<Item Name="Read Library_Version from VIPB.vi" Type="VI" URL="../Read Library_Version from VIPB.vi"/>

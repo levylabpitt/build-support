@@ -32,18 +32,18 @@
 		</Item>
 		<Item Name="Scripts" Type="Folder">
 			<Item Name="Setup-BuildMachine.bat" Type="Document" URL="../lvsrc/Scripts/Setup-BuildMachine.bat"/>
+			<Item Name="build.bat" Type="Document" URL="../lvsrc/Scripts/build.bat"/>
+		</Item>
+		<Item Name="Templates" Type="Folder">
+			<Item Name="build_all.bat" Type="Document" URL="../lvsrc/Templates/build_all.bat"/>
+			<Item Name="Inno.iss" Type="Document" URL="../lvsrc/Templates/Inno.iss"/>
+			<Item Name="build.cfg" Type="Document" URL="../lvsrc/Templates/build.cfg"/>
 		</Item>
 		<Item Name="VI Templates" Type="Folder">
 			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/VI Templates/buildspec-template.vipt"/>
 			<Item Name="Post-Build Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Post-Build Custom Action.vit"/>
 			<Item Name="Post-Install Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Post-Install Custom Action.vit"/>
 			<Item Name="Pre-Build Custom Action.vit" Type="VI" URL="../lvsrc/VI Templates/Pre-Build Custom Action.vit"/>
-		</Item>
-		<Item Name="Batch Templates" Type="Folder">
-			<Item Name="build_all.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_all.bat.template"/>
-			<Item Name="build_vip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/build_vip.bat.template"/>
-			<Item Name="7zip.bat.template" Type="Document" URL="../lvsrc/Batch Templates/7zip.bat.template"/>
-			<Item Name="Inno.iss.template" Type="Document" URL="../lvsrc/Batch Templates/Inno.iss.template"/>
 		</Item>
 		<Item Name="CLI" Type="Folder">
 			<Item Name="Tests" Type="Folder">
@@ -53,8 +53,7 @@
 			<Item Name="Status.vi" Type="VI" URL="../lvsrc/CLI/Status.vi"/>
 		</Item>
 		<Item Name="G-CLI" Type="Folder">
-			<Item Name="noVIPM_IncrementBuild.vi" Type="VI" URL="../lvsrc/G-CLI/noVIPM_IncrementBuild.vi"/>
-			<Item Name="noVIPM_PostBuild.vi" Type="VI" URL="/&lt;vilib&gt;/G CLI Tools/noVIPM_PostBuild.vi"/>
+			<Item Name="g-cli.noVIPM.lvlib" Type="Library" URL="../lvsrc/G-CLI/g-cli.noVIPM.lvlib"/>
 		</Item>
 		<Item Name="Git.lvclass" Type="LVClass" URL="../lvsrc/Git/Git.lvclass"/>
 		<Item Name="PostBuildSupport.lvclass" Type="LVClass" URL="../lvsrc/PostBuildSupport/PostBuildSupport.lvclass"/>
@@ -839,7 +838,6 @@
 				<Item Name="Read Section Cluster__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi" Type="VI" URL="/&lt;vilib&gt;/JKI/_VIPM API_internal_deps/Read Section Cluster__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi"/>
 				<Item Name="Remove Duplicates from 1D Array (Path)__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi" Type="VI" URL="/&lt;vilib&gt;/JKI/_VIPM API_internal_deps/Remove Duplicates from 1D Array (Path)__ogtkDDA31ED5A732916949AA00FDC27B02BA.vi"/>
 				<Item Name="NI_XML.lvlib" Type="Library" URL="/&lt;vilib&gt;/xml/NI_XML.lvlib"/>
-				<Item Name="LMH-Toolbox.lvlib" Type="Library" URL="/&lt;vilib&gt;/MakerHub/Toolbox/LMH-Toolbox.lvlib"/>
 				<Item Name="CLI.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/CLI Class/CLI.lvclass"/>
 				<Item Name="TCP Get Raw Net Object.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/tcp.llb/TCP Get Raw Net Object.vi"/>
 				<Item Name="TCP_NoDelay_Windows.vi" Type="VI" URL="/&lt;vilib&gt;/Wiresmith Technology/G CLI/Dependencies/TCP_NoDelay_Windows.vi"/>
@@ -1487,13 +1485,13 @@
 			<Item Name="Increment Version Build.vi" Type="VI" URL="../lvsrc/VIPM/Increment Version Build.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
-			<Item Name="Patrick Builder" Type="EXE">
+			<Item Name="Patrick Builder Application" Type="EXE">
 				<Property Name="App_copyErrors" Type="Bool">true</Property>
 				<Property Name="App_INI_aliasGUID" Type="Str">{5464BDC9-E63C-426C-89BD-B53D524A50BE}</Property>
 				<Property Name="App_INI_GUID" Type="Str">{C9D2AF69-688D-406B-94A8-006E282E3AB1}</Property>
 				<Property Name="App_serverConfig.httpPort" Type="Int">8002</Property>
 				<Property Name="Bld_buildCacheID" Type="Str">{91079324-72A1-482A-802C-64A26A671DFE}</Property>
-				<Property Name="Bld_buildSpecName" Type="Str">Patrick Builder</Property>
+				<Property Name="Bld_buildSpecName" Type="Str">Patrick Builder Application</Property>
 				<Property Name="Bld_excludeInlineSubVIs" Type="Bool">true</Property>
 				<Property Name="Bld_excludeLibraryItems" Type="Bool">true</Property>
 				<Property Name="Bld_excludePolymorphicVIs" Type="Bool">true</Property>
@@ -1501,12 +1499,12 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToProject</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{C3786147-54D9-4EFB-9A94-FC7AC7C65BCA}</Property>
-				<Property Name="Bld_version.build" Type="Int">43</Property>
+				<Property Name="Bld_version.build" Type="Int">46</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
-				<Property Name="Bld_version.minor" Type="Int">2</Property>
-				<Property Name="Bld_version.patch" Type="Int">11</Property>
+				<Property Name="Bld_version.minor" Type="Int">3</Property>
+				<Property Name="Bld_version.patch" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">Patrick Builder.exe</Property>
-				<Property Name="Destination[0].path" Type="Path">../builds/Application/Patrick Builder.exe</Property>
+				<Property Name="Destination[0].path" Type="Path">../builds/Application/Patrick Builder Application.exe</Property>
 				<Property Name="Destination[0].path.type" Type="Str">relativeToProject</Property>
 				<Property Name="Destination[0].preserveHierarchy" Type="Bool">true</Property>
 				<Property Name="Destination[0].type" Type="Str">App</Property>
@@ -1515,7 +1513,7 @@
 				<Property Name="Destination[1].path.type" Type="Str">relativeToProject</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
 				<Property Name="Exe_iconItemID" Type="Ref">/My Computer/build support/build helper.ico</Property>
-				<Property Name="Source[0].itemID" Type="Str">{A14E4478-71C0-43ED-A784-06B58917F30A}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{F8376D83-D1A8-45B9-BDC6-7CA3F5EAFF74}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/Build.lvlib/Patrick Builder.vi</Property>
@@ -1523,10 +1521,10 @@
 				<Property Name="Source[1].type" Type="Str">VI</Property>
 				<Property Name="SourceCount" Type="Int">2</Property>
 				<Property Name="TgtF_companyName" Type="Str">University of Pittsburgh</Property>
-				<Property Name="TgtF_fileDescription" Type="Str">Patrick Builder</Property>
-				<Property Name="TgtF_internalName" Type="Str">Patrick Builder</Property>
+				<Property Name="TgtF_fileDescription" Type="Str">Patrick Builder Application</Property>
+				<Property Name="TgtF_internalName" Type="Str">Patrick Builder Application</Property>
 				<Property Name="TgtF_legalCopyright" Type="Str">Copyright © 2025, Patrick Irvin, LevyLab, University of Pittsburgh</Property>
-				<Property Name="TgtF_productName" Type="Str">Patrick Builder</Property>
+				<Property Name="TgtF_productName" Type="Str">Patrick Builder Application</Property>
 				<Property Name="TgtF_targetfileGUID" Type="Str">{C9B56297-FA46-4BC1-9EF5-A8F9943BF156}</Property>
 				<Property Name="TgtF_targetfileName" Type="Str">Patrick Builder.exe</Property>
 				<Property Name="TgtF_versionIndependent" Type="Bool">true</Property>
@@ -1591,7 +1589,7 @@
 				<Property Name="INST_defaultDir" Type="Str">{254A36E4-4AEB-4E93-8646-E5F812D87291}</Property>
 				<Property Name="INST_installerName" Type="Str">setup.exe</Property>
 				<Property Name="INST_productName" Type="Str">Patrick Builder</Property>
-				<Property Name="INST_productVersion" Type="Str">1.2.11</Property>
+				<Property Name="INST_productVersion" Type="Str">1.3.1</Property>
 				<Property Name="InstSpecBitness" Type="Str">64-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">19018009</Property>
 				<Property Name="MSI_arpCompany" Type="Str">University of Pittsburgh</Property>
@@ -1613,30 +1611,38 @@
 				<Property Name="Source[0].File[0].ShortcutCount" Type="Int">1</Property>
 				<Property Name="Source[0].File[0].tag" Type="Str">{C9B56297-FA46-4BC1-9EF5-A8F9943BF156}</Property>
 				<Property Name="Source[0].FileCount" Type="Int">1</Property>
-				<Property Name="Source[0].name" Type="Str">Patrick Builder</Property>
-				<Property Name="Source[0].tag" Type="Ref">/My Computer/Build Specifications/Patrick Builder</Property>
+				<Property Name="Source[0].name" Type="Str">Patrick Builder Application</Property>
+				<Property Name="Source[0].tag" Type="Ref">/My Computer/Build Specifications/Patrick Builder Application</Property>
 				<Property Name="Source[0].type" Type="Str">EXE</Property>
-				<Property Name="Source[1].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
-				<Property Name="Source[1].name" Type="Str">7zip.bat.template</Property>
-				<Property Name="Source[1].tag" Type="Ref">/My Computer/Batch Templates/7zip.bat.template</Property>
+				<Property Name="Source[1].dest" Type="Str">{7C1D3CE0-42D9-4628-B1FF-255252E5DC26}</Property>
+				<Property Name="Source[1].name" Type="Str">Setup-BuildMachine.bat</Property>
+				<Property Name="Source[1].tag" Type="Ref">/My Computer/Scripts/Setup-BuildMachine.bat</Property>
 				<Property Name="Source[1].type" Type="Str">File</Property>
-				<Property Name="Source[2].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
-				<Property Name="Source[2].name" Type="Str">build_all.bat.template</Property>
-				<Property Name="Source[2].tag" Type="Ref">/My Computer/Batch Templates/build_all.bat.template</Property>
+				<Property Name="Source[2].dest" Type="Str">{7C1D3CE0-42D9-4628-B1FF-255252E5DC26}</Property>
+				<Property Name="Source[2].name" Type="Str">build.bat</Property>
+				<Property Name="Source[2].tag" Type="Ref">/My Computer/Scripts/build.bat</Property>
 				<Property Name="Source[2].type" Type="Str">File</Property>
 				<Property Name="Source[3].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
-				<Property Name="Source[3].name" Type="Str">build_vip.bat.template</Property>
-				<Property Name="Source[3].tag" Type="Ref">/My Computer/Batch Templates/build_vip.bat.template</Property>
+				<Property Name="Source[3].name" Type="Str">7zip.bat.template</Property>
+				<Property Name="Source[3].tag" Type="Ref"></Property>
 				<Property Name="Source[3].type" Type="Str">File</Property>
 				<Property Name="Source[4].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
-				<Property Name="Source[4].name" Type="Str">Inno.iss.template</Property>
-				<Property Name="Source[4].tag" Type="Ref">/My Computer/Batch Templates/Inno.iss.template</Property>
+				<Property Name="Source[4].name" Type="Str">build.conf.template</Property>
+				<Property Name="Source[4].tag" Type="Ref"></Property>
 				<Property Name="Source[4].type" Type="Str">File</Property>
-				<Property Name="Source[5].dest" Type="Str">{7C1D3CE0-42D9-4628-B1FF-255252E5DC26}</Property>
-				<Property Name="Source[5].name" Type="Str">Setup-BuildMachine.bat</Property>
-				<Property Name="Source[5].tag" Type="Ref">/My Computer/Scripts/Setup-BuildMachine.bat</Property>
+				<Property Name="Source[5].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
+				<Property Name="Source[5].name" Type="Str">build_all.bat.template</Property>
+				<Property Name="Source[5].tag" Type="Ref"></Property>
 				<Property Name="Source[5].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">6</Property>
+				<Property Name="Source[6].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
+				<Property Name="Source[6].name" Type="Str">build_vip.bat.template</Property>
+				<Property Name="Source[6].tag" Type="Ref"></Property>
+				<Property Name="Source[6].type" Type="Str">File</Property>
+				<Property Name="Source[7].dest" Type="Str">{A434049F-05FA-4908-B104-A4A8D1D817FA}</Property>
+				<Property Name="Source[7].name" Type="Str">Inno.iss.template</Property>
+				<Property Name="Source[7].tag" Type="Ref"></Property>
+				<Property Name="Source[7].type" Type="Str">File</Property>
+				<Property Name="SourceCount" Type="Int">8</Property>
 			</Item>
 		</Item>
 	</Item>

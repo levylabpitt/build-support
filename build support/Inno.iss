@@ -70,7 +70,10 @@ WizardStyle=modern
 #include AddBackslash(BuildSupport) + "CodeDependencies.iss"
 
 [Files]
-; The NI installer, carried inside this bootstrapper and unpacked at runtime:
+; The NI installer, carried inside this bootstrapper and unpacked at runtime.
+; Compressed (lzma2/solid): re-compressing the NI media pays off - about 26% smaller
+; (~380 MB -> ~279 MB in testing) for ~70 s of build time. Add "nocompression" to the
+; flags below to trade that size back for a near-instant compile while iterating.
 Source: "{#NIInstallerDir}\*"; DestDir: "{tmp}\ni"; Flags: recursesubdirs createallsubdirs ignoreversion
 ; ---- EXTRA INSTALLERS (per project) — bundle payloads here ------------------
 ; Source: "{#RepoRoot}\thirdparty\SomeCppDriver.exe"; DestDir: "{tmp}\extra"; Flags: ignoreversion
@@ -88,7 +91,7 @@ Filename: "{tmp}\ni\setup.exe"; Parameters: "/q /AcceptLicenses yes /r:n /disabl
 function InitializeSetup(): Boolean;
 begin
   // Prerequisites via InnoDependencyInstaller: installs if missing, skips if present.
-  Dependency_AddVC2013;          // <-- the VC++ 2013 redist that was going missing
+  // Dependency_AddVC2013;          // <-- the VC++ 2013 redist that was going missing
   // Add more as needed, e.g.:
   //   Dependency_AddVC2015To2022;
   Result := True;

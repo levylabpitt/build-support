@@ -15,7 +15,10 @@
 	</Item>
 	<Item Name="Patrick Builder.vi" Type="VI" URL="../Patrick Builder.vi"/>
 	<Item Name="File List Window.vi" Type="VI" URL="../File List Window.vi"/>
+	<Item Name="File List Window 2.vi" Type="VI" URL="../File List Window 2.vi"/>
 	<Item Name="Extension to Mode.vi" Type="VI" URL="../Extension to Mode.vi"/>
 	<Item Name="Create build_all.bat.vi" Type="VI" URL="../Create build_all.bat.vi"/>
 	<Item Name="Publish Packages to Package Repository.vi" Type="VI" URL="../Publish Packages to Package Repository.vi"/>
+	<Item Name="Initialize Repository.vi" Type="VI" URL="../Initialize Repository.vi"/>
+	<Item Name="Edit Text File.vi" Type="VI" URL="../Edit Text File.vi"/>
 </Library>
