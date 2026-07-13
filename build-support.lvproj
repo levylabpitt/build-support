@@ -37,7 +37,7 @@
 		<Item Name="Templates" Type="Folder">
 			<Item Name="build_all.bat" Type="Document" URL="../lvsrc/Templates/build_all.bat"/>
 			<Item Name="Inno.iss" Type="Document" URL="../lvsrc/Templates/Inno.iss"/>
-			<Item Name="build.conf" Type="Document" URL="../lvsrc/Templates/build.conf"/>
+			<Item Name="build.cfg" Type="Document" URL="../lvsrc/Templates/build.cfg"/>
 		</Item>
 		<Item Name="VI Templates" Type="Folder">
 			<Item Name="buildspec-template.vipt" Type="Document" URL="../lvsrc/VI Templates/buildspec-template.vipt"/>
