@@ -64,6 +64,7 @@ Compression=lzma2
 SolidCompression=yes
 PrivilegesRequired=admin
 WizardStyle=modern
+RestartIfNeededByRun=no
 
 ; DomGries InnoDependencyInstaller (placed in %LOCALAPPDATA%\LevyLab\build-support\ISCC
 ; by Setup-BuildMachine.bat). Requires Inno Setup 6.4+.
