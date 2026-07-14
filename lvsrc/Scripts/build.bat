@@ -117,7 +117,7 @@ call :package_inno
 if errorlevel 1 goto error
 :after_installer
 
-REM --- 3) release: git workflow + GitHub release + version bump ---------------
+REM --- 3) release: git workflow + GitHub release (only when DO_RELEASE=true) --
 if /I not "%DO_RELEASE%"=="true" goto :after_release
 
 echo Committing on develop...
@@ -143,27 +143,33 @@ git push origin develop
 if errorlevel 1 ( echo ERROR: git push develop failed & goto error )
 git push origin %VERSION%
 if errorlevel 1 ( echo ERROR: git push tag failed & goto error )
-
 git checkout develop
-
-echo Bumping build number for next release...
-g-cli --lv-ver %LVVER% --arch %LVBIT% noVIPM_IncrementBuild -- "%VIPB_FILE%"
-if errorlevel 1 ( echo ERROR: build number increment failed & goto error )
-git add -A
-git commit -m "Bump build number" --allow-empty
-git push origin develop
 
 echo Creating GitHub release %VERSION%...
 set ASSETS=
 for %%F in (builds\latest\*.vip builds\latest\*_Setup.exe) do set ASSETS=!ASSETS! "%%F"
-if exist "builds\release_notes.txt" (
-    gh release create %VERSION% !ASSETS! -t "%TITLE%" -F builds\release_notes.txt
-    del builds\release_notes.txt
+REM Release body = the vipb's <Release_Notes> (same file as the version). It's multiline
+REM XML, so extract it with PowerShell (-Command, so no ExecutionPolicy / .ps1 needed).
+set "RELNOTES=%TEMP%\levylab_relnotes.txt"
+del "%RELNOTES%" >nul 2>&1
+powershell -NoProfile -Command "$n=([xml](Get-Content -Raw -LiteralPath '%VIPB_FILE%')).SelectSingleNode('//Release_Notes'); if ($n) { [System.IO.File]::WriteAllText('%RELNOTES%', $n.InnerText.Trim()) }" 2>nul
+set "HAVENOTES="
+if exist "%RELNOTES%" for %%A in ("%RELNOTES%") do if %%~zA gtr 0 set "HAVENOTES=1"
+if defined HAVENOTES (
+    gh release create %VERSION% !ASSETS! -t "%TITLE%" -F "%RELNOTES%"
 ) else (
     gh release create %VERSION% !ASSETS! -t "%TITLE%" --generate-notes
 )
 if errorlevel 1 ( echo ERROR: GitHub release failed & goto error )
+del "%RELNOTES%" >nul 2>&1
 :after_release
+
+REM --- 4) bump the build number on EVERY successful build (VIPM-style) --------
+REM Writes the next "build" number into the vipb. NOT committed or pushed - committing
+REM the bumped vipb is left to you (git is manual for the bump).
+echo Bumping build number...
+g-cli --lv-ver %LVVER% --arch %LVBIT% noVIPM_IncrementBuild -- "%VIPB_FILE%"
+if errorlevel 1 ( echo ERROR: build number increment failed & goto error )
 
 echo.
 echo ======================================

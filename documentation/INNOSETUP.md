@@ -22,7 +22,7 @@ Each repo keeps these in its `build support\` folder. The build script itself is
 | --- | --- |
 | `BUILD_VIP` | `true` to build the `.vip` package (`g-cli vipBuild`). |
 | `BUILD_INSTALLER` | `true` to build the app exe + NI installer, then wrap them with Inno Setup. |
-| `DO_RELEASE` | `true` to run the git commit/merge/tag/push + GitHub release + version bump. |
+| `DO_RELEASE` | `true` to run the git release (commit/merge/tag/push) + GitHub release. The build number is bumped in the vipb on every successful build regardless of this flag. |
 | `LVVER` / `LVBIT` (optional) | LabVIEW version and bitness. Default: derived from the `.vipb`'s `Package_LabVIEW_Version`. Override only if needed. |
 | `APP_SPEC` / `INST_SPEC` | The Application and Installer build-spec names in the `.lvproj`. Only used when `BUILD_INSTALLER=true`. Convention: `<Product> Application` / `<Product> Installer`. |
 | `VIPB` (optional) | The `.vipb` filename. Default: the single `*.vipb` in `build support\`. |
@@ -93,13 +93,14 @@ It needs `curl.exe` (built into Windows 10 1803+ and Windows 11). Pass `/q` to s
 3. Archive the previous release from `builds\latest` to `builds\old releases`.
 4. If `BUILD_VIP`: `g-cli vipBuild`.
 5. If `BUILD_INSTALLER`: `ClearCache`, `lvBuild <APP_SPEC>`, `lvBuild <INST_SPEC>`, then compile `Inno.iss` with ISCC.
-6. If `DO_RELEASE`: commit on develop, merge to main, tag, push, bump the build number (`noVIPM_IncrementBuild`), and create the GitHub release.
+6. If `DO_RELEASE`: commit on develop, merge to main, tag, push, and create the GitHub release - with the release body pulled from the vipb's `<Release_Notes>`.
+7. Always (on a successful build): bump the build number in the vipb via `noVIPM_IncrementBuild`. This is **not** committed - committing the bumped vipb is left to you, matching VIPM's behavior.
 
 ISCC is located automatically at build time (any installed `Inno Setup N`, 32- or 64-bit, or on PATH; an `ISCC_PATH` env var overrides).
 
 ## Troubleshooting
 
-- **"Setup must restart your computer" at the end of an install.** Normal for a first-time install. The NI installer needs a reboot after the Run-Time Engine and NI components; it reports this instead of rebooting itself, and Inno shows it as one prompt on the finish page. You will not see it on a machine that already has the runtime.
+- **Restart prompt after install.** The chained NI installer can report "reboot required" (exit 3010) - often just because a file was in use during an update. `Inno.iss` sets `RestartIfNeededByRun=no` so this is *not* surfaced as a prompt (matching the old 7-Zip installer, which silently ignored the same code); any deferred file replacement completes on the next normal reboot. Set it to `yes` if you want the prompt back. Closing the app before updating also avoids the in-use-file case.
 - **Uninstalling the app.** Use the app's Add/Remove Programs entry, registered by the NI installer. The Inno bootstrapper intentionally does not create its own uninstall entry, because it installs nothing itself.
 - **"ISCC.exe not found" during a build.** Inno Setup is not installed. Run `Setup-BuildMachine.bat`.
 - **"project in use" / a stale LabVIEW build.** `build.bat` force-closes LabVIEW at the start of each run; if you build on a dev box, save any open LabVIEW work first, since it will be closed.
