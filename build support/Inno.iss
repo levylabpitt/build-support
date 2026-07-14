@@ -88,11 +88,11 @@ Filename: "{tmp}\ni\setup.exe"; Parameters: "/q /AcceptLicenses yes /r:n /disabl
 ; ----------------------------------------------------------------------------
 
 [Code]
-function InitializeSetup(): Boolean;
-begin
+//function InitializeSetup(): Boolean;
+//begin
   // Prerequisites via InnoDependencyInstaller: installs if missing, skips if present.
   // Dependency_AddVC2013;          // <-- the VC++ 2013 redist that was going missing
   // Add more as needed, e.g.:
-  //   Dependency_AddVC2015To2022;
-  Result := True;
-end;
+  // Dependency_AddVC2015To2022;
+  //Result := True;
+//end;

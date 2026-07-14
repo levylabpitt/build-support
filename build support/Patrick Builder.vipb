@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-11 10:20:17" Creator="Patrick Irvin" Comments="" ID="540dd4877bbcd854742c11702945042d">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-14 11:18:49" Creator="Patrick Irvin" Comments="" ID="02a3fe06a62b97970eba16b4f41853bd">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_patrick_builder</Package_File_Name>
-    <Library_Version>1.3.1.46</Library_Version>
+    <Library_Version>1.4.0.46</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -34,7 +34,11 @@ This vipb file is intended not to be built directly but is used for configuring 
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes/>
+      <Release_Notes>- Windows installers are now built with Inno Setup (replacing the 7-Zip self-extractor) and automatically chain-install prerequisites like the VC++ runtime - fixing apps that wouldn't launch when a redistributable was missing.
+- New per-project build.cfg selects what a build produces: VIP package, application + installer, or both.
+- Reworked build pipeline: a single shared build.bat builds any repo directly, retiring the old build_vip.bat + generated 7zip.bat + post-build-VI chain.
+- Build version and LabVIEW target are now read from the .vipb; the build number still auto-increments each release.
+- One-step build-machine setup via Setup-BuildMachine.bat (installs Inno Setup and dependencies).</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>

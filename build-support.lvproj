@@ -14,14 +14,18 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="build support" Type="Folder">
-			<Item Name="build helper.ico" Type="Document" URL="../build support/build helper.ico"/>
+			<Item Name="Patrick Builder" Type="Folder">
+				<Item Name="build helper.ico" Type="Document" URL="../build support/build helper.ico"/>
+				<Item Name="Patrick Builder.vipb" Type="Document" URL="../build support/Patrick Builder.vipb"/>
+				<Item Name="Build Patrick Builder.vi" Type="VI" URL="../build support/Build Patrick Builder.vi"/>
+				<Item Name="build.cfg" Type="Document" URL="../build support/build.cfg"/>
+				<Item Name="Inno.iss" Type="Document" URL="../build support/Inno.iss"/>
+			</Item>
 			<Item Name="Build Support.vipb" Type="Document" URL="../build support/Build Support.vipb"/>
 			<Item Name="Build Support.vipc" Type="Document" URL="../build support/Build Support.vipc"/>
-			<Item Name="Patrick Builder.vipb" Type="Document" URL="../build support/Patrick Builder.vipb"/>
 			<Item Name="Pre-Build Custom Action.vi" Type="VI" URL="../build support/Pre-Build Custom Action.vi"/>
 			<Item Name="Post-Build Custom Action.vi" Type="VI" URL="../build support/Post-Build Custom Action.vi"/>
 			<Item Name="Post-Install Custom Action.vi" Type="VI" URL="../build support/Post-Install Custom Action.vi"/>
-			<Item Name="Build Patrick Builder.vi" Type="VI" URL="../build support/Build Patrick Builder.vi"/>
 		</Item>
 		<Item Name="PreBuildSupport" Type="Folder">
 			<Item Name="subVIs" Type="Folder">
@@ -1501,8 +1505,7 @@
 				<Property Name="Bld_previewCacheID" Type="Str">{C3786147-54D9-4EFB-9A94-FC7AC7C65BCA}</Property>
 				<Property Name="Bld_version.build" Type="Int">46</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
-				<Property Name="Bld_version.minor" Type="Int">3</Property>
-				<Property Name="Bld_version.patch" Type="Int">1</Property>
+				<Property Name="Bld_version.minor" Type="Int">4</Property>
 				<Property Name="Destination[0].destName" Type="Str">Patrick Builder.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/Application/Patrick Builder Application.exe</Property>
 				<Property Name="Destination[0].path.type" Type="Str">relativeToProject</Property>
@@ -1512,8 +1515,8 @@
 				<Property Name="Destination[1].path" Type="Path">../builds/Application/data</Property>
 				<Property Name="Destination[1].path.type" Type="Str">relativeToProject</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
-				<Property Name="Exe_iconItemID" Type="Ref">/My Computer/build support/build helper.ico</Property>
-				<Property Name="Source[0].itemID" Type="Str">{F8376D83-D1A8-45B9-BDC6-7CA3F5EAFF74}</Property>
+				<Property Name="Exe_iconItemID" Type="Ref">/My Computer/build support/Patrick Builder/build helper.ico</Property>
+				<Property Name="Source[0].itemID" Type="Str">{9586F902-AD6B-49A8-A6C8-3843C5C91AC9}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/Build.lvlib/Patrick Builder.vi</Property>
@@ -1589,7 +1592,7 @@
 				<Property Name="INST_defaultDir" Type="Str">{254A36E4-4AEB-4E93-8646-E5F812D87291}</Property>
 				<Property Name="INST_installerName" Type="Str">setup.exe</Property>
 				<Property Name="INST_productName" Type="Str">Patrick Builder</Property>
-				<Property Name="INST_productVersion" Type="Str">1.3.1</Property>
+				<Property Name="INST_productVersion" Type="Str">1.4.0</Property>
 				<Property Name="InstSpecBitness" Type="Str">64-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">19018009</Property>
 				<Property Name="MSI_arpCompany" Type="Str">University of Pittsburgh</Property>
