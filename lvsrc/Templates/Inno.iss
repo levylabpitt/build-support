@@ -58,6 +58,11 @@ DefaultDirName={autopf}\{#AppName}
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 Uninstallable=no
+; The chained NI installer can report "reboot required" (exit 3010) - e.g. when a file
+; was in use during an update. Do NOT surface that as a restart prompt: the old 7-Zip
+; installer never did, and any deferred file replacement still completes on the next
+; normal reboot. Set to "yes" to restore the prompt.
+RestartIfNeededByRun=no
 OutputDir={#OutputDir}
 OutputBaseFilename={#AppName}_{#AppVersion}_Setup
 Compression=lzma2
