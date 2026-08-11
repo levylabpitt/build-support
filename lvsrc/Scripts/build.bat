@@ -164,12 +164,16 @@ if errorlevel 1 ( echo ERROR: GitHub release failed & goto error )
 del "%RELNOTES%" >nul 2>&1
 :after_release
 
-REM --- 4) bump the build number on EVERY successful build (VIPM-style) --------
-REM Writes the next "build" number into the vipb. NOT committed or pushed - committing
-REM the bumped vipb is left to you (git is manual for the bump).
+REM --- 4) bump the build number ourselves ONLY when we did NOT build the VIP ---
+REM vipBuild (VIPM) already increments the vipb when BUILD_VIP=true, so bumping again
+REM here would double-count. When BUILD_VIP=false (installer-only or test build) nothing
+REM else advances it, so we do - VIPM-style, on success. Written to the vipb but NOT
+REM committed/pushed; committing the bumped vipb is left to you.
+if /I "%BUILD_VIP%"=="true" goto :after_bump
 echo Bumping build number...
 g-cli --lv-ver %LVVER% --arch %LVBIT% noVIPM_IncrementBuild -- "%VIPB_FILE%"
 if errorlevel 1 ( echo ERROR: build number increment failed & goto error )
+:after_bump
 
 echo.
 echo ======================================
