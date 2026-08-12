@@ -43,7 +43,7 @@ The two flags give you the three build modes:
 1. Make sure the build machine is set up once (see [Build-machine setup](#build-machine-setup)).
 2. Set the repo's `build support\build.cfg` for what you want (at minimum `BUILD_VIP` / `BUILD_INSTALLER` and `LVVER` / `LVBIT`).
 3. If building an installer, make sure `build support\Inno.iss` exists and its prerequisites are set (see [The installer](#the-installer)).
-4. Build the repo by running the shared script against it: `"%LOCALAPPDATA%\LevyLab\build-support\scripts\build.bat" "<repo root>"` - or `cd` into the repo and run it with no argument. To build a batch of repos, use `build_all.bat`.
+4. Build the repo by running the shared script against it: `"%LOCALAPPDATA%\LevyLab\build-support\scripts\build.bat" "<repo root>"` - or `cd` into the repo and run it with no argument. To build a batch of repos, use `build_all.bat`. An optional second argument - `release` or `test` - overrides `build.cfg`'s `DO_RELEASE` for that run (the GUI's "Build and release" / "Test build" buttons pass it).
 
 The installer, if built, lands at `builds\latest\<App>_<version>_Setup.exe`, alongside the `.vip`, ready for the GitHub release.
 

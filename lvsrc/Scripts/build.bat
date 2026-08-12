@@ -7,6 +7,9 @@ REM  ONE shared, static script for every repo - lives in
 REM  %LOCALAPPDATA%\LevyLab\build-support\scripts\, NOT copied per repo. Pass the
 REM  target repo root as the first argument (or run from inside the repo):
 REM      build.bat "C:\path\to\repo"
+REM  An optional 2nd arg overrides build.cfg's DO_RELEASE, for the GUI buttons:
+REM      build.bat "C:\path\to\repo" release   (Build and release)
+REM      build.bat "C:\path\to\repo" test      (Test build - no git)
 REM  It reads that repo's per-project config from "build support\build.cfg" and
 REM  the version / LabVIEW target from the .vipb, so nothing is generated per repo.
 REM
@@ -40,6 +43,12 @@ set "VIPB="
 set "LVPROJ="
 set "APP_NAME="
 for /f "usebackq eol=# tokens=1,* delims==" %%A in ("%CONF%") do set "%%A=%%B"
+
+REM --- optional 2nd arg overrides build.cfg's DO_RELEASE ----------------------
+REM Lets the GUI choose per click: "release" = Build and release, "test" = Test build.
+REM No 2nd arg -> use the build.cfg value.
+if /I "%~2"=="release" set "DO_RELEASE=true"
+if /I "%~2"=="test" set "DO_RELEASE=false"
 
 REM --- resolve the VIPB and LVPROJ files (conf value, else the single match) --
 if not defined VIPB for %%F in ("%SUPPORT%*.vipb") do set "VIPB=%%~nxF"
