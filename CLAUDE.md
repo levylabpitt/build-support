@@ -5,7 +5,7 @@ LabVIEW build tooling for the lab's projects. **This repo ships two independent 
 | Product | Version line | Built from | Ships |
 | --- | --- | --- | --- |
 | **Build Support** | `1.11.x` | `build support\build-support.cfg` | the `.vip` package: `build.bat`, the templates, the g-cli tools, the toolkit VIs |
-| **Patrick Builder** | `1.4.x` | `build support\build.cfg` (the default) | the GUI app + Inno Setup installer |
+| **Patrick Builder** | `1.5.x` | `build support\build.cfg` (the default) | the GUI app + Inno Setup installer |
 
 They release separately, on separate version lines, with separate tags. Do not assume "the version" or "the release" without saying which product.
 
@@ -38,11 +38,15 @@ build.bat "<repo>" test build-support      build, no git
 ## Where things come from
 
 - **Version, product name and LabVIEW target** are read from the `.vipb`, not from the config. `Library_Version` is `major.minor.patch.build`.
+- **Release assets** are collected from `builds\latest` only. The `.vipb` writes the `.vip` to its own `Library_Output_Folder` (usually `builds\Package`), so `build.bat` stages it across after a successful VIP build. Inno writes the `Setup.exe` there directly.
 - **The GitHub release body** is the `.vipb`'s `<Release_Notes>`, extracted by inline PowerShell. Rewrite it before each release - it does not clear itself, and stale notes have shipped twice before.
 - **The git tag** is `TAG_PREFIX` + `Library_Version`. Empty prefix gives a bare tag, which is what single-product repos use.
-- **Release flow** (when `DO_RELEASE=true`): commit on develop, merge to main, tag, push all three, create the GitHub release. Branching is git-flow; `main` only ever receives merges from `develop`.
+- **Release flow**: build, bump the build number, then (when `DO_RELEASE=true`) commit on develop, merge to main, tag, push all three, check out develop, create the GitHub release. Branching is git-flow; `main` only ever receives merges from `develop`.
+- **The bump happens before the commit**, so the release commit carries it and nothing is left dirty. When `BUILD_VIP=true` the bump is VIPM's, done inside `vipBuild`; otherwise `build.bat` calls `noVIPM_IncrementBuild`. Either way the tag and the built artifact keep the version as built, and the committed `.vipb` is one build number ahead.
 
 Avoid a `/` in `TAG_PREFIX` for any product shipping the SelfUpdate class. SelfUpdate rebuilds the tag from the last path component of the `releases/latest` redirect and re-requests `releases/tag/<that>`, so a slash makes the round-trip 404.
+
+Both products here use a slashed prefix (`patrick-builder/`, `build-support/`). That is safe because neither consumes SelfUpdate - `Patrick Builder.vi` has no reference to it, and nothing outside `lvsrc/SelfUpdate/` does either. SelfUpdate is shipped *for other products* to use.
 
 ## Build machine requirements
 
@@ -61,7 +65,9 @@ A dev box will not build this. Check before trying:
 - **Changing `build.bat` requires releasing the *package*, not the app.** `build.bat` ships via Build Support's `Scripts` destination; Patrick Builder's vipb sends everything to `user.lib` only.
 - **The GUI has no config picker.** It passes only the repo path, so it can only build `build.cfg`. Same for `build_all.bat`.
 - **Merges from `main` need care.** `main` has previously carried unresolved conflict markers in `lvsrc/VIPM/VIPM.lvlib` and `<userlib>` cross-links in the `.lvproj` from a botched merge. Diff against the merge base before accepting main's side of any file; a clean `git merge` is not evidence the result is correct.
-- **Build-number bumping is unsettled.** `build.bat` skips its own `noVIPM_IncrementBuild` when `BUILD_VIP=true`, assuming VIPM's `vipBuild` increments instead - but `Auto_Increment_Version` is `false` in both vipbs, and nothing in this repo reads that flag. If VIPM honours it, the package build number never advances. Untested since the change landed.
+- **`build.bat` cannot be run from inside the repo it is releasing** without relocating first. The release step checks out other branches, which rewrites the running script; `cmd.exe` reads a batch file by byte offset, so execution resumes mid-line and runs unrelated fragments. Since 1.11.3 the script detects this and re-runs from `%TEMP%`. Prefer the installed copy anyway - it lives outside every repo.
+- **Publishing to the package repository is Patrick Builder's job, not `build.bat`'s.** `Publish Packages to Package Repository.vi` (in `Build.lvlib`, via the VIPM API) writes the `.vip`, `.spec` and `.bmp` into the `levylabpitt.github.io` clone and commits them - every publish commit there reads `Patrick Builder publish packages: <package>-<version>`. `build.bat` has no publish step in any version. A release driven from the command line therefore reaches GitHub but never the VIPM repository.
+- **`releases/latest` is per repo, not per product.** It resolves to whichever product released most recently, so it alternates between Build Support and Patrick Builder. Anything self-updating from this repo sees the wrong artifact half the time.
 
 ## Conventions
 
