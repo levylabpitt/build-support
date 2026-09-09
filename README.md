@@ -34,6 +34,8 @@ Output to `/builds/Installer`. Disable automatic version increment.
 
 See **[documentation/INNOSETUP.md](documentation/INNOSETUP.md)**: set the repo's `build support\build.cfg`, then run `build support\build.bat` - or `build_all.bat` to build a batch of repos in sequence.
 
+[video tutorial](https://drive.google.com/file/d/1pUUSYqd4CoO-P4TOuBV00XkBF96jJvWT/view?usp=sharing) (12 minutes)
+
 ## Project setup
 
 Experimental. Contact Patrick for assistance.
