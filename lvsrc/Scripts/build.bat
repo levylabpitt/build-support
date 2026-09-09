@@ -30,6 +30,27 @@ set "REPO=%CD%"
 set "SUPPORT=%REPO%\build support\"
 set "BUILD_SUPPORT=%LOCALAPPDATA%\LevyLab\build-support\ISCC"
 
+REM --- never run this script from inside the repo it is releasing -------------
+REM The release step checks out other branches, which rewrites this file while
+REM cmd.exe is still reading it by byte offset. Execution then resumes mid-line
+REM and runs arbitrary fragments of the script. Normally this copy lives in
+REM %LOCALAPPDATA% and git never touches it; the build-support repo is the one
+REM case where it does, so re-run from a copy in TEMP and exit.
+if defined BUILD_BAT_RELOCATED goto :no_relocate
+set "SELFDIR=%~dp0"
+if /I "!SELFDIR:%REPO%=!"=="!SELFDIR!" goto :no_relocate
+set "SELFCOPY=%TEMP%\build_relocated_%RANDOM%.bat"
+copy /Y "%~f0" "!SELFCOPY!" >nul
+if errorlevel 1 ( echo ERROR: could not copy this script to "%TEMP%" & exit /b 1 )
+echo NOTE: this script lives inside the repo being built - a branch checkout
+echo       would rewrite it mid-run. Re-running from "!SELFCOPY!"
+set "BUILD_BAT_RELOCATED=1"
+call "!SELFCOPY!" %*
+set "RC=!ERRORLEVEL!"
+del "!SELFCOPY!" >nul 2>&1
+exit /b !RC!
+:no_relocate
+
 REM --- args 2 and 3, in either order: release/test and/or a config name -------
 set "CFG="
 set "ARGRELEASE="
@@ -111,12 +132,15 @@ echo   VIP=%BUILD_VIP%  INSTALLER=%BUILD_INSTALLER%  RELEASE=%DO_RELEASE%
 echo ======================================
 
 REM --- archive previous release ----------------------------------------------
+REM "if exist <dir>\*.*" is TRUE even when the directory is empty - the
+REM wildcard matches the . and .. entries - so this used to run move with nothing
+REM to move, failing with "The filename, directory name, or volume label syntax
+REM is incorrect" on every build. A for wildcard matches real files only.
 if not exist "builds\old releases" mkdir "builds\old releases"
-if exist "builds\latest\*.*" (
-    move /Y "builds\latest\*.*" "builds\old releases\" >nul
-) else (
-    if not exist "builds\latest" mkdir "builds\latest"
-)
+if not exist "builds\latest" mkdir "builds\latest"
+set "HAVEOLD="
+for %%F in ("builds\latest\*.*") do set "HAVEOLD=1"
+if defined HAVEOLD move /Y "builds\latest\*.*" "builds\old releases" >nul
 
 REM --- close any lingering LabVIEW so g-cli starts clean ----------------------
 REM Needed when build_all.bat runs repos that use different LabVIEW versions:
@@ -132,6 +156,26 @@ if /I not "%BUILD_VIP%"=="true" goto :after_vip
 echo Building VIP...
 g-cli --lv-ver %LVVER% --arch %LVBIT% vipBuild -- "%VIPB_FILE%"
 if errorlevel 1 ( echo ERROR: VIP build failed & goto error )
+
+REM The vipb writes the .vip to its Library_Output_Folder (relative to the vipb),
+REM but the release step collects assets from builds\latest. Copy it across, or a
+REM package-only product gets a GitHub release with no .vip attached.
+for /f "usebackq tokens=*" %%L in (`findstr /C:"<Library_Output_Folder>" "%VIPB_FILE%"`) do set "LINE=%%L"
+set "LINE=!LINE:<Library_Output_Folder>=!"
+set "VIPOUT=!LINE:</Library_Output_Folder>=!"
+for %%D in ("%SUPPORT%!VIPOUT!") do set "VIPOUT=%%~fD"
+set "VIPCOPIED="
+for /f "delims=" %%F in ('dir /b /a-d /o-d "!VIPOUT!\*.vip" 2^>nul') do (
+    if not defined VIPCOPIED (
+        copy /Y "!VIPOUT!\%%F" "builds\latest\" >nul
+        set "VIPCOPIED=%%F"
+    )
+)
+if defined VIPCOPIED (
+    echo Staged !VIPCOPIED! for release.
+) else (
+    echo WARNING: no .vip found in "!VIPOUT!" - the release will have no package asset.
+)
 :after_vip
 
 REM --- 2) Application + installer + Inno --------------------------------------

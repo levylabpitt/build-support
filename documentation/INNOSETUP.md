@@ -121,13 +121,14 @@ It needs `curl.exe` (built into Windows 10 1803+ and Windows 11). Pass `/q` to s
 
 `build.bat` (the shared script, given a repo) does, in order:
 
-1. `cd` to the repo root, parse arguments 2 and 3, load the config, and read `VERSION`, product name, and the LabVIEW target (`LVVER`/`LVBIT`) from the `.vipb`. The tag for this run is `TAG_PREFIX` + `VERSION`.
-2. Close any running LabVIEW (`taskkill`) so g-cli starts clean - important when `build_all.bat` runs repos that use different LabVIEW versions.
-3. Archive the previous release from `builds\latest` to `builds\old releases`.
-4. If `BUILD_VIP`: `g-cli vipBuild`.
-5. If `BUILD_INSTALLER`: `ClearCache`, `lvBuild <APP_SPEC>`, `lvBuild <INST_SPEC>`, then compile `Inno.iss` with ISCC.
-6. Bump the build number in the vipb for next time - but **only when `BUILD_VIP=false`**. When the package is built, VIPM's `vipBuild` has already incremented it during step 4, so the script skips its own bump to avoid double-counting. Either way the bump happens *before* the release, so both products behave the same.
-7. If `DO_RELEASE`: commit on develop (the bumped vipb goes in with it), merge to main, tag (with the prefixed tag), push, check out develop, and create the GitHub release - with the release body pulled from the vipb's `<Release_Notes>`. The tag and the built artifact carry the version as built, not the bumped one.
+1. `cd` to the repo root, then check whether this copy of `build.bat` lives *inside* that repo. If it does, copy itself to `%TEMP%`, re-run from there with the same arguments, and exit with the child's code. Step 8 checks out other branches, which would rewrite the running script - `cmd.exe` reads a batch file by byte offset, so it would resume mid-line and execute unrelated fragments. Only the build-support repo trips this; the installed copy under `%LOCALAPPDATA%` is never touched by git.
+2. Parse arguments 2 and 3, load the config, and read `VERSION`, product name, and the LabVIEW target (`LVVER`/`LVBIT`) from the `.vipb`. The tag for this run is `TAG_PREFIX` + `VERSION`.
+3. Close any running LabVIEW (`taskkill`) so g-cli starts clean - important when `build_all.bat` runs repos that use different LabVIEW versions.
+4. Archive the previous release from `builds\latest` to `builds\old releases`.
+5. If `BUILD_VIP`: `g-cli vipBuild`, then stage the built `.vip` into `builds\latest`. The vipb writes it to its own `Library_Output_Folder` (usually `builds\Package`), but step 8 collects release assets from `builds\latest` only - without this a package-only product releases with no assets.
+6. If `BUILD_INSTALLER`: `ClearCache`, `lvBuild <APP_SPEC>`, `lvBuild <INST_SPEC>`, then compile `Inno.iss` with ISCC.
+7. Bump the build number in the vipb for next time - but **only when `BUILD_VIP=false`**. When the package is built, VIPM's `vipBuild` has already incremented it during step 5, so the script skips its own bump to avoid double-counting. Either way the bump happens *before* the release, so both products behave the same.
+8. If `DO_RELEASE`: commit on develop (the bumped vipb goes in with it), merge to main, tag (with the prefixed tag), push, check out develop, and create the GitHub release - with the release body pulled from the vipb's `<Release_Notes>`. The tag and the built artifact carry the version as built, not the bumped one.
 
 ISCC is located automatically at build time (any installed `Inno Setup N`, 32- or 64-bit, or on PATH; an `ISCC_PATH` env var overrides).
 
