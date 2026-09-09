@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-07-14 12:23:01" Creator="Patrick Irvin" Comments="" ID="ae45749d0430e26eef966f0bdea512f2">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-09-09 15:34:38" Creator="Patrick Irvin" Comments="" ID="a714426089ad9c2e6f43d77378902cfc">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_patrick_builder</Package_File_Name>
-    <Library_Version>1.4.1.49</Library_Version>
+    <Library_Version>1.5.0.50</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -34,11 +34,25 @@ This vipb file is intended not to be built directly but is used for configuring 
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>- build.bat now takes an optional second argument that overrides build.cfg's DO_RELEASE for that one run: "release" forces the git release (commit/merge/tag/push + GitHub release), "test" builds without touching git. With no second argument the build.cfg value is used, exactly as before.
-- Fixed a double build-number bump. When BUILD_VIP=true, VIPM's vipBuild already increments the version in the vipb, so build.bat no longer bumps it a second time - it now bumps only when BUILD_VIP=false. This supersedes the "build number always increments on every successful build" behavior described in 1.4.1.48.
+      <Release_Notes>1. Fixed: the 1.11.2 package shipped VIPM.lvlib with six unresolved merge-conflict markers, leaving the library unloadable. It is clean again, and the duplicate VI entries behind the bad merge are gone.
 
-- The build-number bump now runs before the git release rather than after it. Patrick Builder builds with BUILD_VIP=false, so its bump used to land after the commit and had to be committed by hand afterwards - the reason for the stray "Bump build number" commits in this repo's history. The release commit now carries it. The tag and the built installer keep the version as built.
-- Build documentation (INNOSETUP.md) and the build.cfg template updated to describe both changes.</Release_Notes>
+2. build.bat can now build a repo that ships more than one product. Give each product its own &lt;name&gt;.cfg in "build support\" and name it on the command line: build.bat "&lt;repo root&gt;" release build-support. ".cfg" is appended if you leave it off, build.cfg stays the default when no name is given, and naming a config that does not exist lists the ones that do.
+
+3. New TAG_PREFIX config key, prepended to the git tag and the GitHub release name, so two products released from one repo no longer collide in a single tag space. Empty by default, which keeps the bare version tag every single-product repo already uses. Avoid a '/' in the prefix for a product that ships the SelfUpdate class: SelfUpdate rebuilds the tag from the last path component of the releases/latest redirect and re-requests releases/tag/&lt;that&gt;, so a slash makes the round-trip 404.
+
+4. build.bat takes an optional release/test argument that overrides the config's DO_RELEASE for a single run - "release" runs the git release, "test" builds without touching git. It and the config name are arguments 2 and 3 and may be given in either order.
+
+5. The release tag is now pushed as refs/tags/&lt;tag&gt;, so a prefixed tag containing a slash cannot be read as a branch name.
+
+6. Fixed a double build-number bump, and moved the bump ahead of the release. The script's own bump now runs only when BUILD_VIP=false; when the package itself is built the bump is left to VIPM's vipBuild rather than being applied twice. Both bumps now happen before the git release, so the release commit carries the bumped vipb instead of leaving it dirty for a manual follow-up commit. The tag and the built artifact keep the version as built.
+
+7. Build documentation updated throughout: the config-key table covers TAG_PREFIX, the build steps describe the new arguments, and there is a new section on repos that ship more than one product.
+
+8. Fixed: the GitHub release now carries the .vip. The vipb writes the package to its Library_Output_Folder (builds\Package), but the release step only collected assets from builds\latest, so no release ever had a .vip attached - and a package-only product, which builds no installer, would have been released with no assets at all. The built package is now staged into builds\latest and the script says which file it staged, or warns if it found none.
+
+9. Fixed: build.bat can now release the repo it lives in. The release step checks out other branches, which rewrote the running script; cmd.exe reads a batch file by byte offset, so execution resumed mid-line and ran unrelated fragments - in one case compiling an Inno installer for a package-only product. When the script detects it is inside the repo being built it now re-runs from a copy in TEMP. Only the build-support repo hits this; the installed copy in %LOCALAPPDATA% was never affected.
+
+10. Fixed: every build printed "The filename, directory name, or volume label syntax is incorrect" while archiving the previous release. The guard was "if exist builds\latest\*.*", which is true even for an empty directory because the wildcard matches the . and .. entries, so move ran with nothing to move and failed. The guard is now a for wildcard, which matches real files only. Archiving itself always worked when there was something to archive; the message was noise.</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
