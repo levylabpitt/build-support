@@ -37,10 +37,20 @@
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>[1.11.2]
-1. Release notes from the vipb - gh release now pulls its body from &lt;Release_Notes&gt; If the vipb has no notes, it falls back to --generate-notes. The old release_notes.txt path is gone.
+      <Release_Notes>[1.11.3]
+1. Fixed: the 1.11.2 package shipped VIPM.lvlib with six unresolved merge-conflict markers, leaving the library unloadable. It is clean again, and the duplicate VI entries behind the bad merge are gone.
 
-2. Build number always increments on every successful build (after the build/release steps). It writes the bumped version into the vipb but does not commit or push it. DO_RELEASE now gates only the git release (commit/merge/tag/push) + the GitHub release.</Release_Notes>
+2. build.bat can now build a repo that ships more than one product. Give each product its own &lt;name&gt;.cfg in "build support\" and name it on the command line: build.bat "&lt;repo root&gt;" release build-support. ".cfg" is appended if you leave it off, build.cfg stays the default when no name is given, and naming a config that does not exist lists the ones that do.
+
+3. New TAG_PREFIX config key, prepended to the git tag and the GitHub release name, so two products released from one repo no longer collide in a single tag space. Empty by default, which keeps the bare version tag every single-product repo already uses. Avoid a '/' in the prefix for a product that ships the SelfUpdate class: SelfUpdate rebuilds the tag from the last path component of the releases/latest redirect and re-requests releases/tag/&lt;that&gt;, so a slash makes the round-trip 404.
+
+4. build.bat takes an optional release/test argument that overrides the config's DO_RELEASE for a single run - "release" runs the git release, "test" builds without touching git. It and the config name are arguments 2 and 3 and may be given in either order.
+
+5. The release tag is now pushed as refs/tags/&lt;tag&gt;, so a prefixed tag containing a slash cannot be read as a branch name.
+
+6. The script's own build-number bump now runs only when BUILD_VIP=false; when the package itself is built, the bump is left to VIPM's vipBuild rather than being applied twice. Either way the bumped vipb is written but not committed - committing it is still yours, matching VIPM.
+
+7. Build documentation updated throughout: the config-key table covers TAG_PREFIX, the build steps describe the new arguments, and there is a new section on repos that ship more than one product.</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
