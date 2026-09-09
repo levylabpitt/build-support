@@ -150,7 +150,20 @@ call :package_inno
 if errorlevel 1 goto error
 :after_installer
 
-REM --- 3) release: git workflow + GitHub release (only when DO_RELEASE=true) --
+REM --- 3) bump the build number ourselves ONLY when we did NOT build the VIP -
+REM vipBuild (VIPM) already increments the vipb when BUILD_VIP=true, so bumping again
+REM here would double-count. When BUILD_VIP=false (installer-only) nothing else
+REM advances it, so we do - VIPM-style, on success.
+REM Both paths bump BEFORE the release step, so the bumped vipb is picked up by the
+REM release commit's 'git add -A' instead of being left dirty for a manual follow-up.
+REM The tag and the built artifact keep %VERSION%, captured from the vipb before this.
+if /I "%BUILD_VIP%"=="true" goto :after_bump
+echo Bumping build number...
+g-cli --lv-ver %LVVER% --arch %LVBIT% noVIPM_IncrementBuild -- "%VIPB_FILE%"
+if errorlevel 1 ( echo ERROR: build number increment failed & goto error )
+:after_bump
+
+REM --- 4) release: git workflow + GitHub release (only when DO_RELEASE=true) --
 if /I not "%DO_RELEASE%"=="true" goto :after_release
 
 echo Committing on develop...
@@ -198,17 +211,6 @@ if defined HAVENOTES (
 if errorlevel 1 ( echo ERROR: GitHub release failed & goto error )
 del "%RELNOTES%" >nul 2>&1
 :after_release
-
-REM --- 4) bump the build number ourselves ONLY when we did NOT build the VIP ---
-REM vipBuild (VIPM) already increments the vipb when BUILD_VIP=true, so bumping again
-REM here would double-count. When BUILD_VIP=false (installer-only or test build) nothing
-REM else advances it, so we do - VIPM-style, on success. Written to the vipb but NOT
-REM committed/pushed; committing the bumped vipb is left to you.
-if /I "%BUILD_VIP%"=="true" goto :after_bump
-echo Bumping build number...
-g-cli --lv-ver %LVVER% --arch %LVBIT% noVIPM_IncrementBuild -- "%VIPB_FILE%"
-if errorlevel 1 ( echo ERROR: build number increment failed & goto error )
-:after_bump
 
 echo.
 echo ======================================

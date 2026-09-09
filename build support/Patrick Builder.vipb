@@ -35,7 +35,9 @@ This vipb file is intended not to be built directly but is used for configuring 
       <Packager/>
       <URL/>
       <Release_Notes>- build.bat now takes an optional second argument that overrides build.cfg's DO_RELEASE for that one run: "release" forces the git release (commit/merge/tag/push + GitHub release), "test" builds without touching git. With no second argument the build.cfg value is used, exactly as before.
-- Fixed a double build-number bump. When BUILD_VIP=true, VIPM's vipBuild already increments the version in the vipb, so build.bat no longer bumps it a second time - it now bumps only when BUILD_VIP=false. This supersedes the "build number always increments on every successful build" behavior described in 1.4.1.48. Either way the bumped vipb is still not committed or pushed; committing it is left to you, matching VIPM.
+- Fixed a double build-number bump. When BUILD_VIP=true, VIPM's vipBuild already increments the version in the vipb, so build.bat no longer bumps it a second time - it now bumps only when BUILD_VIP=false. This supersedes the "build number always increments on every successful build" behavior described in 1.4.1.48.
+
+- The build-number bump now runs before the git release rather than after it. Patrick Builder builds with BUILD_VIP=false, so its bump used to land after the commit and had to be committed by hand afterwards - the reason for the stray "Bump build number" commits in this repo's history. The release commit now carries it. The tag and the built installer keep the version as built.
 - Build documentation (INNOSETUP.md) and the build.cfg template updated to describe both changes.</Release_Notes>
     </Description>
     <Destinations>

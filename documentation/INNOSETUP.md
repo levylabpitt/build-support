@@ -22,7 +22,7 @@ Each repo keeps these in its `build support\` folder. The build script itself is
 | --- | --- |
 | `BUILD_VIP` | `true` to build the `.vip` package (`g-cli vipBuild`). |
 | `BUILD_INSTALLER` | `true` to build the app exe + NI installer, then wrap them with Inno Setup. |
-| `DO_RELEASE` | `true` to run the git release (commit/merge/tag/push) + GitHub release. Independent of the build-number bump (which `vipBuild` does when `BUILD_VIP=true`, else the script does when `BUILD_VIP=false`). |
+| `DO_RELEASE` | `true` to run the git release (commit/merge/tag/push) + GitHub release. Independent of the build-number bump (which `vipBuild` does when `BUILD_VIP=true`, else the script does when `BUILD_VIP=false`); the bump runs either way, and a release commit carries it. |
 | `LVVER` / `LVBIT` (optional) | LabVIEW version and bitness. Default: derived from the `.vipb`'s `Package_LabVIEW_Version`. Override only if needed. |
 | `APP_SPEC` / `INST_SPEC` | The Application and Installer build-spec names in the `.lvproj`. Only used when `BUILD_INSTALLER=true`. Convention: `<Product> Application` / `<Product> Installer`. |
 | `VIPB` (optional) | The `.vipb` filename. Default: the single `*.vipb` in `build support\`. |
@@ -126,8 +126,8 @@ It needs `curl.exe` (built into Windows 10 1803+ and Windows 11). Pass `/q` to s
 3. Archive the previous release from `builds\latest` to `builds\old releases`.
 4. If `BUILD_VIP`: `g-cli vipBuild`.
 5. If `BUILD_INSTALLER`: `ClearCache`, `lvBuild <APP_SPEC>`, `lvBuild <INST_SPEC>`, then compile `Inno.iss` with ISCC.
-6. If `DO_RELEASE`: commit on develop, merge to main, tag (with the prefixed tag), push, and create the GitHub release - with the release body pulled from the vipb's `<Release_Notes>`.
-7. Bump the build number in the vipb (on a successful build) - but **only when `BUILD_VIP=false`**. When the package is built, VIPM's `vipBuild` already increments it, so the script skips its own bump to avoid double-counting. Either way the bumped vipb is **not** committed; committing it is left to you, matching VIPM.
+6. Bump the build number in the vipb for next time - but **only when `BUILD_VIP=false`**. When the package is built, VIPM's `vipBuild` has already incremented it during step 4, so the script skips its own bump to avoid double-counting. Either way the bump happens *before* the release, so both products behave the same.
+7. If `DO_RELEASE`: commit on develop (the bumped vipb goes in with it), merge to main, tag (with the prefixed tag), push, check out develop, and create the GitHub release - with the release body pulled from the vipb's `<Release_Notes>`. The tag and the built artifact carry the version as built, not the bumped one.
 
 ISCC is located automatically at build time (any installed `Inno Setup N`, 32- or 64-bit, or on PATH; an `ISCC_PATH` env var overrides).
 
