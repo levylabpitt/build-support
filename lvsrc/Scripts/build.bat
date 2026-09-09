@@ -7,11 +7,17 @@ REM  ONE shared, static script for every repo - lives in
 REM  %LOCALAPPDATA%\LevyLab\build-support\scripts\, NOT copied per repo. Pass the
 REM  target repo root as the first argument (or run from inside the repo):
 REM      build.bat "C:\path\to\repo"
-REM  An optional 2nd arg overrides build.cfg's DO_RELEASE, for the GUI buttons:
-REM      build.bat "C:\path\to\repo" release   (Build and release)
-REM      build.bat "C:\path\to\repo" test      (Test build - no git)
-REM  It reads that repo's per-project config from "build support\build.cfg" and
-REM  the version / LabVIEW target from the .vipb, so nothing is generated per repo.
+REM  Args 2 and 3 are optional and may be given in either order:
+REM      release / test - override the config's DO_RELEASE for this run
+REM      <name>         - which config to build. A repo that ships more than one
+REM                       product gives each its own .cfg in "build support\" and
+REM                       names it here (".cfg" is appended if you leave it off).
+REM                       Default: build.cfg
+REM      build.bat "C:\path\to\repo" release                (Build and release)
+REM      build.bat "C:\path\to\repo" test                   (Test build - no git)
+REM      build.bat "C:\path\to\repo" release build-support  (a named config)
+REM  It reads that repo's per-project config from "build support\" and the
+REM  version / LabVIEW target from the .vipb, so nothing is generated per repo.
 REM
 REM  Replaces the old build_vip.bat + VIPM-generated 7zip.bat + post-build VI
 REM  chain: the g-cli lvBuild calls that used to live in 7zip.bat are inlined
@@ -22,11 +28,24 @@ REM --- target repo: first argument, else the current directory ----------------
 if not "%~1"=="" cd /d "%~1"
 set "REPO=%CD%"
 set "SUPPORT=%REPO%\build support\"
-set "CONF=%SUPPORT%build.cfg"
 set "BUILD_SUPPORT=%LOCALAPPDATA%\LevyLab\build-support\ISCC"
+
+REM --- args 2 and 3, in either order: release/test and/or a config name -------
+set "CFG="
+set "ARGRELEASE="
+call :parse_arg "%~2"
+call :parse_arg "%~3"
+
+REM --- resolve the config: as given, else "<name>.cfg" under "build support\" -
+if not defined CFG set "CFG=build.cfg"
+if /I not "%CFG:~-4%"==".cfg" set "CFG=%CFG%.cfg"
+set "CONF=%CFG%"
+if not exist "%CONF%" set "CONF=%SUPPORT%%CFG%"
 if not exist "%CONF%" (
-    echo ERROR: build.cfg not found at "%CONF%"
-    echo Usage: build.bat "^<repo root^>"   or run from inside the repo
+    echo ERROR: config not found: "%CONF%"
+    echo Configs in "%SUPPORT%":
+    for %%F in ("%SUPPORT%*.cfg") do echo     %%~nxF
+    echo Usage: build.bat "<repo root>" [release^|test] [config]
     exit /b 1
 )
 
@@ -35,6 +54,7 @@ set "BUILD_VIP=true"
 set "BUILD_INSTALLER=false"
 set "DO_RELEASE=true"
 set "PUBLISHER=Levylab"
+set "TAG_PREFIX="
 set "APP_SPEC="
 set "INST_SPEC="
 set "LVVER="
@@ -44,11 +64,9 @@ set "LVPROJ="
 set "APP_NAME="
 for /f "usebackq eol=# tokens=1,* delims==" %%A in ("%CONF%") do set "%%A=%%B"
 
-REM --- optional 2nd arg overrides build.cfg's DO_RELEASE ----------------------
+REM --- the release/test argument, when given, wins over the config -----------
 REM Lets the GUI choose per click: "release" = Build and release, "test" = Test build.
-REM No 2nd arg -> use the build.cfg value.
-if /I "%~2"=="release" set "DO_RELEASE=true"
-if /I "%~2"=="test" set "DO_RELEASE=false"
+if defined ARGRELEASE set "DO_RELEASE=%ARGRELEASE%"
 
 REM --- resolve the VIPB and LVPROJ files (conf value, else the single match) --
 if not defined VIPB for %%F in ("%SUPPORT%*.vipb") do set "VIPB=%%~nxF"
@@ -81,8 +99,14 @@ if not defined APP_NAME if defined INST_SPEC set "APP_NAME=!INST_SPEC: Installer
 if not defined APP_NAME set "APP_NAME=%VIPB_PRODUCT%"
 set "TITLE=%VIPB_PRODUCT% %VERSION%"
 
+REM Git tag and GitHub release name. TAG_PREFIX (from the config) namespaces the
+REM tags of a repo that ships more than one product; empty gives a bare version,
+REM which is what every single-product repo has always used.
+set "TAG=!TAG_PREFIX!!VERSION!"
+
 echo ======================================
 echo Building %TITLE%
+echo   config=%CFG%  tag=%TAG%
 echo   VIP=%BUILD_VIP%  INSTALLER=%BUILD_INSTALLER%  RELEASE=%DO_RELEASE%
 echo ======================================
 
@@ -132,17 +156,17 @@ if /I not "%DO_RELEASE%"=="true" goto :after_release
 echo Committing on develop...
 git checkout develop
 git add -A
-git commit -m "Release %VERSION%" --allow-empty
+git commit -m "Release %TAG%" --allow-empty
 if errorlevel 1 ( echo ERROR: git commit failed & goto error )
 
 echo Merging to main...
 git checkout main
 if errorlevel 1 ( echo ERROR: git checkout main failed & goto error )
-git merge develop --no-ff -m "Merge release %VERSION%"
+git merge develop --no-ff -m "Merge release %TAG%"
 if errorlevel 1 ( echo ERROR: git merge failed & goto error )
 
-echo Tagging %VERSION%...
-git tag %VERSION%
+echo Tagging %TAG%...
+git tag %TAG%
 if errorlevel 1 ( echo ERROR: git tag failed & goto error )
 
 echo Pushing...
@@ -150,11 +174,13 @@ git push origin main
 if errorlevel 1 ( echo ERROR: git push main failed & goto error )
 git push origin develop
 if errorlevel 1 ( echo ERROR: git push develop failed & goto error )
-git push origin %VERSION%
+REM refs/tags/ spelled out: a TAG_PREFIX may contain a slash, so a bare tag name
+REM could otherwise be read as a branch.
+git push origin refs/tags/%TAG%
 if errorlevel 1 ( echo ERROR: git push tag failed & goto error )
 git checkout develop
 
-echo Creating GitHub release %VERSION%...
+echo Creating GitHub release %TAG%...
 set ASSETS=
 for %%F in (builds\latest\*.vip builds\latest\*_Setup.exe) do set ASSETS=!ASSETS! "%%F"
 REM Release body = the vipb's <Release_Notes> (same file as the version). It's multiline
@@ -165,9 +191,9 @@ powershell -NoProfile -Command "$n=([xml](Get-Content -Raw -LiteralPath '%VIPB_F
 set "HAVENOTES="
 if exist "%RELNOTES%" for %%A in ("%RELNOTES%") do if %%~zA gtr 0 set "HAVENOTES=1"
 if defined HAVENOTES (
-    gh release create %VERSION% !ASSETS! -t "%TITLE%" -F "%RELNOTES%"
+    gh release create %TAG% !ASSETS! -t "%TITLE%" -F "%RELNOTES%"
 ) else (
-    gh release create %VERSION% !ASSETS! -t "%TITLE%" --generate-notes
+    gh release create %TAG% !ASSETS! -t "%TITLE%" --generate-notes
 )
 if errorlevel 1 ( echo ERROR: GitHub release failed & goto error )
 del "%RELNOTES%" >nul 2>&1
@@ -188,6 +214,23 @@ echo.
 echo ======================================
 echo Build %VERSION% completed successfully
 echo ======================================
+exit /b 0
+
+REM ---------------------------------------------------------------------------
+:parse_arg
+REM One optional argument: "release"/"test" sets ARGRELEASE, anything else is the
+REM config name. Called once for arg 2 and once for arg 3, so the two may be given
+REM in either order; an empty argument is ignored.
+if "%~1"=="" exit /b 0
+if /I "%~1"=="release" (
+    set "ARGRELEASE=true"
+    exit /b 0
+)
+if /I "%~1"=="test" (
+    set "ARGRELEASE=false"
+    exit /b 0
+)
+set "CFG=%~1"
 exit /b 0
 
 REM ---------------------------------------------------------------------------

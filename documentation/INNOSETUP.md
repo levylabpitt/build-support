@@ -1,8 +1,8 @@
 # Building Packages and Installers
 
-A repo is built by one script, `build.bat`, driven by a per-project `build.cfg`. Depending on the config, a build produces the LabVIEW **VIP package**, a Windows **installer** (an Inno Setup `*_Setup.exe` that wraps the NI installer and its prerequisites), or both - and optionally runs the git release workflow.
+A repo is built by one script, `build.bat`, driven by a per-project config (`build.cfg` by default). Depending on the config, a build produces the LabVIEW **VIP package**, a Windows **installer** (an Inno Setup `*_Setup.exe` that wraps the NI installer and its prerequisites), or both - and optionally runs the git release workflow.
 
-`build.bat` is a single static script, installed once on the build machine (in `%LOCALAPPDATA%\LevyLab\build-support\scripts\`) and shared by every repo - it is not copied into each one. You run it with the repo path as an argument (or from inside the repo), and it reads that repo's per-project settings from `build.cfg` and the version, product name, and LabVIEW target straight from the `.vipb`.
+`build.bat` is a single static script, installed once on the build machine (in `%LOCALAPPDATA%\LevyLab\build-support\scripts\`) and shared by every repo - it is not copied into each one. You run it with the repo path as an argument (or from inside the repo), and it reads that repo's per-project settings from its config and the version, product name, and LabVIEW target straight from the `.vipb`.
 
 ## Per-project files
 
@@ -11,7 +11,7 @@ Each repo keeps these in its `build support\` folder. The build script itself is
 | File | Purpose |
 | --- | --- |
 | `<name>.vipb` | The VI package spec (source of the version, product name, and LabVIEW target). |
-| `build.cfg` | Per-project build configuration (what to build, build-spec names). |
+| `build.cfg` | Per-project build configuration (what to build, build-spec names). A repo that ships more than one product adds a `<name>.cfg` per product - see [Repos with more than one product](#repos-with-more-than-one-product). |
 | `Inno.iss` | The Inno Setup installer script (only needed when building an installer). |
 
 ## build.cfg
@@ -29,6 +29,7 @@ Each repo keeps these in its `build support\` folder. The build script itself is
 | `LVPROJ` (optional) | The `.lvproj` filename. Default: the single `*.lvproj` in the repo root. |
 | `APP_NAME` (optional) | The installer's display name. Default: `INST_SPEC` minus " Installer". |
 | `PUBLISHER` (optional) | The installer publisher. Default: `Levylab`. |
+| `TAG_PREFIX` (optional) | Prepended to the git tag and GitHub release name (`TAG_PREFIX` + version). Empty (the default) gives a bare version tag, which is what a single-product repo wants. |
 
 The two flags give you the three build modes:
 
@@ -43,9 +44,41 @@ The two flags give you the three build modes:
 1. Make sure the build machine is set up once (see [Build-machine setup](#build-machine-setup)).
 2. Set the repo's `build support\build.cfg` for what you want (at minimum `BUILD_VIP` / `BUILD_INSTALLER` and `LVVER` / `LVBIT`).
 3. If building an installer, make sure `build support\Inno.iss` exists and its prerequisites are set (see [The installer](#the-installer)).
-4. Build the repo by running the shared script against it: `"%LOCALAPPDATA%\LevyLab\build-support\scripts\build.bat" "<repo root>"` - or `cd` into the repo and run it with no argument. To build a batch of repos, use `build_all.bat`. An optional second argument - `release` or `test` - overrides `build.cfg`'s `DO_RELEASE` for that run (the GUI's "Build and release" / "Test build" buttons pass it).
+4. Build the repo by running the shared script against it: `"%LOCALAPPDATA%\LevyLab\build-support\scripts\build.bat" "<repo root>"` - or `cd` into the repo and run it with no argument. To build a batch of repos, use `build_all.bat`.
+
+Arguments 2 and 3 are optional and may be given in either order:
+
+| Argument | Effect |
+| --- | --- |
+| `release` / `test` | Overrides the config's `DO_RELEASE` for that run. `release` runs the git release, `test` builds without touching git. |
+| any other word | The config to build, for a repo holding more than one product. `.cfg` is appended if you leave it off, and a bare name is looked up in `build support\`. Default: `build.cfg`. |
+
+```
+build.bat "<repo root>" test                   test build, default config
+build.bat "<repo root>" release build-support  release the named config
+```
+
+Naming a config that does not exist lists the ones that do.
 
 The installer, if built, lands at `builds\latest\<App>_<version>_Setup.exe`, alongside the `.vip`, ready for the GitHub release.
+
+## Repos with more than one product
+
+Most repos build one thing and need only `build.cfg`. A repo that ships several - `build-support` itself ships both the **Build Support** VI package and the **Patrick Builder** application - gives each product its own config in `build support\` and names it on the command line:
+
+| Config | Product | Built with |
+| --- | --- | --- |
+| `build.cfg` | Patrick Builder application + installer | `build.bat "<repo>" release` |
+| `build-support.cfg` | Build Support VI package | `build.bat "<repo>" release build-support` |
+
+`build.cfg` stays the default so a bare `build.bat "<repo>"` - which is how Patrick Builder and `build_all.bat` invoke it - keeps working.
+
+Give each product a `TAG_PREFIX` so their tags do not collide in the one tag space: `patrick-builder/1.4.1.49` and `build-support/1.11.3` rather than two version lines fighting over bare tags.
+
+Two things to know before you set one:
+
+- **Avoid `/` in the prefix if the product ships the SelfUpdate class.** SelfUpdate recovers the version by taking the last path component of the `releases/latest` redirect and then re-requesting `releases/tag/<that>`. A slash in the tag makes that round-trip 404. Use a separator like `-` instead.
+- **`releases/latest` is per repo, not per product.** Once a repo publishes GitHub releases for two products, whichever was published most recently is "latest" for everyone. Anything that self-updates from a shared repo needs to account for that.
 
 ## The installer
 
@@ -88,12 +121,12 @@ It needs `curl.exe` (built into Windows 10 1803+ and Windows 11). Pass `/q` to s
 
 `build.bat` (the shared script, given a repo) does, in order:
 
-1. `cd` to the repo root, load `build.cfg`, and read `VERSION`, product name, and the LabVIEW target (`LVVER`/`LVBIT`) from the `.vipb`.
+1. `cd` to the repo root, parse arguments 2 and 3, load the config, and read `VERSION`, product name, and the LabVIEW target (`LVVER`/`LVBIT`) from the `.vipb`. The tag for this run is `TAG_PREFIX` + `VERSION`.
 2. Close any running LabVIEW (`taskkill`) so g-cli starts clean - important when `build_all.bat` runs repos that use different LabVIEW versions.
 3. Archive the previous release from `builds\latest` to `builds\old releases`.
 4. If `BUILD_VIP`: `g-cli vipBuild`.
 5. If `BUILD_INSTALLER`: `ClearCache`, `lvBuild <APP_SPEC>`, `lvBuild <INST_SPEC>`, then compile `Inno.iss` with ISCC.
-6. If `DO_RELEASE`: commit on develop, merge to main, tag, push, and create the GitHub release - with the release body pulled from the vipb's `<Release_Notes>`.
+6. If `DO_RELEASE`: commit on develop, merge to main, tag (with the prefixed tag), push, and create the GitHub release - with the release body pulled from the vipb's `<Release_Notes>`.
 7. Bump the build number in the vipb (on a successful build) - but **only when `BUILD_VIP=false`**. When the package is built, VIPM's `vipBuild` already increments it, so the script skips its own bump to avoid double-counting. Either way the bumped vipb is **not** committed; committing it is left to you, matching VIPM.
 
 ISCC is located automatically at build time (any installed `Inno Setup N`, 32- or 64-bit, or on PATH; an `ISCC_PATH` env var overrides).
