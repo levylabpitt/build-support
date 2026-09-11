@@ -83,6 +83,10 @@ set "LVBIT="
 set "VIPB="
 set "LVPROJ="
 set "APP_NAME="
+REM Seconds to wait for LabVIEW to exit on a close request before force-closing
+REM it. Measured on LabVIEW 2019: a warm instance exits in about 15 s, a freshly
+REM launched one took more than 30. The wait ends as soon as LabVIEW is gone.
+set "QUIT_TIMEOUT=90"
 for /f "usebackq eol=# tokens=1,* delims==" %%A in ("%CONF%") do set "%%A=%%B"
 
 REM --- the release/test argument, when given, wins over the config -----------
@@ -146,36 +150,52 @@ REM --- close any lingering LabVIEW so g-cli starts clean ----------------------
 REM Needed when build_all.bat runs repos that use different LabVIEW versions:
 REM an instance left open by the previous repo will trip up the next g-cli call.
 REM taskkill is version-agnostic (the old LabVIEWCLI CloseLabVIEW only matched one
-REM version + port, which is why it was flaky). Build machines have no interactive
-REM LabVIEW to lose; on a dev box this force-closes any open LabVIEW.
-echo Closing any running LabVIEW...
-taskkill /IM LabVIEW.exe /F /T >nul 2>&1
+REM version + port, which is why it was flaky). It asks first and forces only as a
+REM last resort - see :close_labview for why that matters.
+call :close_labview
 
 REM --- 1) VIP package ---------------------------------------------------------
 if /I not "%BUILD_VIP%"=="true" goto :after_vip
+
+REM The vipb writes the .vip to its Library_Output_Folder (relative to the vipb),
+REM but the release step collects assets from builds\latest, so it is copied
+REM across below. Resolved before the build so a stale copy can be moved aside.
+REM LINE is cleared first: findstr sets nothing on no match, and LINE would
+REM otherwise still hold the Package_LabVIEW_Version line from above.
+set "LINE="
+for /f "usebackq tokens=*" %%L in (`findstr /C:"<Library_Output_Folder>" "%VIPB_FILE%"`) do set "LINE=%%L"
+if not defined LINE ( echo ERROR: no Library_Output_Folder in %VIPB_FILE% & goto error )
+set "LINE=!LINE:<Library_Output_Folder>=!"
+set "VIPOUT=!LINE:</Library_Output_Folder>=!"
+for %%D in ("%SUPPORT%!VIPOUT!") do set "VIPOUT=%%~fD"
+
+REM The one package this build must produce: VIPM names it <package>-<version>.vip.
+REM Move any existing copy aside first, so that finding it afterwards proves it
+REM came from THIS build. Moved rather than deleted, in case the build fails.
+for %%F in ("!VIPOUT!\*-%VERSION%.vip") do (
+    echo Moving existing %%~nxF aside to "builds\old releases"
+    move /Y "%%~fF" "builds\old releases\" >nul
+)
+
 echo Building VIP...
 g-cli --lv-ver %LVVER% --arch %LVBIT% vipBuild -- "%VIPB_FILE%"
 if errorlevel 1 ( echo ERROR: VIP build failed & goto error )
 
-REM The vipb writes the .vip to its Library_Output_Folder (relative to the vipb),
-REM but the release step collects assets from builds\latest. Copy it across, or a
-REM package-only product gets a GitHub release with no .vip attached.
-for /f "usebackq tokens=*" %%L in (`findstr /C:"<Library_Output_Folder>" "%VIPB_FILE%"`) do set "LINE=%%L"
-set "LINE=!LINE:<Library_Output_Folder>=!"
-set "VIPOUT=!LINE:</Library_Output_Folder>=!"
-for %%D in ("%SUPPORT%!VIPOUT!") do set "VIPOUT=%%~fD"
-set "VIPCOPIED="
-for /f "delims=" %%F in ('dir /b /a-d /o-d "!VIPOUT!\*.vip" 2^>nul') do (
-    if not defined VIPCOPIED (
-        copy /Y "!VIPOUT!\%%F" "builds\latest\" >nul
-        set "VIPCOPIED=%%F"
-    )
+REM Do not trust the exit code alone. g-cli exits 0 when it loses its connection
+REM to LabVIEW mid-build ("Comms Error: Unexpected EOF"), and this script used to
+REM then stage the newest .vip in the folder - an OLD package - and release it
+REM under the new version. Transport 2.4.3.51 and 2.4.3.52 both shipped the
+REM 2.4.2.50 package that way. Require the exact file for this version instead.
+set "VIPNEW="
+for %%F in ("!VIPOUT!\*-%VERSION%.vip") do set "VIPNEW=%%~nxF"
+if not defined VIPNEW (
+    echo ERROR: vipBuild did not produce a *-%VERSION%.vip in "!VIPOUT!"
+    echo        Check the g-cli output above for Comms or VIPM errors.
+    goto error
 )
-if defined VIPCOPIED (
-    echo Staged !VIPCOPIED! for release.
-) else (
-    echo WARNING: no .vip found in "!VIPOUT!" - the release will have no package asset.
-)
+copy /Y "!VIPOUT!\!VIPNEW!" "builds\latest\" >nul
+if errorlevel 1 ( echo ERROR: could not copy !VIPNEW! to builds\latest & goto error )
+echo Staged !VIPNEW! for release.
 :after_vip
 
 REM --- 2) Application + installer + Inno --------------------------------------
@@ -292,6 +312,32 @@ if not defined ISCC ( echo ERROR: ISCC.exe not found - run Setup-BuildMachine.ba
 echo Building Inno Setup installer with "%ISCC%"...
 "%ISCC%" /DAppName="%APP_NAME%" /DAppVersion="%VERSION%" /DAppPublisher="%PUBLISHER%" /DRepoRoot="%CD%" /DBuildSupport="%BUILD_SUPPORT%" "build support\Inno.iss"
 exit /b %errorlevel%
+
+REM ---------------------------------------------------------------------------
+:close_labview
+REM Close every running LabVIEW, cleanly if at all possible.
+REM "taskkill /F" is a crash as far as LabVIEW is concerned. It never clears its
+REM LVAutoSave folder, so the next launch - the g-cli one right after this - opens
+REM with the "LabVIEW did not shut down properly" recovery prompt and reopens the
+REM autosaved VIs. Saving everything first does not prevent that; only a clean
+REM exit does. So send a normal close request first (taskkill without /F, the
+REM same message as the window's close box), wait for LabVIEW to exit, and force
+REM it only if it is still running after QUIT_TIMEOUT seconds - for example
+REM because it is showing a "save changes?" dialog.
+REM Waits use ping, not timeout: timeout quits at once when stdin is redirected,
+REM which it is when Patrick Builder drives cmd through a pipe.
+tasklist /FI "IMAGENAME eq LabVIEW.exe" /NH 2>nul | findstr /I /C:"LabVIEW.exe" >nul || exit /b 0
+echo Closing any running LabVIEW...
+taskkill /IM LabVIEW.exe /T >nul 2>&1
+for /L %%S in (1,1,%QUIT_TIMEOUT%) do (
+    tasklist /FI "IMAGENAME eq LabVIEW.exe" /NH 2>nul | findstr /I /C:"LabVIEW.exe" >nul || exit /b 0
+    ping -n 2 127.0.0.1 >nul
+)
+echo WARNING: LabVIEW still running after %QUIT_TIMEOUT% s - force-closing it.
+echo          Its next launch will show the "did not shut down properly" prompt.
+taskkill /IM LabVIEW.exe /F /T >nul 2>&1
+ping -n 3 127.0.0.1 >nul
+exit /b 0
 
 :error
 echo.
