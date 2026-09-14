@@ -147,6 +147,7 @@ for %%F in ("builds\latest\*.*") do set "HAVEOLD=1"
 if defined HAVEOLD move /Y "builds\latest\*.*" "builds\old releases" >nul
 
 REM --- close any lingering LabVIEW so g-cli starts clean ----------------------
+REM (Closed again once the build steps finish - see "close the build instance".)
 REM Needed when build_all.bat runs repos that use different LabVIEW versions:
 REM an instance left open by the previous repo will trip up the next g-cli call.
 REM taskkill is version-agnostic (the old LabVIEWCLI CloseLabVIEW only matched one
@@ -226,6 +227,18 @@ echo Bumping build number...
 g-cli --lv-ver %LVVER% --arch %LVBIT% noVIPM_IncrementBuild -- "%VIPB_FILE%"
 if errorlevel 1 ( echo ERROR: build number increment failed & goto error )
 :after_bump
+
+REM --- close the build instance: nothing after this point needs LabVIEW -------
+REM g-cli leaves LabVIEW running when it returns, and it is easy to carry on
+REM working in that instance. Don't: after an Application Builder build its
+REM native file dialogs are dead - File, Open does nothing and new VIs cannot be
+REM saved (existing VIs still save, because they skip the dialog) - until
+REM LabVIEW restarts. The builder moves the process working directory into the
+REM build output folder, the build clears and recreates that folder, and the
+REM common dialog then opens at a directory that no longer exists. Quitting here
+REM means the next LabVIEW is a clean process. Not g-cli --kill: that
+REM force-closes, which leaves the recovery prompt described at :close_labview.
+call :close_labview
 
 REM --- 4) release: git workflow + GitHub release (only when DO_RELEASE=true) --
 if /I not "%DO_RELEASE%"=="true" goto :after_release
@@ -340,6 +353,9 @@ ping -n 3 127.0.0.1 >nul
 exit /b 0
 
 :error
+REM A failed build leaves the same broken instance behind - see "close the
+REM build instance" above.
+call :close_labview
 echo.
 echo ==========================================
 echo BUILD FAILED
