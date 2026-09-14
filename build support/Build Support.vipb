@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-09-09 14:51:26" Creator="Patrick Irvin" Comments="" ID="314b1dad7b226f84884377ea86d83147">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-09-14 08:31:13" Creator="Patrick Irvin" Comments="" ID="5857affd4a59bad1f0108af1189b4d76">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_Build_Support</Package_File_Name>
-    <Library_Version>1.11.3.55</Library_Version>
+    <Library_Version>1.11.4.56</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -37,26 +37,8 @@
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>[1.11.3]
-1. Fixed: the 1.11.2 package shipped VIPM.lvlib with six unresolved merge-conflict markers, leaving the library unloadable. It is clean again, and the duplicate VI entries behind the bad merge are gone.
-
-2. build.bat can now build a repo that ships more than one product. Give each product its own &lt;name&gt;.cfg in "build support\" and name it on the command line: build.bat "&lt;repo root&gt;" release build-support. ".cfg" is appended if you leave it off, build.cfg stays the default when no name is given, and naming a config that does not exist lists the ones that do.
-
-3. New TAG_PREFIX config key, prepended to the git tag and the GitHub release name, so two products released from one repo no longer collide in a single tag space. Empty by default, which keeps the bare version tag every single-product repo already uses. Avoid a '/' in the prefix for a product that ships the SelfUpdate class: SelfUpdate rebuilds the tag from the last path component of the releases/latest redirect and re-requests releases/tag/&lt;that&gt;, so a slash makes the round-trip 404.
-
-4. build.bat takes an optional release/test argument that overrides the config's DO_RELEASE for a single run - "release" runs the git release, "test" builds without touching git. It and the config name are arguments 2 and 3 and may be given in either order.
-
-5. The release tag is now pushed as refs/tags/&lt;tag&gt;, so a prefixed tag containing a slash cannot be read as a branch name.
-
-6. Fixed a double build-number bump, and moved the bump ahead of the release. The script's own bump now runs only when BUILD_VIP=false; when the package itself is built the bump is left to VIPM's vipBuild rather than being applied twice. Both bumps now happen before the git release, so the release commit carries the bumped vipb instead of leaving it dirty for a manual follow-up commit. The tag and the built artifact keep the version as built.
-
-7. Build documentation updated throughout: the config-key table covers TAG_PREFIX, the build steps describe the new arguments, and there is a new section on repos that ship more than one product.
-
-8. Fixed: the GitHub release now carries the .vip. The vipb writes the package to its Library_Output_Folder (builds\Package), but the release step only collected assets from builds\latest, so no release ever had a .vip attached - and a package-only product, which builds no installer, would have been released with no assets at all. The built package is now staged into builds\latest and the script says which file it staged, or warns if it found none.
-
-9. Fixed: build.bat can now release the repo it lives in. The release step checks out other branches, which rewrote the running script; cmd.exe reads a batch file by byte offset, so execution resumed mid-line and ran unrelated fragments - in one case compiling an Inno installer for a package-only product. When the script detects it is inside the repo being built it now re-runs from a copy in TEMP. Only the build-support repo hits this; the installed copy in %LOCALAPPDATA% was never affected.
-
-10. Fixed: every build printed "The filename, directory name, or volume label syntax is incorrect" while archiving the previous release. The guard was "if exist builds\latest\*.*", which is true even for an empty directory because the wildcard matches the . and .. entries, so move ran with nothing to move and failed. The guard is now a for wildcard, which matches real files only. Archiving itself always worked when there was something to archive; the message was noise.</Release_Notes>
+      <Release_Notes>[1.11.4]
+- close LabVIEW gracefully, fail when vipBuild produces no package</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
@@ -401,7 +383,7 @@
         <Path>..\lvsrc\Build</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>D888AD6D27333ED4CB9C9FEA080DECD1</GUID>
+      <GUID>B1F2CC77C7B1BE167CE1479662CCBAC4</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -856,7 +838,7 @@
         <Path>..\lvsrc\Git\API\Walk Up to Repository.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>905487837B95327D0D138646907AA9FC</GUID>
+      <GUID>FBBB78AFDA8A241D54DFC4C8922DD0A2</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -947,7 +929,7 @@
         <Path>..\lvsrc\PostBuildSupport\Private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>131A3ACE0A2E69A47CC90FCA3E56A902</GUID>
+      <GUID>6A35973B09E9163D1680EFC3D72C15B8</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1010,7 +992,7 @@
         <Path>..\lvsrc\PreBuildSupport\VIPT to rename.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>616B57BC74BF9E2B1805300F3D2A6EE8</GUID>
+      <GUID>BEB19E5D5FC1884C68BFC910FA696E45</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1115,7 +1097,7 @@
         <Path>..\lvsrc\ProjectItem\Protected</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>4BB93CFBE30CFC17264DB224B55F1FF9</GUID>
+      <GUID>93316FBD2FA1E119E8A80221EAB3AD32</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -1234,7 +1216,7 @@
         <Path>..\lvsrc\SelfUpdate\private</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>CCD123FF49AA18DF222029F8A854FD38</GUID>
+      <GUID>618CA375BDE4CA01870FCCD6B886C422</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -1269,7 +1251,7 @@
         <Path>..\lvsrc\PostBuildSupport\Test\Test 7z.bat.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>26E1A6D421E04F460A4724A7B4C6BEE2</GUID>
+      <GUID>8CC11F0D1C43FA98F13B031B06672C4A</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>3</Parent_Palette_Index>
@@ -1304,7 +1286,7 @@
         <Path>..\lvsrc\PreBuildSupport\subVI\Find File By Name.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>3EDEFAD1DFD474BAFF8B08BB4AC21257</GUID>
+      <GUID>E950CAA303396CCE5B6B80FC3FA9854A</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1395,7 +1377,7 @@
         <Path>..\lvsrc\ProjectItem\Private\Update Path.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>FDE37F430B7D0EA60606AB95613632E3</GUID>
+      <GUID>BD12ABC9987A51313D843376457B8D90</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>4</Parent_Palette_Index>
@@ -1696,7 +1678,7 @@
         <Path>..\lvsrc\ProjectItem\Protected\Write Wire Color Data.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>055F2A2D17F88E6E20CA4E309473144A</GUID>
+      <GUID>819DDAFBD82A015BF15F57E9FBC0A4E9</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1731,7 +1713,7 @@
         <Path>..\lvsrc\SelfUpdate\example\Self Update Example.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>DDA0DB727F6324A3A52B16DF0E31D52E</GUID>
+      <GUID>91ABAB82535BAE0E15AF10680FC49998</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>5</Parent_Palette_Index>
@@ -1794,7 +1776,7 @@
         <Path>..\lvsrc\SelfUpdate\private\Update Dialog.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>E10CBD1D1B6FD99CDF45E2E3005C9E8A</GUID>
+      <GUID>60E1B8ADCE8FE7938178C7AEB42A99F7</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>2</Parent_Palette_Index>
@@ -2137,7 +2119,7 @@
         <Path>..\lvsrc\PostBuildSupport\Private\Create 7z config.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>D5E915E3E1ED2E1D785935F90E7DEB18</GUID>
+      <GUID>F96008426593EA4B245E230AE695566D</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2396,7 +2378,7 @@
         <Path>..\lvsrc\VIPM\Write Node to VIPB.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>6A23D68C84707A9197C25935E5B91E75</GUID>
+      <GUID>15C98A192F5A3CB2D6634BB112938948</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2445,7 +2427,7 @@
         <Path>..\lvsrc\CLI\Status.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>7B4D01A1CC2A664E5DD3F3CBCACB715D</GUID>
+      <GUID>6E0C74E73CB6BD009B0813BD5FDF2F69</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2508,7 +2490,7 @@
         <Path>..\lvsrc\VI Templates\Pre-Build Custom Action.vit</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>4C7B131E4402000759711A1AF1BCF5CD</GUID>
+      <GUID>634A53191BE3F64070B46B29DB41BD72</GUID>
     </Functions_Palette_Data>
     <Functions_Palette_Data>
       <Parent_Palette_Index>0</Parent_Palette_Index>
@@ -2627,7 +2609,7 @@
         <Path>..\lvsrc\Build\Initialize Repository.vi</Path>
         <VI_Title/>
       </Items_Data>
-      <GUID>6A8B8DB74579BE606D8E85D8131E0846</GUID>
+      <GUID>32B62B3FD7BEE9A00B29CB39FE52B675</GUID>
     </Functions_Palette_Data>
   </Library_Palette_Definition>
 </VI_Package_Builder_Settings>
