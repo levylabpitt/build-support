@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-09-14 08:46:54" Creator="Patrick Irvin" Comments="" ID="47a619fec089d23ade3a16a226873b0a">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2020-02-18 09:33:40" Modified_Date="2026-09-14 10:51:22" Creator="Patrick Irvin" Comments="" ID="3f0732e25c0bb3bf5b0cd5c37ee7d5af">
   <Library_General_Settings>
     <Package_File_Name>Levylab_lib_patrick_builder</Package_File_Name>
-    <Library_Version>1.5.1.51</Library_Version>
+    <Library_Version>1.5.2.52</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\lvsrc</Library_Source_Folder>
     <Library_Output_Folder>..\builds\Package</Library_Output_Folder>
@@ -34,7 +34,7 @@ This vipb file is intended not to be built directly but is used for configuring 
       <Copyright/>
       <Packager/>
       <URL/>
-      <Release_Notes>build-support 1.11.4 closes LabVIEW gracefully and fails when vipBuild produces no package</Release_Notes>
+      <Release_Notes>fix an issue where a repository's folder would not open</Release_Notes>
     </Description>
     <Destinations>
       <Toolkit_VIs>
